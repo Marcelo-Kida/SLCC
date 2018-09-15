@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtPZW0001>
+  <TipoRegistro tipo="A" tamanho="1" decimais="0" inicio="0"/>
+  <BancoOrigem tipo="A" tamanho="3" decimais="0" inicio="1"/>
+  <UnidadeOrigem tipo="A" tamanho="7" decimais="0" inicio="4"/>
+  <SiglaSistemaOrigem tipo="A" tamanho="3" decimais="0" inicio="11"/>
+  <CodigoSistemaOrigem tipo="A" tamanho="4" decimais="0" inicio="14"/>
+  <ControleLegado tipo="A" tamanho="23" decimais="0" inicio="18"/>
+  <NumeroDocumento tipo="A" tamanho="6" decimais="0" inicio="41"/>
+  <BancoDestino tipo="A" tamanho="3" decimais="0" inicio="47"/>
+  <ISPBDestino tipo="A" tamanho="8" decimais="0" inicio="50"/>
+  <DataContabil tipo="A" tamanho="8" decimais="0" inicio="58"/>
+  <HoraAgendamento tipo="A" tamanho="6" decimais="0" inicio="66"/>
+  <CodigoAcao tipo="A" tamanho="1" decimais="0" inicio="72"/>
+  <MeioTransferencia tipo="A" tamanho="1" decimais="0" inicio="73"/>
+  <IdentificadorAlteracao tipo="A" tamanho="1" decimais="0" inicio="74"/>
+  <NumeroVersao tipo="A" tamanho="2" decimais="0" inicio="75"/>
+  <LancamentoCC tipo="A" tamanho="1" decimais="0" inicio="77"/>
+  <HistoricoCC tipo="A" tamanho="5" decimais="0" inicio="78"/>
+  <ContaDebitada tipo="A" tamanho="13" decimais="0" inicio="83"/>
+  <AgenciaDebitada tipo="A" tamanho="5" decimais="0" inicio="96"/>
+  <OrigemContabilidade tipo="A" tamanho="2" decimais="0" inicio="101"/>
+  <Filler1 tipo="A" tamanho="39" decimais="0" inicio="103"/>
+  <Erro1 tipo="A" tamanho="5" decimais="0" inicio="142"/>
+  <Erro2 tipo="A" tamanho="5" decimais="0" inicio="147"/>
+  <Erro3 tipo="A" tamanho="5" decimais="0" inicio="152"/>
+  <CodigoPZ tipo="A" tamanho="50" decimais="0" inicio="157"/>
+  <CodigoMensagem tipo="A" tamanho="9" decimais="0" inicio="207"/>
+  <ValorLancamento tipo="A" tamanho="18" decimais="0" inicio="216"/>
+  <DataMovimento tipo="A" tamanho="8" decimais="0" inicio="234"/>
+  <AgenciaCreditada tipo="A" tamanho="5" decimais="0" inicio="242"/>
+  <AgenciaRemetente tipo="A" tamanho="5" decimais="0" inicio="247"/>
+  <Filler2 tipo="A" tamanho="40" decimais="0" inicio="252"/>
+</udtPZW0001>

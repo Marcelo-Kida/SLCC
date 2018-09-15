@@ -1,0 +1,62 @@
+--
+--Criaçao de Trigger de Log  : A8PROC.TGAR_PARM_HIST_CC
+--Tabela associada           : TB_PARM_HIST_CC
+--Data Criaçao               : 26-01-2004 13:05:42
+--
+CREATE OR REPLACE TRIGGER TGAR_PARM_HIST_CC
+	AFTER UPDATE OR DELETE OR INSERT
+	ON A8.TB_PARM_HIST_CC
+	FOR EACH ROW
+--
+DECLARE
+	--
+	--Variável de controle de Operaçao (1 = Alter ; 2 = Delete; 3 = Insert)
+	nIN_TIPO_OPER  NUMBER := 0;
+	--
+BEGIN
+	--
+	IF UPDATING THEN
+		nIN_TIPO_OPER := 1;
+	ELSIF DELETING THEN
+		nIN_TIPO_OPER := 2;
+	ELSE
+		nIN_TIPO_OPER := 3;
+	END IF;
+	--
+	INSERT	INTO A8.TB_LOG_PARM_HIST_CC
+			(TP_BKOF,
+			TP_OPER,
+			IN_LANC_DEBT_CRED,
+			SG_SIST,
+			CO_EMPR,
+			CO_HIST_CC,
+			CO_USUA_ULTI_ATLZ,
+			CO_ETCA_TRAB_ULTI_ATLZ,
+			DH_ULTI_ATLZ,
+			IN_TIPO_OPER,
+			CO_USUA_OPER,
+			CO_ETCA_TRAB_OPER,
+			DH_OPER)
+	VALUES	(:OLD.TP_BKOF,
+			:OLD.TP_OPER,
+			:OLD.IN_LANC_DEBT_CRED,
+			:OLD.SG_SIST,
+			:OLD.CO_EMPR,
+			:OLD.CO_HIST_CC,
+			:OLD.CO_USUA_ULTI_ATLZ,
+			:OLD.CO_ETCA_TRAB_ULTI_ATLZ,
+			:OLD.DH_ULTI_ATLZ,
+			nIN_TIPO_OPER,
+			NULL,
+			NULL,
+			SYSDATE);
+	--
+	EXCEPTION
+		WHEN OTHERS THEN
+			RAISE_APPLICATION_ERROR(-20001,'Erro na execuçao da Trigger TGAR_PARM_HIST_CC'
+									|| 'A8.TGAR_PARM_HIST_CC'
+									|| SQLCODE || ' - '
+									|| SUBSTR(SQLERRM, 1, 100));
+--
+END;
+/

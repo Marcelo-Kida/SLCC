@@ -1,0 +1,4 @@
+VBGROUP 5.0
+Project=..\A7\DLL\A7Miu\A7Miu.vbp
+Project=..\A7\DLL\A7Server\A7Server.vbp
+StartupProject=..\A7\EXE\A7\A7.vbp

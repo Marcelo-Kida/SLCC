@@ -1,0 +1,204 @@
+VERSION 5.00
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Begin VB.PropertyPage pagGeneral 
+   AutoRedraw      =   -1  'True
+   Caption         =   "General"
+   ClientHeight    =   4170
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   5055
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   4170
+   ScaleWidth      =   5055
+   Begin MSComDlg.CommonDialog CommonDialog 
+      Left            =   4380
+      Top             =   3480
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
+   Begin VB.Frame fraPicture 
+      Caption         =   "Picture"
+      Height          =   3195
+      Left            =   60
+      TabIndex        =   4
+      Top             =   900
+      Width           =   4935
+      Begin VB.CommandButton cmdClear 
+         Caption         =   "&Clear"
+         Height          =   375
+         Left            =   3480
+         TabIndex        =   2
+         Top             =   720
+         Width           =   1275
+      End
+      Begin VB.CommandButton cmdBrowse 
+         Caption         =   "&Browse"
+         Height          =   375
+         Left            =   3480
+         TabIndex        =   1
+         Top             =   300
+         Width           =   1275
+      End
+      Begin VB.PictureBox picPreview 
+         AutoRedraw      =   -1  'True
+         BackColor       =   &H00FFFFFF&
+         Height          =   2775
+         Left            =   120
+         ScaleHeight     =   2715
+         ScaleWidth      =   3135
+         TabIndex        =   6
+         Top             =   300
+         Width           =   3195
+      End
+   End
+   Begin VB.Frame fraImageList 
+      Height          =   795
+      Left            =   60
+      TabIndex        =   3
+      Top             =   0
+      Width           =   4935
+      Begin VB.ComboBox cmbImageList 
+         Height          =   315
+         Left            =   960
+         Style           =   2  'Dropdown List
+         TabIndex        =   0
+         Top             =   300
+         Width           =   3855
+      End
+      Begin VB.Label lblLabel 
+         AutoSize        =   -1  'True
+         Caption         =   "ImageList"
+         Height          =   195
+         Index           =   1
+         Left            =   120
+         TabIndex        =   5
+         Top             =   360
+         Width           =   675
+      End
+   End
+End
+Attribute VB_Name = "pagGeneral"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = False
+Option Explicit
+
+Private mcolImagesList                      As Collection
+
+Private lngCodigoErroNegocio                 As Long
+Private intNumeroSequencialErro              As Integer
+
+Private Sub cmbImageList_Click()
+    Changed = True
+End Sub
+
+Private Sub cmdBrowse_Click()
+
+On Error GoTo ErrorHandler
+
+    With CommonDialog
+        .DialogTitle = "Load Picture"
+        .Filter = "All Picture Files|*.bmp;*.dib;*.gif;*.jpg;*.wmf;*.emf;*.ico;*.cur|" & _
+                  "Bitmaps (*.bmp; *.dib)|*.bmp;*.dib|" & _
+                  "GIF Images (*.gif)|*.gif|" & _
+                  "JPEG Images (*.jpg)|*.jpg|" & _
+                  "Metafiles (*.wmf; *.emf)|*.wmf;*.emf|" & _
+                  "Icons (*.ico; *.cur)|*.ico;*.cur|" & _
+                  "All Files (*.*)|*.*|"
+        .ShowOpen
+        
+        If .FileName = vbNullString Then
+            Set picPreview.Picture = Nothing
+        Else
+            Set picPreview.Picture = LoadPicture(.FileName)
+        End If
+        
+        Changed = True
+    End With
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagGeneral", "cmdBrowse_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub cmdClear_Click()
+On Error GoTo ErrorHandler
+    
+    Set picPreview.Picture = Nothing
+    Changed = True
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagGeneral", "cmdClear_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub PropertyPage_ApplyChanges()
+On Error GoTo ErrorHandler
+    
+    Set SelectedControls(0).Picture = picPreview.Picture
+    
+    If cmbImageList.ListIndex > 0 Then
+        SelectedControls(0).ImageListName = cmbImageList.Text
+    Else
+        SelectedControls(0).ImageListName = vbNullString
+    End If
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagGeneral", "PropertyPage_ApplyChanges Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub PropertyPage_SelectionChanged()
+
+Dim objImageList                            As ImageList
+Dim strImageListName                         As String
+Dim intIndex                                 As Integer
+
+On Error GoTo ErrorHandler
+
+
+    Set mcolImagesList = SelectedControls(0).GetImagesList()
+    strImageListName = SelectedControls(0).ImageListName
+    Set picPreview.Picture = SelectedControls(0).Picture
+
+    cmbImageList.Clear
+    cmbImageList.AddItem "(None)", 0
+    
+    For Each objImageList In mcolImagesList
+        cmbImageList.AddItem objImageList.Name
+    Next
+    
+    
+    cmbImageList.ListIndex = 0
+    
+    If strImageListName <> vbNullString Then
+        For intIndex = 1 To cmbImageList.ListCount
+            If cmbImageList.List(intIndex) = strImageListName Then
+                cmbImageList.ListIndex = intIndex
+                Exit For
+            End If
+        Next
+    End If
+    
+    cmbImageList.Refresh
+    
+    Changed = False
+    
+    Set objImageList = Nothing
+
+    Exit Sub
+ErrorHandler:
+    Set objImageList = Nothing
+
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagGeneral", "PropertyPage_SelectionChanged Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub

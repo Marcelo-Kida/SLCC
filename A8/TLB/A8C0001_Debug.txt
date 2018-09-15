@@ -1,0 +1,346 @@
+       IDENTIFICATION DIVISION.                                         00000010
+       PROGRAM-ID.    A8C0001.                                          00000020
+       AUTHOR.        MARCELO GARCIA.                                   00000030
+       DATE-WRITTEN.  ABRIL/2004.                                       00000040
+       DATE-COMPILED.                                                   00000050
+      *---------------------------------------------------------------* 00000060
+      *                                                               * 00000070
+      *     CHAMA A ROTINA XPOXP08 PASSANDO BCO, AGENCIA E DATA E     * 00000080
+      *     RECEBE CODIGO QUE IDENTIFICA SE EH DIA UTIL E SE NAO FOR  * 00000090
+      *     QUAL EH O PROXIMO DIA UTIL.                               * 00000100
+      *                                                               * 00000110
+      *     RETORNA 'S' PARA SIM EH DIA UTIL OU                       * 00000120
+      *             'N' PARA NAO EH DIA UTIL                          * 00000130
+      *              NO CAMPO A8W0001-02-IN-DT-UTIL                   * 00000140
+      *     E  PROXIMO DIA UTIL NO A8W0001-02-PROX-UTIL               * 00000150
+      *                                                               * 00000160
+      *---------------------------------------------------------------* 00000170
+       ENVIRONMENT DIVISION.                                            00000180
+       CONFIGURATION SECTION.                                           00000190
+       SPECIAL-NAMES. DECIMAL-POINT IS COMMA.                           00000200
+       DATA DIVISION.                                                   00000210
+                                                                        00000220
+       WORKING-STORAGE SECTION.                                         00000230
+                                                                        00000240
+       01  FILLER.                                                      00000250
+                                                                        00000260
+           03  FILLER                    PIC  X(034)       VALUE        00000270
+           'INICIO DA WORK DO PROGRAMA NUO5000'.                        00000280
+                                                                        00000290
+      *---------------------------------------------------------------* 00000300
+      *    CAMPOS DE USO GERAL                                        * 00000310
+      *---------------------------------------------------------------* 00000320
+                                                                        00000330
+      *    03  WK-TSSTATUS               PIC S9(009) COMP  VALUE ZEROS. 00000340
+      *    03  WK-NOMEDATS.                                             00000350
+      *        05  WK-NOMETRAN           PIC  X(004)       VALUE SPACES.00000360
+      *        05  WK-NOMETERM           PIC  X(004)       VALUE SPACES.00000370
+                                                                        00000380
+      *    03  I                         PIC  9(003)       VALUE  ZEROS.00000390
+                                                                        00000400
+      *    03  WK-ITEM                   PIC S9(004) COMP  VALUE 0.     00000410
+                                                                        00000420
+           03  WK-PROGRAMA               PIC  X(008) VALUE 'XPOXP08'.   00000430
+           03  WK-LEN-COMM               PIC S9(004) COMP  VALUE +25.   00000440
+                                                                        00000450
+           03 WK-TRACE.                                                 00000450
+              05  WK-TRACE-LEN           PIC S9(004) COMP  VALUE +80.   00000430
+              05  WK-TRACE-VAL.                                         00000440
+                  07  WK-CAMPO           PIC  X(010).                   00000440
+                  07  WK-VALOR           PIC  X(070).                   00000440
+                                                                        00000450
+      *---------------------------------------------------------------* 00000460
+      *    AREA PARA COPY DOS BOOKS                                   * 00000470
+      *---------------------------------------------------------------* 00000480
+                                                                        00000490
+      *--- BOOK DO ARQ. A8W0001                                         00000500
+           COPY  A8W0001.                                               00000510
+                                                                        00000520
+      *--- BOOK DO ARQ. XPWXP08                                         00000530
+           COPY  XPWXP08.                                               00000540
+                                                                        00000550
+                                                                        00000560
+      *---------------------------------------------------------------* 00000570
+      *    AREA PARA DECLARE DOS CURSORES                             * 00000580
+      *---------------------------------------------------------------* 00000590
+                                                                        00000600
+       LINKAGE SECTION.                                                 00000610
+                                                                        00000620
+       01  DFHCOMMAREA.                                                 00000630
+           05  LK-COMMAREA               PIC  X(150).                   00000630
+                                                                        00000640
+       PROCEDURE DIVISION.                                              00000650
+                                                                        00000670
+           PERFORM  R010-CONSISTE-FISICA  THRU  R010-EXIT.              00000680
+                                                                        00000700
+           PERFORM  R200-PROCESSA         THRU  R200-EXIT.              00000710
+                                                                        00000730
+           GO TO    R900-FINALIZA.                                      00000740
+                                                                        00000750
+      *---------------------------------------------------------------* 00000760
+      *    CONSISTENCIA FISICA DA ENTRADA                             * 00000770
+      *---------------------------------------------------------------* 00000780
+       R010-CONSISTE-FISICA.                                            00000790
+                                                                        00000800
+      *--- CRITICA COMMAREA                                             00000890
+                                                                                
+           EXEC CICS IGNORE CONDITION INVREQ END-EXEC.                  00000800
+           EXEC CICS IGNORE CONDITION LENGERR END-EXEC.                 00000800
+                                                                        00000900
+           MOVE 'COMAREA'              TO WK-CAMPO.                     00000900
+           MOVE  LK-COMMAREA           TO WK-VALOR.                     00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (1)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+      *--- MOVIMENTA A COMMAREA DA LINKAGE PARA WORK                    00000950
+                                                                        00000960
+           MOVE  LK-COMMAREA           TO  A8W0001-COMMAREA.            00000970
+                                                                                
+           MOVE 'BANCO: '              TO WK-CAMPO.                     00000900
+           MOVE  A8W0001-CD-BANCO      TO WK-VALOR.                     00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (2)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+           MOVE 'AGENCIA: '            TO WK-CAMPO.                     00000900
+           MOVE  A8W0001-CD-AGENCIA    TO WK-VALOR.                     00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (3)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+           MOVE 'DATA   : '            TO WK-CAMPO.                     00000900
+           MOVE  A8W0001-DT-INFORMADA  TO WK-VALOR.                     00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (4)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+           MOVE 'EIBCALEN'   TO WK-CAMPO.                               00000900
+           MOVE EIBCALEN     TO WK-VALOR.                               00000900
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (11)                                        
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                        00000980
+           IF EIBCALEN NOT EQUAL A8W0001-LENGTH-COMMAREA                00000910
+              MOVE 05 TO A8W0001-01-CD-RETORNO                          00000920
+              GO TO R900-FINALIZA.                                      00000930
+                                                                        00000940
+      *--- INITIALIZE A8W0001-RETORNO                                   00000990
+                                                                        00001000
+           IF (A8W0001-CD-BANCO NOT NUMERIC) OR                         00001010
+              (A8W0001-CD-BANCO LESS ZEROS)                             00001020
+               MOVE    01    TO  A8W0001-01-CD-RETORNO                  00001030
+               GO TO    R900-FINALIZA                                   00001040
+           END-IF.                                                      00001050
+                                                                        00001060
+           IF (A8W0001-CD-AGENCIA NOT NUMERIC) OR                       00001070
+              (A8W0001-CD-AGENCIA LESS ZEROS)                           00001080
+               MOVE    02    TO  A8W0001-01-CD-RETORNO                  00001090
+               GO TO    R900-FINALIZA                                   00001100
+           END-IF.                                                      00001110
+                                                                        00001120
+           IF (A8W0001-DT-INFORMADA NOT NUMERIC) OR                     00001130
+              (A8W0001-DT-INFORMADA LESS ZEROS)                         00001140
+               MOVE    03    TO  A8W0001-01-CD-RETORNO                  00001150
+               GO TO    R900-FINALIZA                                   00001160
+           END-IF.                                                      00001170
+                                                                        00001180
+        R010-EXIT.                                                      00001190
+            EXIT.                                                       00001200
+                                                                        00001210
+      *---------------------------------------------------------------* 00001220
+      *    PROCESSA OS DADOS                                          * 00001230
+      *---------------------------------------------------------------* 00001240
+       R200-PROCESSA.                                                   00001250
+                                                                        00001260
+      *--- MONTA O REGISTRO PARA O LINK COM O XPOXP08                   00001270
+                                                                        00001280
+           MOVE A8W0001-CD-BANCO TO  XPWXP08-NBANCO.                    00001290
+           MOVE A8W0001-CD-AGENCIA TO  XPWXP08-CODAGE.                  00001300
+           MOVE A8W0001-DT-INFORMADA TO  XPWXP08-DTINFO.                00001310
+                                                                        00001320
+           EXEC CICS LINK PROGRAM (WK-PROGRAMA)                         00001330
+                          COMMAREA (XPWXP08-DADOSX)                     00001340
+                          LENGTH  (WK-LEN-COMM)                         00001350
+           END-EXEC.                                                    00001360
+                                                                        00001370
+           IF  XPWXP08-RTCODE NOT EQUAL ZEROS OR SPACES                 00001380
+               MOVE XPWXP08-RTCODE   TO  A8W0001-01-CD-RETORNO          00001390
+               GO TO    R900-FINALIZA                                   00001400
+           END-IF.                                                      00001410
+                                                                        00001420
+           MOVE  ZEROS   TO A8W0001-01-CD-RETORNO.                      00001430
+                                                                        00001440
+                                                                        00001450
+       R200-EXIT.                                                       00001460
+           EXIT.                                                        00001470
+      *--------------------------------------------------------------*  00001480
+      *    RETORNA AO PROGRAMA CHAMADOR                              *  00001490
+      *--------------------------------------------------------------*  00001500
+       R900-FINALIZA.                                                   00001510
+                                                                        00001520
+           IF A8W0001-01-CD-RETORNO NOT = ZEROS                         00001530
+              GO TO R900-FINALIZA-ERRO                                  00001540
+           END-IF.                                                      00001550
+                                                                        00001560
+                                                                        00001570
+      *    MOVE  SPACES  TO A8W0001-01-MENSAGEM                         00001580
+                                                                        00001590
+      *    MOVE  1 TO WK-ITEM                                           00001600
+      *                                                                 00001610
+      *    EXEC  CICS WRITEQ TS QUEUE (WK-NOMEDATS)                     00001620
+      *                         FROM  (A8W0001-TS-RECORD)               00001630
+      *                         LENGTH (A8W0001-LENGTH-TS)              00001640
+      *                         ITEM (WK-ITEM)                          00001650
+      *    END-EXEC.                                                    00001660
+                                                                        00001670
+           MOVE SPACES TO A8W0001-RETORNO                               00001680
+                                                                        00001690
+      *--- RETORNA 'S' PARA SIM EH DIA UTIL OU                          00001700
+      *            'N' PARA NAO EH DIA UTIL                             00001710
+                                                                        00001720
+           IF  XPWXP08-PERIOD EQUAL +7 OR +8 OR +9                      00001730
+                   MOVE 'N' TO A8W0001-02-IN-DT-UTIL                    00001740
+               ELSE                                                     00001750
+                   MOVE 'S' TO A8W0001-02-IN-DT-UTIL                    00001760
+           END-IF.                                                      00001770
+                                                                        00001780
+           MOVE XPWXP08-PROXDT TO A8W0001-02-DT-PROX-UTIL.              00001790
+                                                                        00001800
+      *    ADD   1 TO WK-ITEM                                           00001810
+      *                                                                 00001820
+      *    EXEC  CICS WRITEQ TS QUEUE (WK-NOMEDATS)                     00001830
+      *                         FROM  (A8W0001-TS-RECORD)               00001840
+      *                         LENGTH (A8W0001-LENGTH-TS)              00001850
+      *                         ITEM (WK-ITEM)                          00001860
+      *    END-EXEC                                                     00001870
+                                                                        00001880
+           GO TO R900-RETORNA.                                          00001890
+                                                                        00001900
+       R900-FINALIZA-ERRO.                                              00001910
+                                                                        00001920
+           EVALUATE TRUE                                                00001930
+             WHEN A8W0001-01-CD-RETORNO = 01                            00001940
+               MOVE 'CODIGO DE BANCO INVALIDO' TO A8W0001-01-MENSAGEM   00001950
+             WHEN A8W0001-01-CD-RETORNO = 02                            00001960
+               MOVE 'CODIGO DE AGENCIA INVALIDA' TO A8W0001-01-MENSAGEM 00001970
+             WHEN A8W0001-01-CD-RETORNO = 03                            00001980
+               MOVE 'DATA INFORMADA INVALIDA' TO A8W0001-01-MENSAGEM    00001990
+             WHEN A8W0001-01-CD-RETORNO = 05                            00002000
+               MOVE 'ERRO DE COMUNICACAO - TAMANHO'                     00002010
+                                              TO A8W0001-01-MENSAGEM    00002020
+             WHEN A8W0001-01-CD-RETORNO = 20                            00002030
+               MOVE 'BCO/AG NAO NUMERICO, NAO INFORMADO OU INEXISTENTE' 00002040
+                                              TO A8W0001-01-MENSAGEM    00002050
+             WHEN A8W0001-01-CD-RETORNO = 21                            00002060
+               MOVE 'AGENCIA INEXISTENTE'        TO A8W0001-01-MENSAGEM 00002070
+             WHEN A8W0001-01-CD-RETORNO = 25                            00002080
+               MOVE 'DATA INFORMADA NAO NUMERICA, ZERADA OU INVALIDA'   00002090
+                                              TO A8W0001-01-MENSAGEM    00002100
+             WHEN A8W0001-01-CD-RETORNO = 29                            00002110
+               MOVE 'DATA MENOR QUE 1974ALIDO' TO A8W0001-01-MENSAGEM   00002120
+             WHEN A8W0001-01-CD-RETORNO = 91                            00002130
+               MOVE 'ERRO ROTINA UGS0090'        TO A8W0001-01-MENSAGEM 00002140
+             WHEN A8W0001-01-CD-RETORNO = 94                            00002150
+               MOVE 'ERRO NA ROTINA HOH0097 (AGENCIA 424)'              00002160
+                                              TO A8W0001-01-MENSAGEM    00002170
+             WHEN A8W0001-01-CD-RETORNO = 95                            00002180
+               MOVE 'ERRO NA ROTINA HOH0092 (AGENCIA 353)'              00002190
+                                              TO A8W0001-01-MENSAGEM    00002200
+             WHEN A8W0001-01-CD-RETORNO = 96                            00002210
+               MOVE 'ERRO NA ROTINA HOH0018 (QUALQUER BANCO)'           00002220
+                                              TO A8W0001-01-MENSAGEM    00002230
+             WHEN A8W0001-01-CD-RETORNO = 97                            00002240
+               MOVE 'ERRO NA ROTINA UGS0090'                            00002250
+                                              TO A8W0001-01-MENSAGEM    00002260
+             WHEN A8W0001-01-CD-RETORNO = 98                            00002270
+               MOVE 'ERRO NA ROTINA HOH0004 (CARTEIRA)'                 00002280
+                                              TO A8W0001-01-MENSAGEM    00002290
+             WHEN A8W0001-01-CD-RETORNO = 99                            00002300
+               MOVE 'ERRO NAO PREVISTO'                                 00002310
+                                              TO A8W0001-01-MENSAGEM    00002320
+             WHEN OTHER                                                 00002330
+               MOVE 'ERRO DA ROTINA XPHXP08'  TO A8W0001-01-MENSAGEM    00002340
+           END-EVALUATE.                                                00002350
+                                                                        00002360
+      *    MOVE  1 TO WK-ITEM                                           00002370
+                                                                        00002380
+      *    EXEC  CICS WRITEQ TS QUEUE (WK-NOMEDATS)                     00002390
+      *                         FROM  (A8W0001-TS-RECORD)               00002400
+      *                         LENGTH (A8W0001-LENGTH-TS)              00002410
+      *                         ITEM (WK-ITEM)                          00002420
+      *    END-EXEC.                                                    00002430
+                                                                        00002440
+      *    MOVE SPACES TO A8W0001-RETORNO                               00002450
+           MOVE SPACES TO A8W0001-02-IN-DT-UTIL                         00002460
+           MOVE ZEROS  TO A8W0001-02-DT-PROX-UTIL.                      00002470
+                                                                        00002480
+      *    ADD   1 TO WK-ITEM                                           00002490
+      *                                                                 00002500
+      *    EXEC  CICS WRITEQ TS QUEUE (WK-NOMEDATS)                     00002510
+      *                         FROM  (A8W0001-TS-RECORD)               00002520
+      *                         LENGTH (A8W0001-LENGTH-TS)              00002530
+      *                         ITEM (WK-ITEM)                          00002540
+      *    END-EXEC.                                                    00002550
+                                                                        00002560
+       R900-RETORNA.                                                    00002570
+                                                                        00002580
+           MOVE 'RETORNO: '            TO WK-CAMPO.                     00000900
+           MOVE  A8W0001-RETORNO       TO WK-VALOR.                     00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (5)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+           MOVE 'COD RET:'             TO WK-CAMPO.                     00000900
+           MOVE  A8W0001-01-CD-RETORNO TO WK-VALOR.                     00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (6)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+           MOVE 'MSG    : '            TO WK-CAMPO.                     00000900
+           MOVE  A8W0001-01-MENSAGEM   TO WK-VALOR.                     00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (7)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+           MOVE 'ID UTIL: '            TO WK-CAMPO.                     00000900
+           MOVE  A8W0001-02-IN-DT-UTIL TO WK-VALOR.                     00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (8)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+           MOVE 'NEXT DATE:'           TO WK-CAMPO.                     00000900
+           MOVE  A8W0001-02-DT-PROX-UTIL TO WK-VALOR.                   00000970
+                                                                        00000900
+           EXEC CICS ENTER TRACENUM (9)                                         
+                     FROM (WK-TRACE-VAL)                                        
+                     FROMLENGTH (WK-TRACE-LEN)                                  
+           END-EXEC.                                                            
+                                                                                
+           MOVE  A8W0001-RETORNO    TO  DFHCOMMAREA.                    00002590
+                                                                        00002600
+           EXEC  CICS SYNCPOINT END-EXEC.                               00002610
+                                                                        00002620
+           EXEC  CICS  RETURN  END-EXEC.                                00002630
+                                                                        00002640
+       R900-EXIT.                                                       00002650
+           EXIT.                                                        00002660
+                                                                                

@@ -1,0 +1,9 @@
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\bin\Debug\A8NET.Data.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\bin\Debug\A8NET.Data.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\bin\Debug\A8NET.Comum.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\bin\Debug\MBS_Client.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\bin\Debug\System.Data.OracleClient.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\bin\Debug\A8NET.Comum.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\obj\Debug\A8NET.Data.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Data\obj\Debug\A8NET.Data.pdb

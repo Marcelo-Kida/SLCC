@@ -1,0 +1,6 @@
+<RegraFormatacaoSaidaA7>
+	<TIPO_MESG TP_MESG='LDL1016'>
+		<CtCed FormataZerosEsquerda='S'/>
+		<CtCes FormataZerosEsquerda='S'/>
+	</TIPO_MESG>
+</RegraFormatacaoSaidaA7>

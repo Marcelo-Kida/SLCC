@@ -1,0 +1,56 @@
+--
+--Criaçao de Trigger de Log  : A7PROC.TGAR_RSPT_OCOR_SIST
+--Tabela associada           : TB_RSPT_OCOR_SIST
+--Data Criaçao               : 29-08-2003 12:55:41
+--
+CREATE OR REPLACE TRIGGER TGAR_RSPT_OCOR_SIST
+	AFTER UPDATE OR DELETE OR INSERT
+	ON A7.TB_RSPT_OCOR_SIST
+	FOR EACH ROW
+--
+DECLARE
+	--
+	--Variável de controle de Operaçao (1 = Alter ; 2 = Delete, 3 = Insert)
+	nIN_TIPO_OPER  NUMBER := 0;
+	--
+BEGIN
+	--
+	IF UPDATING THEN
+		nIN_TIPO_OPER := 1;
+	ELSIF DELETING THEN
+		nIN_TIPO_OPER := 2;
+	ELSE
+		nIN_TIPO_OPER := 3;
+	END IF;
+	--
+	INSERT	INTO A7.TB_LOG_RSPT_OCOR_SIST
+			(SG_SIST,
+			CO_EMPR,
+			CO_OCOR_MESG,
+			CO_USUA_ULTI_ATLZ,
+			CO_ETCA_TRAB_ULTI_ATLZ,
+			DH_ULTI_ATLZ,
+			IN_TIPO_OPER,
+			CO_USUA_OPER,
+			CO_ETCA_TRAB_OPER,
+			DH_OPER)
+	VALUES	(:OLD.SG_SIST,
+			:OLD.CO_EMPR,
+			:OLD.CO_OCOR_MESG,
+			:OLD.CO_USUA_ULTI_ATLZ,
+			:OLD.CO_ETCA_TRAB_ULTI_ATLZ,
+			:OLD.DH_ULTI_ATLZ,
+			nIN_TIPO_OPER,
+			NULL,
+			NULL,
+			SYSDATE);
+	--
+	EXCEPTION
+		WHEN OTHERS THEN
+			RAISE_APPLICATION_ERROR(-20001,'Erro na execuçao da Trigger TGAR_RSPT_OCOR_SIST'
+									||'A7.TB_LOG_RSPT_OCOR_SIST'
+									|| SQLCODE || ' - '
+									|| SUBSTR(SQLERRM, 1, 100));
+	--
+END;
+/

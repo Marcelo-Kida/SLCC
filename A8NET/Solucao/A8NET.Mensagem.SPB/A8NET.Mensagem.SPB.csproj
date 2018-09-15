@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4A507E5B-B484-4D49-88E1-19A0429991F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>A8NET.Mensagem.SPB</RootNamespace>
+    <AssemblyName>A8NET.Mensagem.SPB</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>http://localhost/A8NET.Mensagem.SPB/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MensagemAvisoInformacao.cs" />
+    <Compile Include="MensagemSPB.cs" />
+    <Compile Include="MensagemSPBR1.cs" />
+    <Compile Include="MensagemSPBR2.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="udt\udtCabecalhoMensagem.cs" />
+    <Compile Include="udt\udtMensagem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="xml\udtCabecalhoMensagem.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A8NET.Comum\A8NET.Comum.csproj">
+      <Project>{B7009338-AD00-481E-A83E-1F80AE5FC3B5}</Project>
+      <Name>A8NET.Comum</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\A8NET.ConfiguracaoMQ\A8NET.ConfiguracaoMQ.csproj">
+      <Project>{A34D81B4-94E6-4FF8-9C9C-F115C87EA584}</Project>
+      <Name>A8NET.ConfiguracaoMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\A8NET.Data\A8NET.Data.csproj">
+      <Project>{670E72F1-5AED-4AE3-AFDF-6B00FC1EA1DC}</Project>
+      <Name>A8NET.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\A8NET.Historico\A8NET.Historico.csproj">
+      <Project>{2741829D-191C-43AF-A7A2-5F79737189BE}</Project>
+      <Name>A8NET.Historico</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\A8NET.Mensagem\A8NET.Mensagem.csproj">
+      <Project>{0D487462-D9DA-42E1-8C72-8C66F1FF4F22}</Project>
+      <Name>A8NET.Mensagem</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

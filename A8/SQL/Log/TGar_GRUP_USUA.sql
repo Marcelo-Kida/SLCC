@@ -1,0 +1,58 @@
+--
+--Criaçao de Trigger de Log  : A8PROC.TGAR_GRUP_USUA
+--Tabela associada           : TB_GRUP_USUA
+--Data Criaçao               : 15-10-2003 13:10:54
+--
+CREATE OR REPLACE TRIGGER TGAR_GRUP_USUA
+	AFTER UPDATE OR DELETE OR INSERT
+	ON A8.TB_GRUP_USUA
+	FOR EACH ROW
+--
+DECLARE
+	--
+	--Variável de controle de Operaçao (1 = Alter ; 2 = Delete; 3 = Insert)
+	nIN_TIPO_OPER  NUMBER := 0;
+	--
+BEGIN
+	--
+	IF UPDATING THEN
+		nIN_TIPO_OPER := 1;
+	ELSIF DELETING THEN
+		nIN_TIPO_OPER := 2;
+	ELSE
+		nIN_TIPO_OPER := 3;
+	END IF;
+	--
+	INSERT	INTO A8.TB_LOG_GRUP_USUA
+			(CO_GRUP_USUA,
+			NO_GRUP_USUA,
+			DT_INIC_VIGE,
+			DT_FIM_VIGE,
+			CO_USUA_ULTI_ATLZ,
+			CO_ETCA_TRAB_ULTI_ATLZ,
+			DH_ULTI_ATLZ,
+			IN_TIPO_OPER,
+			CO_USUA_OPER,
+			CO_ETCA_TRAB_OPER,
+			DH_OPER)
+	VALUES	(:OLD.CO_GRUP_USUA,
+			:OLD.NO_GRUP_USUA,
+			:OLD.DT_INIC_VIGE,
+			:OLD.DT_FIM_VIGE,
+			:OLD.CO_USUA_ULTI_ATLZ,
+			:OLD.CO_ETCA_TRAB_ULTI_ATLZ,
+			:OLD.DH_ULTI_ATLZ,
+			nIN_TIPO_OPER,
+			NULL,
+			NULL,
+			SYSDATE);
+	--
+	EXCEPTION
+		WHEN OTHERS THEN
+			RAISE_APPLICATION_ERROR(-20001,'Erro na execuçao da Trigger TGAR_GRUP_USUA'
+									|| 'A8.TB_LOG_GRUP_USUA'
+									|| SQLCODE || ' - '
+									|| SUBSTR(SQLERRM, 1, 100));
+--
+END;
+/

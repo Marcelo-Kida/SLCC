@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+	<MBS>
+		<WebService>http://wsdotnetpi.sb:81/mbs-ext/mbscomi.asmx</WebService>
+	</MBS>

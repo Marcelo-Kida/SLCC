@@ -1,0 +1,9 @@
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\bin\Release\A7NET.Data.dll.config
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\bin\Release\A7NET.Data.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\bin\Release\A7NET.Data.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\bin\Release\A7NET.Comum.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\bin\Release\System.Data.OracleClient.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\bin\Release\A7NET.Comum.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\obj\Release\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\obj\Release\A7NET.Data.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Data\obj\Release\A7NET.Data.pdb

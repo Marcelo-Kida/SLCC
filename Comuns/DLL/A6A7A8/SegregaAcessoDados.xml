@@ -1,0 +1,32 @@
+<Repeat_SegregaAcessoDados>
+  <Grupo_TipoBackOffice>
+    <TipoBackOffice>1</TipoBackOffice>
+  </Grupo_TipoBackOffice>
+  <Repeat_LocalLiquidacao>
+    <Grupo_LocalLiquidacao>
+      <LocalLiquidacao>13</LocalLiquidacao>
+      <LocalLiquidacao>5</LocalLiquidacao>
+    </Grupo_LocalLiquidacao>
+  </Repeat_LocalLiquidacao>
+  <Repeat_GrupoVeiculoLegal>
+    <Grupo_GrupoVeiculoLegal>
+      <GrupoVeiculoLegal>1</GrupoVeiculoLegal>
+      <GrupoVeiculoLegal>3</GrupoVeiculoLegal>
+    </Grupo_GrupoVeiculoLegal>
+  </Repeat_GrupoVeiculoLegal>
+  <Repeat_GrupoUsuario>
+    <Grupo_GrupoUsuario>
+      <GrupoUsuario>2</GrupoUsuario>
+      <GrupoUsuario>3</GrupoUsuario>
+      <GrupoUsuario>33</GrupoUsuario>
+    </Grupo_GrupoUsuario>
+  </Repeat_GrupoUsuario>
+  <Repeat_Acesso>
+    <Grupo_Acesso>
+      <Perfil>mnuCadastro</Perfil>
+      <Perfil>mnuCadastroGrupoUsuario</Perfil>
+      <Perfil>mnuConsulta</Perfil>
+      <Perfil>mnuConsultaMensagens</Perfil>
+    </Grupo_Acesso>
+  </Repeat_Acesso>
+</Repeat_SegregaAcessoDados>

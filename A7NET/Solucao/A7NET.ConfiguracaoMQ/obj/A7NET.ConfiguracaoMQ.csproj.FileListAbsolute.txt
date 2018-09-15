@@ -1,0 +1,6 @@
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.ConfiguracaoMQ\bin\Debug\A7NET.ConfiguracaoMQ.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.ConfiguracaoMQ\bin\Debug\A7NET.ConfiguracaoMQ.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.ConfiguracaoMQ\bin\Debug\amqmdnet.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.ConfiguracaoMQ\obj\Debug\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.ConfiguracaoMQ\obj\Debug\A7NET.ConfiguracaoMQ.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.ConfiguracaoMQ\obj\Debug\A7NET.ConfiguracaoMQ.pdb

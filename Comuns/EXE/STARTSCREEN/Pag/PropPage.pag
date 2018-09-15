@@ -1,0 +1,871 @@
+VERSION 5.00
+Begin VB.PropertyPage pagTabs 
+   Caption         =   "Tabs "
+   ClientHeight    =   4170
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   5055
+   LockControls    =   -1  'True
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   4170
+   ScaleWidth      =   5055
+   Begin VB.Frame fraButtons 
+      Caption         =   "Tab Buttons"
+      Height          =   2595
+      Left            =   60
+      TabIndex        =   24
+      Top             =   1500
+      Width           =   4935
+      Begin VB.CheckBox chkEnabled 
+         Caption         =   "Enabled"
+         Height          =   315
+         Left            =   3900
+         TabIndex        =   16
+         Top             =   2220
+         Value           =   1  'Checked
+         Width           =   915
+      End
+      Begin VB.CheckBox chkVisible 
+         Caption         =   "Visible"
+         Height          =   315
+         Left            =   2760
+         TabIndex        =   15
+         Top             =   2220
+         Value           =   1  'Checked
+         Width           =   795
+      End
+      Begin VB.TextBox txtImage 
+         Height          =   315
+         Left            =   4020
+         MaxLength       =   15
+         TabIndex        =   13
+         Top             =   1500
+         Width           =   795
+      End
+      Begin VB.TextBox txtKey 
+         Height          =   315
+         Left            =   1080
+         MaxLength       =   20
+         TabIndex        =   11
+         Top             =   1140
+         Width           =   1335
+      End
+      Begin VB.TextBox txtTooltip 
+         Height          =   315
+         Left            =   1080
+         MaxLength       =   30
+         TabIndex        =   12
+         Top             =   1500
+         Width           =   2355
+      End
+      Begin VB.TextBox txtTag 
+         Height          =   315
+         Left            =   1080
+         MaxLength       =   30
+         TabIndex        =   14
+         Top             =   1860
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCaption 
+         Height          =   315
+         Left            =   1080
+         MaxLength       =   30
+         TabIndex        =   9
+         Top             =   780
+         Width           =   1335
+      End
+      Begin VB.TextBox txtDescription 
+         Height          =   315
+         Left            =   3420
+         MaxLength       =   20
+         TabIndex        =   10
+         Top             =   780
+         Width           =   1395
+      End
+      Begin VB.CommandButton cmdRemove 
+         Caption         =   "&Remove Button"
+         Height          =   315
+         Left            =   3480
+         TabIndex        =   27
+         Top             =   300
+         Width           =   1335
+      End
+      Begin VB.CommandButton cmdInsert 
+         Caption         =   "&Insert Button"
+         Height          =   315
+         Left            =   2100
+         TabIndex        =   7
+         Top             =   300
+         Width           =   1335
+      End
+      Begin VB.CommandButton cmdNext 
+         Height          =   315
+         Left            =   1635
+         TabIndex        =   26
+         Top             =   300
+         Width           =   135
+      End
+      Begin VB.CommandButton cmdPrevious 
+         Height          =   315
+         Left            =   1500
+         Style           =   1  'Graphical
+         TabIndex        =   25
+         Top             =   300
+         Width           =   135
+      End
+      Begin VB.TextBox txtIndex 
+         Enabled         =   0   'False
+         Height          =   315
+         Left            =   1080
+         TabIndex        =   8
+         TabStop         =   0   'False
+         Top             =   300
+         Width           =   375
+      End
+      Begin VB.Label lblCaption 
+         AutoSize        =   -1  'True
+         Caption         =   "Image"
+         Height          =   195
+         Index           =   9
+         Left            =   3540
+         TabIndex        =   34
+         Top             =   1560
+         Width           =   435
+      End
+      Begin VB.Label lblCaption 
+         AutoSize        =   -1  'True
+         Caption         =   "Key"
+         Height          =   195
+         Index           =   7
+         Left            =   120
+         TabIndex        =   33
+         Top             =   1200
+         Width           =   270
+      End
+      Begin VB.Label lblCaption 
+         AutoSize        =   -1  'True
+         Caption         =   "Tag"
+         Height          =   195
+         Index           =   10
+         Left            =   120
+         TabIndex        =   32
+         Top             =   1920
+         Width           =   285
+      End
+      Begin VB.Label lblCaption 
+         AutoSize        =   -1  'True
+         Caption         =   "Tooltip Text"
+         Height          =   195
+         Index           =   8
+         Left            =   120
+         TabIndex        =   31
+         Top             =   1560
+         Width           =   840
+      End
+      Begin VB.Label lblCaption 
+         AutoSize        =   -1  'True
+         Caption         =   "Caption"
+         Height          =   195
+         Index           =   5
+         Left            =   120
+         TabIndex        =   30
+         Top             =   840
+         Width           =   540
+      End
+      Begin VB.Label lblCaption 
+         AutoSize        =   -1  'True
+         Caption         =   "Description"
+         Height          =   195
+         Index           =   6
+         Left            =   2520
+         TabIndex        =   29
+         Top             =   840
+         Width           =   795
+      End
+      Begin VB.Label lblCaption 
+         AutoSize        =   -1  'True
+         Caption         =   "Index"
+         Height          =   195
+         Index           =   4
+         Left            =   120
+         TabIndex        =   28
+         Top             =   360
+         Width           =   390
+      End
+   End
+   Begin VB.TextBox txtTabKey 
+      Height          =   315
+      Left            =   1140
+      MaxLength       =   20
+      TabIndex        =   4
+      Top             =   960
+      Width           =   1335
+   End
+   Begin VB.TextBox txtTabCaption 
+      BackColor       =   &H00FFFFFF&
+      Height          =   315
+      Left            =   1140
+      MaxLength       =   20
+      TabIndex        =   2
+      Top             =   600
+      Width           =   1335
+   End
+   Begin VB.TextBox txtTabDescription 
+      Height          =   315
+      Left            =   3480
+      MaxLength       =   20
+      TabIndex        =   3
+      Top             =   600
+      Width           =   1395
+   End
+   Begin VB.CommandButton cmdRemoveTab 
+      Caption         =   "&Remove Button"
+      Height          =   315
+      Left            =   3540
+      TabIndex        =   19
+      Top             =   120
+      Width           =   1335
+   End
+   Begin VB.CommandButton cmdInsertTab 
+      Caption         =   "&Insert Button"
+      Height          =   315
+      Left            =   2160
+      TabIndex        =   0
+      Top             =   120
+      Width           =   1335
+   End
+   Begin VB.CommandButton cmdTabNext 
+      Height          =   315
+      Left            =   1695
+      TabIndex        =   18
+      Top             =   120
+      Width           =   135
+   End
+   Begin VB.CommandButton cmdTabPrevious 
+      Height          =   315
+      Left            =   1560
+      Style           =   1  'Graphical
+      TabIndex        =   17
+      Top             =   120
+      Width           =   135
+   End
+   Begin VB.TextBox txtTabIndex 
+      Enabled         =   0   'False
+      Height          =   315
+      Left            =   1140
+      TabIndex        =   1
+      TabStop         =   0   'False
+      Top             =   120
+      Width           =   375
+   End
+   Begin VB.CheckBox chkTabVisible 
+      Caption         =   "Visible"
+      Height          =   315
+      Left            =   2880
+      TabIndex        =   5
+      Top             =   1200
+      Value           =   1  'Checked
+      Width           =   795
+   End
+   Begin VB.CheckBox chkTabEnabled 
+      Caption         =   "Enabled"
+      Height          =   315
+      Left            =   4020
+      TabIndex        =   6
+      Top             =   1200
+      Value           =   1  'Checked
+      Width           =   915
+   End
+   Begin VB.Label lblCaption 
+      AutoSize        =   -1  'True
+      Caption         =   "Key"
+      Height          =   195
+      Index           =   3
+      Left            =   180
+      TabIndex        =   23
+      Top             =   1020
+      Width           =   270
+   End
+   Begin VB.Label lblCaption 
+      AutoSize        =   -1  'True
+      Caption         =   "Caption"
+      Height          =   195
+      Index           =   1
+      Left            =   180
+      TabIndex        =   22
+      Top             =   660
+      Width           =   540
+   End
+   Begin VB.Label lblCaption 
+      AutoSize        =   -1  'True
+      Caption         =   "Description"
+      Height          =   195
+      Index           =   2
+      Left            =   2580
+      TabIndex        =   21
+      Top             =   660
+      Width           =   795
+   End
+   Begin VB.Label lblCaption 
+      AutoSize        =   -1  'True
+      Caption         =   "Index"
+      Height          =   195
+      Index           =   0
+      Left            =   180
+      TabIndex        =   20
+      Top             =   180
+      Width           =   390
+   End
+End
+Attribute VB_Name = "pagTabs"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = False
+Option Explicit
+
+Private mcolTabs                            As colTabs
+Private blnRemoved                          As Boolean
+Private blnRemovedTab                       As Boolean
+
+Private lngCodigoErroNegocio                 As Long
+Private intNumeroSequencialErro              As Integer
+
+Private Sub chkEnabled_Click()
+    Changed = True
+End Sub
+
+Private Sub chkTabEnabled_Click()
+    Changed = True
+End Sub
+
+Private Sub chkTabVisible_Click()
+    Changed = True
+End Sub
+
+Private Sub chkVisible_Click()
+    Changed = True
+End Sub
+
+Private Sub cmdDescription_Change()
+    Changed = True
+End Sub
+
+Private Sub cmdInsert_Click()
+
+On Error GoTo ErrorHandler
+        
+    If IsNumeric(txtIndex) Then
+        WritePropertyButton
+    End If
+    
+    ClearPropertyButton
+    If Val(txtTabIndex) <= mcolTabs.Count Then
+        txtIndex = mcolTabs(Val(txtTabIndex)).Buttons.Count + 1
+    Else
+        txtIndex = 1
+    End If
+    Changed = True
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "cmdInsert_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub cmdInsertTab_Click()
+
+On Error GoTo ErrorHandler
+
+    If IsNumeric(txtTabIndex) Then
+        WritePropertyTab
+    End If
+    
+    ClearPropertyTab
+    txtTabIndex = mcolTabs.Count + 1
+    Changed = True
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "cmdInsertTab_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub cmdNext_Click()
+
+On Error GoTo ErrorHandler
+    
+    If IsNumeric(txtIndex) Then
+        WritePropertyButton
+    
+        If Val(txtIndex) < mcolTabs(Val(txtTabIndex)).Buttons.Count Then
+            txtIndex = Val(txtIndex) + 1
+            
+            ClearPropertyButton
+            ReadPropertyButton
+        End If
+    End If
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "cmdNext_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub cmdPrevious_Click()
+On Error GoTo ErrorHandler
+
+    If IsNumeric(txtIndex) Then
+        If Not blnRemoved Then
+            WritePropertyButton
+        End If
+        
+        If mcolTabs(Val(txtTabIndex)).Buttons.Count > 0 Then
+            If Val(txtIndex) - 1 <= mcolTabs(Val(txtTabIndex)).Buttons.Count And Val(txtIndex) - 1 > 0 Then
+                txtIndex = Val(txtIndex) - 1
+            Else
+                txtIndex = 1
+            End If
+            
+            ClearPropertyButton
+            ReadPropertyButton
+        Else
+            txtIndex = Empty
+        End If
+    End If
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "cmdPrevious_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub cmdRemove_Click()
+On Error GoTo ErrorHandler
+
+    If IsNumeric(txtIndex) Then
+        blnRemoved = True
+        
+        If mcolTabs.Count > 0 Then
+            If Val(txtIndex) <= mcolTabs(Val(txtTabIndex)).Buttons.Count Then
+                mcolTabs(Val(txtTabIndex)).Buttons.Remove Val(txtIndex)
+            End If
+        End If
+        
+        ClearPropertyButton
+        cmdPrevious_Click
+        
+        Changed = True
+        blnRemoved = False
+    End If
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "cmdRemove_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub cmdRemoveTab_Click()
+On Error GoTo ErrorHandler
+
+    If IsNumeric(txtTabIndex) Then
+        blnRemovedTab = True
+        If Val(txtTabIndex) <= mcolTabs.Count Then
+            mcolTabs.Remove Val(txtTabIndex)
+        End If
+        
+        ClearPropertyTab
+        cmdTabPrevious_Click
+        
+        Changed = True
+        blnRemovedTab = False
+    End If
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "cmdRemoveTab_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub cmdTabNext_Click()
+On Error GoTo ErrorHandler
+
+    If IsNumeric(txtTabIndex) Then
+        WritePropertyTab
+            
+        If Val(txtTabIndex) < mcolTabs.Count Then
+            txtTabIndex = Val(txtTabIndex) + 1
+            
+            ClearPropertyTab
+            ReadPropertyTab
+        End If
+    End If
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "cmdTabNext_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub cmdTabPrevious_Click()
+On Error GoTo ErrorHandler
+
+    If IsNumeric(txtTabIndex) Then
+        If Not blnRemovedTab Then
+            WritePropertyTab
+        End If
+    
+        If mcolTabs.Count > 0 Then
+            If Val(txtTabIndex) - 1 <= mcolTabs.Count And Val(txtTabIndex) - 1 > 0 Then
+                txtTabIndex = Val(txtTabIndex) - 1
+            Else
+                txtTabIndex = 1
+            End If
+        
+            ClearPropertyTab
+            ReadPropertyTab
+        Else
+            txtTabIndex = Empty
+        End If
+    End If
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "cmdTabPrevious_Click Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub PropertyPage_Initialize()
+On Error GoTo ErrorHandler
+
+    cmdInsert.Enabled = False
+    cmdRemove.Enabled = False
+    cmdRemoveTab.Enabled = False
+        
+    EnabledPropertyTab False
+    EnabledPropertyButton False
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "PropertyPage_Initialize Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub txtCaption_Change()
+    Changed = True
+End Sub
+
+Private Sub txtDescription_Change()
+    Changed = True
+End Sub
+
+Private Sub txtImage_Change()
+    Changed = True
+End Sub
+
+Private Sub txtIndex_Change()
+On Error GoTo ErrorHandler
+
+    If IsNumeric(txtIndex) Then
+        EnabledPropertyButton True
+        cmdRemove.Enabled = True
+    Else
+        EnabledPropertyButton False
+        cmdRemove.Enabled = False
+    End If
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "txtIndex_Change Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub txtKey_Change()
+    Changed = True
+End Sub
+
+Private Sub txtTabCaption_Change()
+    Changed = True
+End Sub
+
+Private Sub txtTabDescription_Change()
+    Changed = True
+End Sub
+
+Private Sub txtTabIndex_Change()
+On Error GoTo ErrorHandler
+    
+    If IsNumeric(txtTabIndex) Then
+        EnabledPropertyTab True
+        
+        cmdRemoveTab.Enabled = True
+        cmdInsert.Enabled = True
+    Else
+        txtIndex = Empty
+    
+        EnabledPropertyTab False
+        
+        cmdRemoveTab.Enabled = False
+        cmdInsert.Enabled = False
+    End If
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "txtTabIndex_Change Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub txtTabKey_Change()
+    Changed = True
+End Sub
+
+Private Sub txtTag_Change()
+    Changed = True
+End Sub
+
+Private Sub txtTooltip_Change()
+    Changed = True
+End Sub
+
+Private Sub PropertyPage_ApplyChanges()
+On Error GoTo ErrorHandler
+
+    If IsNumeric(txtTabIndex) And Not blnRemovedTab Then
+        WritePropertyTab
+    End If
+    
+    Set SelectedControls(0).ObjectTabs = mcolTabs
+    SelectedControls(0).ArrangeControls
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "PropertyPage_ApplyChanges Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub PropertyPage_SelectionChanged()
+On Error GoTo ErrorHandler
+
+    Set mcolTabs = SelectedControls(0).ObjectTabs
+        
+    If mcolTabs.Count > 0 Then
+        txtTabIndex = 1
+        ReadPropertyTab
+    End If
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "PropertyPage_SelectionChanged Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub WritePropertyButton()
+On Error GoTo ErrorHandler
+
+    If Val(txtTabIndex) > mcolTabs.Count Then
+        mcolTabs.Add Val(txtTabIndex)
+    
+        WritePropertyTab
+    End If
+    
+    If IsNumeric(txtIndex) Then
+        If Val(txtIndex) > mcolTabs(Val(txtTabIndex)).Buttons.Count Then
+            mcolTabs(Val(txtTabIndex)).Buttons.Add Val(txtIndex)
+        End If
+        
+        With mcolTabs(Val(txtTabIndex)).Buttons(Val(txtIndex))
+            .Caption = txtCaption
+            .Description = txtDescription
+            .Enabled = chkEnabled
+            .Image = txtImage
+            .Key = txtKey
+            .Tag = txtTag
+            .ToolTip = txtTooltip
+            .Visible = chkVisible
+        End With
+    End If
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "WritePropertyButton Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub WritePropertyTab()
+On Error GoTo ErrorHandler
+    
+    If Val(txtTabIndex) > mcolTabs.Count Then
+        mcolTabs.Add Val(txtTabIndex)
+    End If
+    
+    With mcolTabs(Val(txtTabIndex))
+        .Caption = txtTabCaption
+        .Description = txtTabDescription
+        .Enabled = chkTabEnabled
+        .Key = txtTabKey
+        .Visible = chkTabVisible
+    End With
+    
+    If IsNumeric(txtIndex) Then
+        WritePropertyButton
+    End If
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "WritePropertyTab Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub ReadPropertyButton()
+On Error GoTo ErrorHandler
+
+    With mcolTabs(Val(txtTabIndex)).Buttons(Val(txtIndex))
+        txtCaption = .Caption
+        txtDescription = .Description
+        chkEnabled = Abs(.Enabled)
+        txtImage = .Image
+        txtKey = .Key
+        txtTag = .Tag
+        txtTooltip = .ToolTip
+        chkVisible = Abs(.Visible)
+    End With
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "ReadPropertyButton Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub ReadPropertyTab()
+On Error GoTo ErrorHandler
+
+    With mcolTabs(Val(txtTabIndex))
+        txtTabCaption = .Caption
+        txtTabDescription = .Description
+        chkTabEnabled = Abs(.Enabled)
+        txtTabKey = .Key
+        chkTabVisible = Abs(.Visible)
+    
+        If .Buttons.Count > 0 Then
+            txtIndex = 1
+            ReadPropertyButton
+        End If
+    End With
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "ReadPropertyTab Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub ClearPropertyButton()
+On Error GoTo ErrorHandler
+
+    txtCaption = Empty
+    txtDescription = Empty
+    chkEnabled = Abs(True)
+    txtImage = Empty
+    txtKey = Empty
+    txtTag = Empty
+    txtTooltip = Empty
+    chkVisible = Abs(True)
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "ClearPropertyButton Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub ClearPropertyTab()
+On Error GoTo ErrorHandler
+
+    txtTabCaption = Empty
+    txtTabDescription = Empty
+    chkTabEnabled = Abs(True)
+    txtTabKey = Empty
+    chkTabVisible = Abs(True)
+
+    ClearPropertyButton
+    txtIndex = Empty
+    
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "ClearPropertyTab Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub
+
+Private Sub EnabledPropertyButton(Enabled As Boolean)
+On Error GoTo ErrorHandler
+
+    txtIndex.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+
+    txtCaption.Enabled = Enabled
+    txtCaption.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    txtDescription.Enabled = Enabled
+    txtDescription.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    txtKey.Enabled = Enabled
+    txtKey.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    txtTooltip.Enabled = Enabled
+    txtTooltip.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    txtImage.Enabled = Enabled
+    txtImage.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    txtTag.Enabled = Enabled
+    txtTag.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    chkVisible.Enabled = Enabled
+    chkEnabled.Enabled = Enabled
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "EnabledPropertyButton Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Sub
+
+Private Sub EnabledPropertyTab(Enabled As Boolean)
+On Error GoTo ErrorHandler
+
+    txtTabIndex.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    txtTabCaption.Enabled = Enabled
+    txtTabCaption.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    txtTabDescription.Enabled = Enabled
+    txtTabDescription.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    txtTabKey.Enabled = Enabled
+    txtTabKey.BackColor = IIf(Enabled, vb3DHighlight, vb3DFace)
+    
+    chkTabVisible.Enabled = Enabled
+    chkTabEnabled.Enabled = Enabled
+
+    Exit Sub
+ErrorHandler:
+    If lngCodigoErroNegocio <> 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, "pagTabs", "EnabledPropertyTab Sub", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Sub

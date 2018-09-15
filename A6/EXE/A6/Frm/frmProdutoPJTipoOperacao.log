@@ -1,0 +1,5 @@
+Line 92: Class MSComctlLib.Toolbar of control tblAplicar was not a loaded control class.
+Line 144: Class MSComctlLib.ListView of control lstTipoOperacao was not a loaded control class.
+Line 182: Class MSComctlLib.ListView of control lstProduto was not a loaded control class.
+Line 226: Class MSComctlLib.ImageList of control imlIcons was not a loaded control class.
+Line 268: Class MSComctlLib.Toolbar of control tlbCadastro was not a loaded control class.

@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[A6A7A8ServicoCOM.vbp]
+SCC_Aux_Path =\\bsbrsp54\VSSSLCC\vss,
+SCC_Project_Name ="$/SLCC/FONTESDS_SISBACEN/Comuns/DLL/A6A7A8SERVICOCOM", LCJDAAAA
+
+[Project1.vbp]
+SCC_Aux_Path =\\bsbrsp54\VSSSLCC\vss,
+SCC_Project_Name ="$/SLCC/FONTESDS_SISBACEN/Comuns/DLL/A6A7A8SERVICOCOM", LCJDAAAA

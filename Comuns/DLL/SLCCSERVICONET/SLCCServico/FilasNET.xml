@@ -1,0 +1,20 @@
+<!--
+________________________________________________
+configuracoes de Filas de Entrada do SLCC no MQ
+________________________________________________
+-->
+
+<ConfiguracaoEntrada>
+   <NomeQueueManager>QM.SLCC.01</NomeQueueManager>
+   <QuantidadeTotalThreads>80</QuantidadeTotalThreads>
+   <Janela_ParadaVerificacao HoraInicio='03:00:00' HoraFim='03:30:00' />
+   <Repet_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><NomeFila>FILA1</NomeFila><NomeObjeto>TesteThread.clsTeste</NomeObjeto><NomeObjetoApoio/><NomeFilaErro>A7Q.E.ERRO</NomeFilaErro><QuantidadeMaxThreads>4</QuantidadeMaxThreads><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><NomeFila>FILA2</NomeFila><NomeObjeto>TesteThread.clsTeste1</NomeObjeto><NomeObjetoApoio/><NomeFilaErro>A7Q.E.ERRO</NomeFilaErro><QuantidadeMaxThreads>4</QuantidadeMaxThreads><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><NomeFila>FILA3</NomeFila><NomeObjeto>TesteThread.clsTeste2</NomeObjeto><NomeObjetoApoio/><NomeFilaErro>A7Q.E.ERRO</NomeFilaErro><QuantidadeMaxThreads>4</QuantidadeMaxThreads><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><NomeFila>FILA4</NomeFila><NomeObjeto>TesteThread.clsTeste3</NomeObjeto><NomeObjetoApoio/><NomeFilaErro>A7Q.E.ERRO</NomeFilaErro><QuantidadeMaxThreads>4</QuantidadeMaxThreads><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+
+
+   </Repet_Parametros_Entrada>
+</ConfiguracaoEntrada>
+

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtProtocoloMensagem>
+  <TipoMensagem tipo="A" tamanho="9" decimais="0" inicio="0"  />
+  <SiglaSistemaOrigem tipo="A" tamanho="3" decimais="0" inicio="9"/>
+  <SiglaSistemaDestino tipo="A" tamanho="3" decimais="0" inicio="12"/>
+  <CodigoEmpresa tipo="A" tamanho="5" decimais="0" inicio="15"/>
+</udtProtocoloMensagem>

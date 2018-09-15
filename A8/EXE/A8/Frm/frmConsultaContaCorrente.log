@@ -1,0 +1,4 @@
+Line 16: Class MSComctlLib.Toolbar of control tlbButtons was not a loaded control class.
+Line 85: Class MSComctlLib.ListView of control lvwContaCorrente was not a loaded control class.
+Line 284: Class MSComctlLib.ImageList of control imgToolBar was not a loaded control class.
+Line 326: Class MSComctlLib.TreeView of control tvrContaCorrrenteStatus was not a loaded control class.

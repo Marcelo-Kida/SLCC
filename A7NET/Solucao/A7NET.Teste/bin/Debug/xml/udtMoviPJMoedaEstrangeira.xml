@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtMoviPJMoedaEstrangeira>
+  <TipoRemessa tipo="A" tamanho="3" decimais="0" inicio="0"/>
+  <CodigoEmpresa tipo="A" tamanho="5" decimais="0" inicio="0"/>
+  <SiglaSistema tipo="A" tamanho="3" decimais="0" inicio="0"/>
+  <IdentificadorMovimento tipo="A" tamanho="25" decimais="0" inicio="0"/>
+  <CodigoMoeda tipo="A" tamanho="4" decimais="0" inicio="0"/>
+  <CodigoBanqueiroSwift tipo="A" tamanho="30" decimais="0" inicio="0"/>
+  <CodigoProduto tipo="A" tamanho="4" decimais="0" inicio="0"/>
+  <DataMovimento tipo="A" tamanho="8" decimais="0" inicio="0"/>
+  <CodigoReferenciaSwift tipo="A" tamanho="16" decimais="0" inicio="0"/>
+  <TipoEntradaSaida tipo="A" tamanho="1" decimais="0" inicio="0"/>
+  <ValorMovimento tipo="A" tamanho="19" decimais="0" inicio="0"/>
+  <NomeCliente tipo="A" tamanho="50" decimais="0" inicio="0"/>
+  <TipoMovimento tipo="A" tamanho="3" decimais="0" inicio="0"/>
+  <TipoProcessamento tipo="A" tamanho="1" decimais="0" inicio="0"/>
+  <ContaBanqueiro tipo="A" tamanho="35" decimais="0" inicio="0"/>
+  <Filler tipo="A" tamanho="93" decimais="0" inicio="0"/>
+</udtMoviPJMoedaEstrangeira>

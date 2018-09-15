@@ -1,0 +1,17 @@
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Teste.exe
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Teste.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.GerenciadorFila.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.ConfiguracaoMQ.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Data.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Factory.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Mensagem.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Comum.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.GerenciadorFila.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.ConfiguracaoMQ.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Data.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Factory.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Mensagem.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\bin\Debug\A7NET.Comum.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\obj\Debug\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\obj\Debug\A7NET.Teste.exe
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Teste\obj\Debug\A7NET.Teste.pdb

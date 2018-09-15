@@ -1,0 +1,16 @@
+clsAlerta = 132, 132, 907, 586, C
+clsMensagemRejeitada = 22, 29, 519, 481, 
+clsRegraTransporte = 0, 0, 0, 0, C
+basRBLibrary = 22, 22, 956, 467, C
+basRegistryAPI = 0, 0, 0, 0, C
+basA7Miu = 176, 176, 897, 708, C
+clsA7Dominio = 0, 0, 0, 0, C
+clsA6A7A8Dominio = 198, 198, 921, 784, 
+clsTransacao = 36, 131, 483, 676, C
+clsMapaNavegacao = 0, 0, 934, 445, C
+clsMIU = 36, 131, 483, 676, C
+clsConsulta = 36, 131, 483, 676, C
+clsVersao = 88, 88, 1004, 499, C
+clsFilaErro = 0, 0, 0, 0, C
+clsMonitoracao = 198, 198, 1020, 642, Z
+clsCtrlProcessamento = 176, 176, 862, 788, C

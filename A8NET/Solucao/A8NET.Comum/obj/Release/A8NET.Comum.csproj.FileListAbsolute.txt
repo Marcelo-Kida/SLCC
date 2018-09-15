@@ -1,0 +1,5 @@
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Comum\bin\Release\A8NET.Comum.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Comum\bin\Release\A8NET.Comum.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Comum\obj\Release\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Comum\obj\Release\A8NET.Comum.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Comum\obj\Release\A8NET.Comum.pdb

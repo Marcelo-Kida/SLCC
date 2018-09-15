@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtProtocoloNZ>
+  <SiglaSistemaEnviouNZ tipo="A" tamanho="3" decimais="0" inicio="0"  />
+  <CodigoMensagem tipo="A" tamanho="9" decimais="0" inicio="3"/>
+  <ControleRemessaNZ tipo="A" tamanho="20" decimais="0" inicio="12"/>
+  <DataRemessa tipo="A" tamanho="8" decimais="0" inicio="32"/>
+  <CodigoEmpresa tipo="A" tamanho="5" decimais="0" inicio="40"/>
+  <CodigoMoeda tipo="A" tamanho="5" decimais="0" inicio="45"/>
+  <FormatoMensagem tipo="A" tamanho="1" decimais="0" inicio="50"/>
+  <AssinaturaInterna tipo="A" tamanho="50" decimais="0" inicio="51"/>
+  <SiglaSistemaLegadoOrigem tipo="A" tamanho="3" decimais="0" inicio="101"/>
+  <ReferenciaContabil tipo="A" tamanho="8" decimais="0" inicio="104"/>
+  <BancoAgencia tipo="A" tamanho="15" decimais="0" inicio="112"/>
+  <QuantidadeMensagem tipo="A" tamanho="6" decimais="0" inicio="127"/>
+  <NuOP tipo="A" tamanho="23" decimais="0" inicio="133"/>
+  <Filler tipo="A" tamanho="44" decimais="0" inicio="156"/>
+</udtProtocoloNZ>

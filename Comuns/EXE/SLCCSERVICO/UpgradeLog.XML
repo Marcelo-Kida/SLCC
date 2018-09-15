@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SLCCServico">
+</Property><Property Name="Solution File" Value="C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\SLCCServico.sln">
+</Property><Property Name="Date" Value="domingo, 17 de julho de 2011">
+</Property><Property Name="Time" Value="13:20:50">
+</Property></Properties><Event ErrorLevel="0" Project="SLCCServico" Source="SLCCServico.csproj" Description="Project file successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\SLCCServico.csproj">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="SLCCServico.csproj.user" Description="Project user file successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\SLCCServico.csproj.user">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="ProjectInstaller.cs" Description="File successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\ProjectInstaller.cs">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="ProjectInstaller.Designer.cs" Description="File successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\ProjectInstaller.Designer.cs">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="SLCCServico.cs" Description="File successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\SLCCServico.cs">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="SLCCServico.Designer.cs" Description="File successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\SLCCServico.Designer.cs">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="Program.cs" Description="File successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\Program.cs">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="ProjectInstaller.resx" Description="File successfully backed up as C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\Backup\ProjectInstaller.resx">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="SLCCServico.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SLCCServico" Source="SLCCServico.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SLCCServico" Source="SLCCServico.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

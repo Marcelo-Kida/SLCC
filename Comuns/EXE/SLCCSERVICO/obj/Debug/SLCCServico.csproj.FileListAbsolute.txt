@@ -1,0 +1,2 @@
+C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\obj\Debug\SLCCServico.exe
+C:\SLCC\FontesDS_SISBACEN\Comuns\EXE\SLCCSERVICO\obj\Debug\SLCCServico.pdb

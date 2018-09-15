@@ -1,0 +1,58 @@
+--
+--Criaçao de Trigger de Log  : A8PROC.TGAR_CTRL_ACES_DADO
+--Tabela associada           : TB_CTRL_ACES_DADO
+--Data Criaçao               : 15-10-2003 13:10:40
+--
+CREATE OR REPLACE TRIGGER TGAR_CTRL_ACES_DADO
+	AFTER UPDATE OR DELETE OR INSERT
+	ON A8.TB_CTRL_ACES_DADO
+	FOR EACH ROW
+--
+DECLARE
+	--
+	--Variável de controle de Operaçao (1 = Alter ; 2 = Delete; 3 = Insert)
+	nIN_TIPO_OPER  NUMBER := 0;
+	--
+BEGIN
+	--
+	IF UPDATING THEN
+		nIN_TIPO_OPER := 1;
+	ELSIF DELETING THEN
+		nIN_TIPO_OPER := 2;
+	ELSE
+		nIN_TIPO_OPER := 3;
+	END IF;
+	--
+	INSERT	INTO A8.TB_LOG_CTRL_ACES_DADO
+			(CO_GRUP_GS,
+			TP_INFO,
+			CO_INFO,
+			CO_USUA_ULTI_ATLZ,
+			CO_ETCA_TRAB_ULTI_ATLZ,
+			DH_ULTI_ATLZ,
+			NO_GRUP_GS,
+			IN_TIPO_OPER,
+			CO_USUA_OPER,
+			CO_ETCA_TRAB_OPER,
+			DH_OPER)
+	VALUES	(:OLD.CO_GRUP_GS,
+			:OLD.TP_INFO,
+			:OLD.CO_INFO,
+			:OLD.CO_USUA_ULTI_ATLZ,
+			:OLD.CO_ETCA_TRAB_ULTI_ATLZ,
+			:OLD.DH_ULTI_ATLZ,
+			:OLD.NO_GRUP_GS,
+			nIN_TIPO_OPER,
+			NULL,
+			NULL,
+			SYSDATE);
+	--
+	EXCEPTION
+		WHEN OTHERS THEN
+			RAISE_APPLICATION_ERROR(-20001,'Erro na execuçao da Trigger TGAR_CTRL_ACES_DADO'
+									|| 'A8.TB_LOG_CTRL_ACES_DADO'
+									|| SQLCODE || ' - '
+									|| SUBSTR(SQLERRM, 1, 100));
+--
+END;
+/

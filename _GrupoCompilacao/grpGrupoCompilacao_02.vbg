@@ -1,0 +1,3 @@
+VBGROUP 5.0
+StartupProject=..\Comuns\EXE\SLCCTRILHAAUDITORIA\A6A7A8TrilhaAuditoria.vbp
+Project=..\Comuns\DLL\A6A8ValidaRemessa\A6A8ValidaRemessa.vbp

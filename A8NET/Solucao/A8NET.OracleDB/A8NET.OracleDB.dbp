@@ -1,0 +1,23 @@
+# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "A8NET.OracleDB"
+   MSDTVersion = "80"
+   Begin DBRefFolder = "Database References"
+   End
+   Begin Folder = "Scripts"
+      Begin Folder = "Packages"
+         Node = "PKG_A7_CACHE_DOMINIO.pck"
+         Node = "PKG_A8_CACHE_DOMINIO.pck"
+         Node = "PKG_A8_CONCILIACAO_OPER_MESG.pck"
+         Node = "PKG_A8_INTEGRACAO_PJ.pck"
+         Node = "PKG_A8_SLCC_INTERF_BACEN.pck"
+         Node = "PKG_A8_TB_HIST_ENVI_INFO_GEST.pck"
+         Node = "PKG_A8_TB_HIST_SITU_ACAO_MESG.pck"
+         Node = "PKG_A8_TB_HIST_SITU_ACAO_OPER.pck"
+         Node = "PKG_A8_TB_MESG_RECB_ENVI_SPB.pck"
+         Node = "PKG_A8_TB_OPER_ATIV.pck"
+         Node = "PKG_A8_TB_OPER_ATIV_MESG_INTE.pck"
+         Node = "PKG_A8_TB_REME_REJE.pck"
+         Node = "PKG_A8_TB_TEXT_XML.pck"
+      End
+   End
+End

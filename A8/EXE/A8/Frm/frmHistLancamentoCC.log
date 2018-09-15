@@ -1,0 +1,5 @@
+Line 20: Class SHDocVwCtl.WebBrowser of control wbDetalhe was not a loaded control class.
+Line 68: Class MSComctlLib.ListView of control lvwComposicaoNet was not a loaded control class.
+Line 89: Class MSComctlLib.ListView of control lvwHistoricoStatus was not a loaded control class.
+Line 140: Class MSComctlLib.ImageList of control imlIcons was not a loaded control class.
+Line 202: Class MSComctlLib.Toolbar of control tlbComandosForm was not a loaded control class.

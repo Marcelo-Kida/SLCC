@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtPZO00140>
+  <HeaderNZ_PZ tipo="A" tamanho="200" decimais="0" inicio="0"/>
+  <CodMsg tipo="A" tamanho="9" decimais="0" inicio="200"/>
+  <NumCtrlIF tipo="A" tamanho="20" decimais="0" inicio="209"/>
+  <ISPBIFDebtd tipo="A" tamanho="8" decimais="0" inicio="229"/>
+  <NumCtrlSTR tipo="A" tamanho="20" decimais="0" inicio="237"/>
+  <SitLancSTR tipo="A" tamanho="3" decimais="0" inicio="257"/>
+  <DtHrSit tipo="A" tamanho="14" decimais="0" inicio="260"/>
+  <DtMovto tipo="A" tamanho="8" decimais="0" inicio="274"/>
+  <Filler tipo="A" tamanho="316" decimais="0" inicio="282"/>
+</udtPZO00140>

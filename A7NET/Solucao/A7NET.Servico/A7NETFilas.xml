@@ -1,0 +1,32 @@
+<ConfiguracaoEntrada>
+   <NomeQueueManager>QM.SLCC.01</NomeQueueManager>
+
+   <QuantidadeTotalThreads>25</QuantidadeTotalThreads>
+
+   <QuantidadePorThread>100</QuantidadePorThread>
+
+<!-- em segundos -->
+   <TempoEspera>1</TempoEspera>
+
+   <Repet_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <QtdeMaxThread>20</QtdeMaxThread>
+         <Fila>A7Q.E.ENTRADA_NET</Fila>
+         <NomeObjeto>A7NET.GerenciadorFila.GerenciadorRecebimento</NomeObjeto>
+         <Metodo>ProcessaMensagemMQ</Metodo>
+         <Tipo>NET</Tipo>
+      </Grupo_Parametros_Entrada>
+   </Repet_Parametros_Entrada>
+
+   <Repet_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <QtdeMaxThread>5</QtdeMaxThread>
+         <Fila>A7Q.E.ENTRADA_NET_PRIOR</Fila>
+         <NomeObjeto>A7NET.GerenciadorFila.GerenciadorRecebimento</NomeObjeto>
+         <Metodo>ProcessaMensagemMQ</Metodo>
+         <Tipo>NET</Tipo>
+      </Grupo_Parametros_Entrada>
+   </Repet_Parametros_Entrada>
+
+</ConfiguracaoEntrada>
+

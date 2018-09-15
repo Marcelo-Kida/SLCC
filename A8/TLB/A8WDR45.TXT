@@ -1,0 +1,164 @@
+      *----------------------------------------------------------------*        
+      * AREA COPY - DRCE0045                                           *        
+      * REG. LINKAGE - DRAT0045    (MANIPULACAO DE DATAS - CICS - COM  *        
+      * REFERENCIA A FERIADOS MUNICIPAIS,  ESTADUAIS  E  FEDERAIS  DO  *        
+      * BRASIL E DO EXTERIOR)                                          *        
+      * TAMANHO REGISTRO - 300 BYTES                                   *        
+      *                                                                *        
+      * CAMPOS             DESCRICAO                        POSICOES   *        
+      * ------             ---------                        --------   *        
+      * W045-OPC           OPCAO DE PROCESSAMENTO:            1   2  N *        
+      *                    00 - VALIDACAO DE DATAS                     *        
+      *                    01 - CONVERSAO DE DATAS                     *        
+      *                    02 - DIFERENCA ENTRE DATAS                  *        
+      *                    03 - PROGRESSAO DE DATAS                    *        
+      *                    04 - REGRESSAO DE DATAS                     *        
+      *                    05 - PRIMEIRO DIA UTIL DO MES               *        
+      *                    06 - ULTIMO DIA UTIL DO MES                 *        
+      * REFERENCIA A FERIADOS MUNICIPAIS,  ESTADUAIS  E  FEDERAIS  DO  *        
+      * BRASIL E DO EXTERIOR)                                          *        
+      * TAMANHO REGISTRO - 300 BYTES                                   *        
+      *                                                                *        
+      * CAMPOS             DESCRICAO                        POSICOES   *        
+      * ------             ---------                        --------   *        
+      * W045-OPC           OPCAO DE PROCESSAMENTO:            1   2  N *        
+      *                    00 - VALIDACAO DE DATAS                     *        
+      *                    01 - CONVERSAO DE DATAS                     *        
+      *                    02 - DIFERENCA ENTRE DATAS                  *        
+      *                    03 - PROGRESSAO DE DATAS                    *        
+      *                    04 - REGRESSAO DE DATAS                     *        
+      *                    05 - PRIMEIRO DIA UTIL DO MES               *        
+      *                    06 - ULTIMO DIA UTIL DO MES                 *        
+      *                    07 - PRIMEIRO DIA UTIL DA SEMANA SEGUINTE   *        
+      *                    08 - ULTIMO DIA UTIL DA SEMANA ANTERIOR     *        
+      *                    09 - QTDE DIA UTEIS ENTRE A DATA FORNECIDA  *        
+      *                         (EXCLUSIVE) E O PRIMEIRO DIA DO MES E  *        
+      *                         (EXCLUSIVE) E O PRIMEIRO DIA DO MES E  *        
+      *                         QTDE DIA UTEIS ENTRE A DATA FORNECIDA  *        
+      *                         (EXCLUSIVE) E O ULTIMO DIA DO MES      *        
+      *                    10 - TODOS OS SABADOS E DOMINGOS DO MES DA  *        
+      *                         DATA FORNECIDA E SUAS QTDES.           *        
+      *                    11 - TODOS OS FERIADOS DO MES DA DATA FOR-  *        
+      *                         NECIDA E A RESPECTIVA QTDE.            *        
+      *                    12 - QTDE DIAS UTEIS ENTRE O PRIMEIRO DIA   *        
+      *                         UTIL DO MES (INCLUSIVE) E A DATA FOR-  *        
+      *                         NECIDA (INCLUSIVE) E A QTDE DIAS UTEIS *        
+      *                         DO MES DA DATA FORNECIDA               *        
+      * W045-TPO-UOR       TIPO DA UNIORG                     3   2  B *        
+      * W045-COD-UOR       CODIGO DA UNIORG                   5   2  B *        
+      * W045-COD-IDN-DPN   IDENTIFICADOR DA DEPENDENCIA:      7   1  N *        
+      *                    0 = DO BRASIL                               *        
+      *                    1 = DO EXTERIOR                             *        
+      * W045-DAT-1         DATA A SER PROCESSADA              8   8  A *        
+      * W045-DAT-2         DATA A SER PROCESSADA             16   8  A *        
+      * W045-TPO-TRT       TIPO TRATAMENTO P/DIAS NAO UTEIS  24   1  N *        
+      * W045-QTD-DIA       NUMERO DE DIAS (PROGR./REGR.)     25   5  N *        
+      ******************************************************************        
+      * W045-TPO-UNI       TIPO DA UNIORG  (DECIMAL ZONADO)  30   4  N *        
+      * W045-COD-UNI       CODIGO DA UNIORG (DECIMAL ZONADO) 34   4  N *        
+      * W045-FLG-UNI       FLAG P/UNIORG    (DECIMAL ZONADO) 38   2  A *        
+      ******************************************************************        
+      * W045-FLG-ARQ-3     FLAG P/ UTILIZ. ARQ. "DRV0375E":  40   1  A *        
+      *                    S = SIM                                     *        
+      *                    N = NAO                                     *        
+      * W045-OPC-MUN       OPCAO DE MUNICIPIO:               41   2  N *        
+      *                    01 - CODIGO DO MUNICIPIO BACEN              *        
+      *                    02 - TIPO E CODIGO DA AGEO DO MUNICIPIO     *        
+      * W045-COD-BAC       CODIGO DO MUNICIPIO BACEN         43   7  N *        
+      * W045-TPO-AGO       TIPO DA AGEO DO MUNICIPIO         50   3  N *        
+      * W045-COD-AGO       CODIGO DA AGEO DO MUNICIPIO       53   7  N *        
+      * W045-DAT-3         DATA (FORMATO DD/MM/AA)           60   8  A *        
+      * W045-DAT-2         DATA A SER PROCESSADA             16   8  A *        
+      * W045-DAT-3         DATA (FORMATO DD/MM/AA)           60   8  A *        
+      * W045-DIA-MES-NUM   DIA DO MES (NUMERICO)             68   2  N *        
+      * W045-DIA-MES-ALF   DIA DO MES (EXTENSO)              70  14  A *        
+      * W045-MES-NUM       MES DO ANO (NUMERICO)             84   2  N *        
+      * W045-MES-ALF       MES DO ANO (EXTENSO)              86   9  A *        
+      * W045-ANO           ANO (NUMERICO/FORMATO AAAA)       95   4  N *        
+      * W045-DIA-SEM-NUM   DIA DA SEMANA (NUMERICO)          99   1  N *        
+      * W045-DIA-SEM-ALF   DIA DA SEMANA (EXTENSO)          100  13  A *        
+      * W045-IND-UTI       INDICADOR DIA UTIL               113   1  N *        
+      * W045-TPO-FRD       TIPO DE FERIADO:                 114   1  A *        
+      *                    M = MUNICIPAL                               *        
+      *                    E = ESTADUAL                                *        
+      *                    F = FEDERAL                                 *        
+      *                    X = MUNICIPAL E FEDERAL                     *        
+      *                    Y = MUNICIPAL E ESTADUAL                    *        
+      *                    Z = ESTADUAL E FEDERAL                      *        
+      *                    W = MUNICIPAL, ESTADUAL E FEDERAL           *        
+      *                    BRANCO = QUANDO A DATA FOR DIA UTIL         *        
+      *                    BRANCO = QUANDO A DATA FOR DIA UTIL         *        
+      *                    OU QUANDO A DATA FOR SABADO OU DOMINGO      *        
+      * W045-DAT-ALF       DATA POR EXTENSO                 115  35  A *        
+      * W045-SGN           SINAL (OPCAO 02)                 150   1  A *        
+      * W045-DIF-DIA       DIFERENCA DE DIAS                151   5  N *        
+      * W045-DIF-UTI       DIFERENCA DE DIAS UTEIS          156   5  N *        
+      * W045-TAB-UTI-ANT   TABELA UTEIS ANTERIORES  (OCC 5) 161  40  N *        
+      * W045-DAT-UTI-ANT   DIA UTIL ANTERIOR                  *   8  N *        
+      * W045-TAB-UTI-POS   TABELA UTEIS POSTERIORES (OCC 5) 201  40  N *        
+      * W045-DAT-UTI-POS   DIA UTIL POSTERIOR                 *   8  N *        
+      * W045-COD-RET       CODIGO DE RETORNO:               241   2  N *        
+      *                    00 - OPERACAO OK                            *        
+      *                    01 - OPCAO INVALIDA OU DATA COM MENOS       *        
+      *                         QUE 5 DIGITOS OU TAMANHO DA COMMAREA   *        
+      *                         ERRADO (DIFERENTE DE 300)              *        
+      *                    02 - DATA GREGORIANA - MES INVALIDO         *        
+      *                    03 - DATA GREGORIANA - DIA INVALIDO         *        
+      *                    04 - DATA JULIANA    - DIA INVALIDO         *        
+      *                    04 - DATA JULIANA    - DIA INVALIDO         *        
+      *                    05 - QTDE. DIAS NAO NUMERICA (OPC. 03 E 04) *        
+      *                    06 - IDENTIFICADOR DE DEPENDENCIA INVALIDO  *        
+      *                    07 - TIPO OU CODIGO DA UNIORG (DECIMAL ZO-  *        
+      *                         NADO) NAO NUMERICO                     *        
+      *                    33 - TIPO DE AREA GEOGRAFICA INVALIDO       *        
+      *                    34 - CODIGO DE AREA GEOGRAFICA INVALIDO     *        
+      *                    35 - AREA GEOGRAFICA NAO CADASTRADA         *        
+      *                    36 - CODIGO MUNICIPIO BACEN INVALIDO        *        
+      *                    37 - CODIGO MUNICIPIO BACEN NAO CADASTRADO  *        
+      *                    88 - ERRO DE ACESSO AO DB2 (VIDE SQLCODE E  *        
+      *                         NOME DA TABELA)                        *        
+      *                    99 - ABEND NA ROTINA                        *        
+      * W045-SQL-COD       SQLCODE EM CASO DE ERRO DB2      243   9  N *        
+      * W045-NOM-TAB       NOME DA TABELA DB2               252   8  A *        
+      * FILLER             RESERVADO                        260  41  A *        
+      *----------------------------------------------------------------*        
+         02     W045-DRCE0045.                                                  
+           03     W045-OPC                           PIC 9(02).                 
+           03     W045-TPO-UOR                       PIC S9(04)  COMP.          
+           03     W045-COD-UOR                       PIC S9(04)  COMP.          
+           03     W045-COD-IDN-DPN                   PIC 9(01).                 
+           03     W045-DAT-1                         PIC X(08).                 
+           03     W045-DAT-2                         PIC X(08).                 
+           03     W045-TPO-TRT                       PIC 9(01).                 
+           03     W045-QTD-DIA                       PIC 9(05).                 
+           03     W045-TPO-UNI                       PIC 9(04).                 
+           03     W045-COD-UNI                       PIC 9(04).                 
+           03     W045-FLG-UNI                       PIC X(02).                 
+           03     W045-FLG-ARQ-3                     PIC X(01).                 
+           03     W045-OPC-MUN                       PIC 9(02).                 
+           03     W045-COD-BAC                       PIC 9(07).                 
+           03     W045-TPO-AGO                       PIC 9(03).                 
+           03     W045-COD-AGO                       PIC 9(07).                 
+           03     W045-DAT-3                         PIC X(08).                 
+           03     W045-DIA-MES-NUM                   PIC 9(02).                 
+           03     W045-DIA-MES-ALF                   PIC X(14).                 
+           03     W045-MES-NUM                       PIC 9(02).                 
+           03     W045-MES-ALF                       PIC X(09).                 
+           03     W045-ANO                           PIC 9(04).                 
+           03     W045-DIA-SEM-NUM                   PIC 9(01).                 
+           03     W045-DIA-SEM-ALF                   PIC X(13).                 
+           03     W045-IND-UTI                       PIC 9(01).                 
+           03     W045-TPO-FRD                       PIC X(01).                 
+           03     W045-DAT-ALF                       PIC X(35).                 
+           03     W045-SGN                           PIC X(01).                 
+           03     W045-DIF-DIA                       PIC 9(05).                 
+           03     W045-DIF-UTI                       PIC 9(05).                 
+           03     W045-TAB-UTI-ANT                   OCCURS  5.                 
+              05  W045-DAT-UTI-ANT                   PIC 9(08).                 
+           03     W045-TAB-UTI-POS                   OCCURS  5.                 
+              05  W045-DAT-UTI-POS                   PIC 9(08).                 
+           03     W045-COD-RET                       PIC 9(02).                 
+           03     W045-SQL-COD                       PIC 9(09).                 
+           03     W045-NOM-TAB                       PIC X(08).                 
+           03     FILLER                             PIC X(41).                 
+                                                                                

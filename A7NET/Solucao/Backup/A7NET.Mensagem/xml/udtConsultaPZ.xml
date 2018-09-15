@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtConsultaPZ>
+  <Banco tipo="A" tamanho="3" decimais="0" inicio="0"/>
+  <Agencia tipo="A" tamanho="5" decimais="0" inicio="3"/>
+  <Conta tipo="A" tamanho="13" decimais="0" inicio="8"/>
+  <DataMensagem tipo="A" tamanho="8" decimais="0" inicio="21"/>
+  <HoraMensagem tipo="A" tamanho="8" decimais="0" inicio="29"/>
+  <CodigoMensagem tipo="A" tamanho="9" decimais="0" inicio="37"/>
+  <SiglaSistema tipo="A" tamanho="3" decimais="0" inicio="46"/>
+  <Filler tipo="A" tamanho="20" decimais="0" inicio="49"/>
+  <QuantidadeItem tipo="A" tamanho="5" decimais="0" inicio="69"/>
+  <RCRotina tipo="A" tamanho="5" decimais="0" inicio="74"/>
+  <MensagemRCRotina tipo="A" tamanho="80" decimais="0" inicio="79"/>
+</udtConsultaPZ>

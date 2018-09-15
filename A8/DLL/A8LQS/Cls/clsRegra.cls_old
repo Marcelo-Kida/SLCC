@@ -1,0 +1,304 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+  Persistable = 0  'NotPersistable
+  DataBindingBehavior = 0  'vbNone
+  DataSourceBehavior  = 0  'vbNone
+  MTSTransactionMode  = 0  'NotAnMTSObject
+END
+Attribute VB_Name = "clsRegra"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+Attribute VB_Description = "Componente     : \r\nClasse         : \r\nData Criação   : \r\nObjetivo       : \r\n\r\nAnalista       : \r\n\r\nProgramador    :\r\nData           :\r\n\r\nTeste          :\r\nAutor          :\r\n\r\nData Alteração :\r\nAutor          :\r\nObjetivo       :"
+Attribute VB_Ext_KEY = "RVB_UniqueId" ,"3F1808C200CC"
+Attribute VB_Ext_KEY = "RVB_ModelStereotype" ,"MTS Class"
+ 
+'' Objeto responsável por controlar a verificação de regras automática para:
+'' Confirmação, Conciliacao e Liberação de operação.
+
+
+Option Explicit
+
+'Variável utilizada para tratamento de erros
+Private lngCodigoErroNegocio                As Long
+Private intNumeroSequencialErro             As Integer
+
+Private ObjectContext                       As COMSVCSLib.ObjectContext
+Implements COMSVCSLib.ObjectControl
+
+Private Sub ObjectControl_Activate()
+    Set ObjectContext = COMSVCSLib.GetObjectContext()
+End Sub
+
+Private Function ObjectControl_CanBePooled() As Boolean
+    ObjectControl_CanBePooled = True
+End Function
+
+Private Sub ObjectControl_Deactivate()
+    Set ObjectContext = Nothing
+End Sub
+
+'Verifica as regras automáticas para a operação
+
+Public Function VerificarRegraAutomatica(ByVal xmlOperacao As MSXML2.DOMDocument40, _
+                                         ByVal plngFuncaoSistema As Long, _
+                                Optional ByRef plngCodigoRetornoVerificacao As Long = 0) As Boolean
+
+Dim rsFuncaoAutomatica                      As ADODB.Recordset
+
+    On Error GoTo ErrorHandler
+
+    'Se entrada manual sempre segue fluxo de Confirmação e Liberação Manual
+    If Not xmlOperacao.selectSingleNode("//IN_ENTR_MANU") Is Nothing Then
+        If xmlOperacao.selectSingleNode("//IN_ENTR_MANU").Text = enumIndicadorSimNao.Sim Then
+            If Not xmlOperacao.selectSingleNode("//TP_MESG") Is Nothing Then
+                If Val(xmlOperacao.selectSingleNode("//TP_MESG").Text) <> enumTipoMensagemLQS.RegistroOperacoesBMC And Val(xmlOperacao.selectSingleNode("//TP_MESG").Text) <> enumTipoMensagemLQS.NegociacaoOperacaoCCR And Val(xmlOperacao.selectSingleNode("//TP_MESG").Text) <> enumTipoMensagemLQS.RegistroOperacaoInterbancaria Then
+                    VerificarRegraAutomatica = False
+                    Exit Function
+                End If
+            Else
+                VerificarRegraAutomatica = False
+                Exit Function
+            End If
+        End If
+    End If
+
+    Set rsFuncaoAutomatica = flObterFuncaoAutomatica(xmlOperacao, _
+                                                     plngFuncaoSistema, _
+                                                     plngCodigoRetornoVerificacao)
+
+    'para a Conciliação de Registro de Operações Interbancária não é preciso verificar as permissões do usuário que enviou a operação,
+    'visto que a operação já foi Confirmada e Liberada automaticamente ou manualmente por outros usuários
+    If Not xmlOperacao.documentElement.selectSingleNode("//TP_MESG") Is Nothing Then
+        If Val(xmlOperacao.documentElement.selectSingleNode("//TP_MESG").Text) = enumTipoMensagemBUS.RegistroOperacaoInterbancaria And (plngFuncaoSistema = enumFuncaoSistema.Conciliar Or plngFuncaoSistema = enumFuncaoSistema.Liberar) Then
+            VerificarRegraAutomatica = True
+            plngCodigoRetornoVerificacao = 0
+            If Not ObjectContext Is Nothing Then
+                ObjectContext.SetComplete
+            End If
+            Exit Function
+        End If
+    End If
+
+    If Not rsFuncaoAutomatica Is Nothing Then
+        If rsFuncaoAutomatica.RecordCount > 0 Then
+            If rsFuncaoAutomatica!IN_FCAO_SIST_AUTM = enumIndicadorSimNao.Sim And _
+                IsNull(rsFuncaoAutomatica!TP_OPER) Then
+                VerificarRegraAutomatica = True
+            Else
+                VerificarRegraAutomatica = False
+            End If
+        Else
+            VerificarRegraAutomatica = False
+        End If
+    Else
+        VerificarRegraAutomatica = False
+    End If
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+    Exit Function
+
+ErrorHandler:
+    If Not ObjectContext Is Nothing Then
+        'ObjectContext.SetAbort
+    End If
+
+    If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, TypeName(Me), "VerificarRegraAutomatica Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Function
+
+'Verifica as regras automáticas para a operação
+
+Public Function VerificarRegraAutomatica2(ByVal pstrSequenciaOperacao As String, _
+                                          ByVal plngFuncaoSistema As Long) As Boolean
+
+'Obtem o XML da operacao e depois chama a VerificarRegraAutomatica
+    
+Dim objHistSituacaoOperacao                 As A8LQS.clsHistSituacaoOperacao
+Dim xmlOperacao                             As MSXML2.DOMDocument40
+Dim objOperacao                             As A8LQS.clsOperacao
+Dim blnRegraAutomatica                      As Boolean
+Dim lngJustificativa                        As Long
+Dim lngCodigoRetornoVerificacao             As Long
+    
+    On Error GoTo ErrorHandler
+    
+    Set objOperacao = CreateObject("A8LQS.clsOperacao")
+    Set xmlOperacao = objOperacao.LerXMLOperacao(Val(pstrSequenciaOperacao))
+
+    'Se entrada manual sempre segue fluxo de Confirmação e Liberação Manual
+    If Not xmlOperacao.selectSingleNode("//IN_ENTR_MANU") Is Nothing Then
+      If xmlOperacao.selectSingleNode("//IN_ENTR_MANU").Text = enumIndicadorSimNao.Sim Then
+            If Not xmlOperacao.selectSingleNode("//TP_MESG") Is Nothing Then
+                If Val(xmlOperacao.selectSingleNode("//TP_MESG").Text) <> enumTipoMensagemLQS.RegistroOperacoesBMC And Val(xmlOperacao.selectSingleNode("//TP_MESG").Text) <> enumTipoMensagemLQS.RegistroOperacaoInterbancaria Then
+                    VerificarRegraAutomatica2 = False
+                    Exit Function
+                End If
+            Else
+                VerificarRegraAutomatica2 = False
+                Exit Function
+            End If
+        End If
+    End If
+
+    blnRegraAutomatica = VerificarRegraAutomatica(xmlOperacao, plngFuncaoSistema, lngCodigoRetornoVerificacao)
+   
+    If blnRegraAutomatica Then
+        lngJustificativa = 0
+        VerificarRegraAutomatica2 = True
+    Else
+        lngJustificativa = enumJustificativa.RegraWorkflow
+        VerificarRegraAutomatica2 = False
+    End If
+    
+    If lngCodigoRetornoVerificacao <> 0 Then
+        lngJustificativa = lngCodigoRetornoVerificacao
+        VerificarRegraAutomatica2 = False
+    End If
+
+    If lngJustificativa <> 0 Then
+        Set objHistSituacaoOperacao = CreateObject("A8LQS.clsHistSituacaoOperacao")
+        objHistSituacaoOperacao.AlterarJustificativa xmlOperacao.documentElement.selectSingleNode("//NU_SEQU_OPER_ATIV").Text, _
+                                                     xmlOperacao.documentElement.selectSingleNode("//CO_ULTI_SITU_PROC").Text, _
+                                                     lngJustificativa
+        Set objHistSituacaoOperacao = Nothing
+    End If
+    
+    Set objOperacao = Nothing
+
+    Exit Function
+
+ErrorHandler:
+    Set objHistSituacaoOperacao = Nothing
+    Set objOperacao = Nothing
+
+    If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, TypeName(Me), "VerificarRegraAutomatica2 Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Function
+
+'Obter as regras de workflow cadastrada para o grupo de usuário
+
+Private Function flObterFuncaoAutomatica(ByVal xmlOperacao As MSXML2.DOMDocument40, _
+                                         ByVal plngFuncaoSistema As Long, _
+                                         ByRef plngCodigoRetornoVerificacao As Long) As ADODB.Recordset
+
+Dim strSQL                                  As String
+Dim strControleAcesso                       As String
+Dim strGrupoUsuario                         As String
+Dim objControleAcesso                       As A6A7A8.clsControleAcesso
+Dim xmlControleAcesso                       As MSXML2.DOMDocument40
+Dim objNode                                 As MSXML2.IXMLDOMNode
+Dim strUsuarioOperacao                      As String
+
+Dim objValidaRemessa                        As Object 'A6A8ValidaRemessa.clsValidaRemessa
+
+On Error GoTo ErrorHandler
+
+    'Obter o grupo Usuario
+    Set objControleAcesso = CreateObject("A6A7A8.clsControleAcesso")
+    Set xmlControleAcesso = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    strUsuarioOperacao = UCase(Mid$(xmlOperacao.documentElement.selectSingleNode("//CO_USUA_CADR_OPER").Text, 1, 8))
+    
+    'A verificação dos dados MBS para segregação de acesso
+    'foi cacheada no validaRemessa
+    Set objValidaRemessa = CreateObject("A6A8ValidaRemessa.clsValidaRemessa")
+    strControleAcesso = objValidaRemessa.VerificaUsuario(strUsuarioOperacao)
+    
+    If strControleAcesso = vbNullString Then
+        strControleAcesso = objControleAcesso.ObterGruposAcessoDadosPorUsuario(strUsuarioOperacao, plngCodigoRetornoVerificacao)
+        Call objValidaRemessa.AdicionaUsuario(strUsuarioOperacao, strControleAcesso)
+    End If
+    
+    Set objValidaRemessa = Nothing
+
+    If strControleAcesso = vbNullString Then
+        'Sai sem erro, pois irá informar que o grupo não está cadastrado para o usuário
+        If plngCodigoRetornoVerificacao = 0 Then
+            plngCodigoRetornoVerificacao = enumJustificativa.CadastroGrupoUsuario
+        End If
+        Exit Function
+    End If
+    
+    xmlControleAcesso.loadXML strControleAcesso
+
+    For Each objNode In xmlControleAcesso.documentElement.selectNodes("Repeat_GrupoUsuario/Grupo_GrupoUsuario/GrupoUsuario")
+        strGrupoUsuario = strGrupoUsuario & objNode.Text & ", "
+    Next
+
+    If strGrupoUsuario = vbNullString Then
+        'Sai sem erro, pois irá informar que o grupo não está cadastrado para o usuário
+        Set objControleAcesso = Nothing
+        Set xmlControleAcesso = Nothing
+        If plngCodigoRetornoVerificacao = 0 Then
+            plngCodigoRetornoVerificacao = enumJustificativa.CadastroGrupoUsuario
+        End If
+        Exit Function
+    End If
+
+    strGrupoUsuario = Left$(Trim$(strGrupoUsuario), Len(Trim(strGrupoUsuario)) - 1)
+
+    strSQL = " Select   A.IN_FCAO_SIST_AUTM, B.TP_OPER " & vbCrLf & _
+             " From     A8.TB_PARM_FCAO_SIST        A, " & vbCrLf & _
+             "          (Select * " & vbCrLf & _
+             "             From A8.TB_PARM_FCAO_SIST_EXCE " & vbCrLf & _
+             "            Where CO_GRUP_USUA    IN  (" & strGrupoUsuario & ")) B " & vbCrLf & _
+             " Where    A.TP_OPER           =   " & xmlOperacao.documentElement.selectSingleNode("//TP_OPER").Text & vbCrLf & _
+             " And      A.CO_FCAO_SIST      =   " & plngFuncaoSistema & vbCrLf & _
+             " And      A.CO_EMPR           =   " & xmlOperacao.documentElement.selectSingleNode("//CO_EMPR").Text & vbCrLf & _
+             " And      A.TP_BKOF           =   " & "(Select TP_BKOF From A8.TB_VEIC_LEGA " & vbCrLf & _
+                                                    " Where  CO_VEIC_LEGA    =   '" & xmlOperacao.documentElement.selectSingleNode("//CO_VEIC_LEGA").Text & "'" & _
+                                                    " And    SG_SIST         =   '" & xmlOperacao.documentElement.selectSingleNode("//SG_SIST_ORIG").Text & "')" & _
+             " And      A.TP_OPER           =   B.TP_OPER(+) " & vbCrLf & _
+             " And      A.CO_FCAO_SIST      =   B.CO_FCAO_SIST(+) " & vbCrLf & _
+             " And      A.TP_BKOF           =   B.TP_BKOF(+) " & vbCrLf & _
+             " And      A.CO_EMPR           =   B.CO_EMPR(+) " & vbCrLf & _
+             " And      B.SG_SIST(+)        =   '" & xmlOperacao.documentElement.selectSingleNode("//SG_SIST_ORIG").Text & "'" & vbCrLf & _
+             " And      B.CO_LOCA_LIQU(+)   =   " & xmlOperacao.documentElement.selectSingleNode("//CO_LOCA_LIQU").Text
+
+    Set flObterFuncaoAutomatica = fgQuerySQL(strSQL)
+
+    Set objControleAcesso = Nothing
+    Set xmlControleAcesso = Nothing
+    
+    Call flIncluirUsuarioControle(strUsuarioOperacao)
+
+    Exit Function
+ErrorHandler:
+    
+    Set objControleAcesso = Nothing
+    Set xmlControleAcesso = Nothing
+
+    If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, TypeName(Me), "flObterFuncaoAutomatica Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+End Function
+
+Private Function flIncluirUsuarioControle(ByVal pstrUsuarioOperacao As String)
+    
+Dim objControleUsuario                      As Object
+
+On Error GoTo ErrorHandler
+    
+    'PIKACHU - 02/03/2005
+    'INCLUIR CONTROLE USUARIO SISTEMA
+    Set objControleUsuario = CreateObject("A7Server.clsControleUsuarioSistema")
+    Call objControleUsuario.Incluir(pstrUsuarioOperacao, "A8P")
+    Set objControleUsuario = Nothing
+
+    Exit Function
+ErrorHandler:
+    
+    Set objControleUsuario = Nothing
+    
+    Err.Clear
+
+End Function
+

@@ -1,0 +1,209 @@
+<!--
+________________________________________________
+configuracoes de Filas de Entrada do SLCC no MQ
+________________________________________________
+-->
+<ConfiguracaoEntrada>
+   <NomeQueueManager>QM.SLCC.01</NomeQueueManager>
+   <QuantidadeTotalThreads>40</QuantidadeTotalThreads>
+   <Janela_ParadaVerificacao HoraInicio='0300' HoraFim='0330'/>
+   <NomeFilaMonitor Empresa="523">NZQ.E.MONITOR</NomeFilaMonitor>
+   <NomeFilaMonitor Empresa="701">NZQ.E.MONITOR</NomeFilaMonitor>
+   <NomeFilaConsultaPZ Empresa="523">A8Q.E.CONSULTA_PZ</NomeFilaConsultaPZ>
+   <NomeFilaConsultaPZ Empresa="558">A8Q.E.CONSULTA_PZ</NomeFilaConsultaPZ>
+   <NomeFilaConsultaPZ Empresa="701">A8Q.E.CONSULTA_PZ</NomeFilaConsultaPZ>
+   <NomeFilaConsDT Empresa="523">A8Q.E.CONS_DT</NomeFilaConsDT>
+   <NomeFilaConsDT Empresa="701">A8Q.E.CONS_DT</NomeFilaConsDT>
+   <Repet_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A7Q.E.ENTRADA</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A7Q.E.MENSAGEMRECEBIDA</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorEnvio</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A7Q.E.REPORT</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorEntrega</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.ENTRADA</NomeFila>
+         <NomeObjeto>A8LQS.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.ENTRADA_BOLETO</NomeFila>
+         <NomeObjeto>A8LQS.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.ENTRADA_OPERACAO</NomeFila>
+         <NomeObjeto>A8LQS.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.ENTRADA_BACEN</NomeFila>
+         <NomeObjeto>A8LQS.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.ENTRADA_CC</NomeFila>
+         <NomeObjeto>A8LQS.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.ESPERA_REPROC</NomeFila>
+         <NomeObjeto>A8LQS.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A6Q.E.REMESSASUBRESERVA</NomeFila>
+         <NomeObjeto>A6SubReserva.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A6Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A6Q.E.REMESSAFUTURO</NomeFila>
+         <NomeObjeto>A6SubReserva.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A6Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.MSG_R1</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001000NZ A8 00000</Protocolo>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.MSG_R2</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001000NZ A8 00000</Protocolo>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.AVISO</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001000NZ A8 00000</Protocolo>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.CONS_HD</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001000NZ A8 00000</Protocolo>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.ERRO</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001003NZ A8 00000</Protocolo>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>AEA.QL.ANSWER.SLCC</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001008BG A8 00000</Protocolo>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.REPROCESSAMENTO</NomeFila>
+         <NomeObjeto>A8LQS.clsRemessa</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <QuantidadeMaxThreads>2</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.ERROPZ</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001009PZ A8 00000</Protocolo>
+         <QuantidadeMaxThreads>1</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.MSG_R1R2</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001011PZ A8 00000</Protocolo>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.DEVO</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001012PZ A8 00558</Protocolo>
+         <QuantidadeMaxThreads>4</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <NomeFila>A8Q.E.MSG</NomeFila>
+         <NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto>
+         <NomeObjetoApoio/>
+         <NomeFilaErro>A7Q.E.ERRO</NomeFilaErro>
+         <Protocolo>000001013PZ A8 00000</Protocolo>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametros_Entrada>
+   </Repet_Parametros_Entrada>
+   <Repet_Parametros_Agendamento>
+      <Grupo_Parametro_Agendamento>
+         <NomeObjeto>A8LQS.clsTRemessa</NomeObjeto>
+         <QuantidadeMaxThreads>1</QuantidadeMaxThreads>
+      </Grupo_Parametro_Agendamento>
+      <Grupo_Parametro_Agendamento>
+         <NomeObjeto>A8LQS.clsLiquidacaoTQ</NomeObjeto> 
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads> 
+      </Grupo_Parametro_Agendamento>
+      <Grupo_Parametro_Agendamento>
+         <NomeObjeto>A8LQS.clsProcessoMensagemSTR</NomeObjeto>
+         <QuantidadeMaxThreads>1</QuantidadeMaxThreads>
+      </Grupo_Parametro_Agendamento>
+      <Grupo_Parametro_Agendamento>
+         <NomeObjeto>A7Server.clsControleUsuarioSistema</NomeObjeto>
+         <QuantidadeMaxThreads>1</QuantidadeMaxThreads>
+      </Grupo_Parametro_Agendamento>
+      <Grupo_Parametro_Agendamento>
+         <NomeObjeto>A8LQS.clsLiquidacaoFutura</NomeObjeto>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametro_Agendamento>
+      <Grupo_Parametro_Agendamento>
+         <NomeObjeto>A6A7A8.CLSCONTROLEACESSO</NomeObjeto>
+         <QuantidadeMaxThreads>5</QuantidadeMaxThreads>
+      </Grupo_Parametro_Agendamento>
+   </Repet_Parametros_Agendamento>
+</ConfiguracaoEntrada>

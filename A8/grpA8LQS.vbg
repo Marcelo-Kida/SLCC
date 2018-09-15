@@ -1,0 +1,9 @@
+VBGROUP 5.0
+Project=DLL\A8MIU\A8MIU.vbp
+Project=DLL\A8LQS\A8LQS.vbp
+Project=..\Comuns\DLL\A6A7A8\A6A7A8.vbp
+Project=EXE\A8\A8.vbp
+Project=..\Comuns\DLL\A6A7A8CA\A6A7A78CA.vbp
+Project=..\Comuns\DLL\A6A8ValidaRemessa\A6A8ValidaRemessa.vbp
+StartupProject=..\RecMsgMov\Project1.vbp
+Project=..\Comuns\DLL\A6A7A8Miu\A6A7A8MIU.vbp

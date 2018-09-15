@@ -1,0 +1,15 @@
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.GerenciadorFila.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.GerenciadorFila.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.ConfiguracaoMQ.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.Data.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.Factory.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.Mensagem.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.Comum.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.ConfiguracaoMQ.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.Data.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.Factory.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.Mensagem.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\bin\Debug\A7NET.Comum.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\obj\Debug\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\obj\Debug\A7NET.GerenciadorFila.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.GerenciadorFila\obj\Debug\A7NET.GerenciadorFila.pdb

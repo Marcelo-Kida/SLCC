@@ -1,0 +1,66 @@
+CREATE OR REPLACE PACKAGE PKG_A8_TB_REME_REJE IS
+
+-- Public function and procedure declarations
+PROCEDURE SPI_TB_REME_REJE(
+	P_SG_SIST_ORIG_INFO	IN A8.TB_REME_REJE.SG_SIST_ORIG_INFO%TYPE,
+	P_TP_MESG_INTE IN A8.TB_REME_REJE.TP_MESG_INTE%TYPE,
+	P_CO_EMPR	IN A8.TB_REME_REJE.CO_EMPR%TYPE,
+	P_CO_TEXT_XML_REJE IN A8.TB_REME_REJE.CO_TEXT_XML_REJE%TYPE,
+	P_CO_TEXT_XML_RETN_SIST_ORIG IN A8.TB_REME_REJE.CO_TEXT_XML_RETN_SIST_ORIG%TYPE,
+	P_TX_XML_ERRO	IN A8.TB_REME_REJE.TX_XML_ERRO%TYPE,
+	P_DH_REME_REJE IN A8.TB_REME_REJE.DH_REME_REJE%TYPE
+);
+
+END PKG_A8_TB_REME_REJE;
+/
+CREATE OR REPLACE PACKAGE BODY PKG_A8_TB_REME_REJE IS
+
+/********************************************************************************************************
+Nome Lógico     :	SPI_TB_REME_REJE
+Descrição       :	Procedure de inclusão de registros na tabela TB_REME_REJE 
+Retorno         :	-
+Autor           :	Fernando Grassi Chaves
+Data Criação    :	30/05/2011 18:25:43 
+Comentario      :	-
+----------------------------------------------------------------------------------------------------------
+Alterado        :
+Data            :
+Motivo          :
+Solicitado Por  :
+**********************************************************************************************************/
+PROCEDURE SPI_TB_REME_REJE(
+	P_SG_SIST_ORIG_INFO	IN A8.TB_REME_REJE.SG_SIST_ORIG_INFO%TYPE,
+	P_TP_MESG_INTE	IN A8.TB_REME_REJE.TP_MESG_INTE%TYPE,
+	P_CO_EMPR	IN A8.TB_REME_REJE.CO_EMPR%TYPE,
+	P_CO_TEXT_XML_REJE	IN A8.TB_REME_REJE.CO_TEXT_XML_REJE%TYPE,
+	P_CO_TEXT_XML_RETN_SIST_ORIG	IN A8.TB_REME_REJE.CO_TEXT_XML_RETN_SIST_ORIG%TYPE,
+	P_TX_XML_ERRO	IN A8.TB_REME_REJE.TX_XML_ERRO%TYPE,
+	P_DH_REME_REJE	IN A8.TB_REME_REJE.DH_REME_REJE%TYPE
+) IS
+BEGIN
+
+  INSERT INTO A8.TB_REME_REJE(
+
+		SG_SIST_ORIG_INFO, 
+		TP_MESG_INTE, 
+		CO_EMPR, 
+		CO_TEXT_XML_REJE, 
+		CO_TEXT_XML_RETN_SIST_ORIG, 
+		TX_XML_ERRO, 
+		DH_REME_REJE 
+  )
+  VALUES(
+
+		P_SG_SIST_ORIG_INFO,
+		P_TP_MESG_INTE,
+		P_CO_EMPR,
+		P_CO_TEXT_XML_REJE,
+		P_CO_TEXT_XML_RETN_SIST_ORIG,
+		P_TX_XML_ERRO,
+		P_DH_REME_REJE
+  );
+END SPI_TB_REME_REJE;
+
+
+END PKG_A8_TB_REME_REJE;
+/

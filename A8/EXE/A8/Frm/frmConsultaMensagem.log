@@ -1,0 +1,5 @@
+Line 42: Class MSComctlLib.Toolbar of control tlbButtons was not a loaded control class.
+Line 111: Class MSComctlLib.ListView of control lstMensagem was not a loaded control class.
+Line 277: Class MSComctlLib.ImageList of control imgToolBar was not a loaded control class.
+Line 344: Class MSComctlLib.TreeView of control trvMensagemStatus was not a loaded control class.
+Line 359: Class MSComctlLib.TreeView of control trvMensagemGrupo was not a loaded control class.

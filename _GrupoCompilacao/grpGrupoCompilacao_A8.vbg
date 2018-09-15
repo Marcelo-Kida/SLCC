@@ -1,0 +1,4 @@
+VBGROUP 5.0
+Project=..\A8\DLL\A8MIU\A8MIU.vbp
+Project=..\A8\DLL\A8LQS\A8LQS.vbp
+StartupProject=..\A8\EXE\A8\A8.vbp

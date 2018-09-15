@@ -1,0 +1,15 @@
+ctlBarraVertical = 110, 110, 910, 555, Z, 12, 107, 459, 652, C
+ctlSysTray = 75, 75, 1111, 542, , 12, 107, 459, 652, C
+pagGeneral = 0, 0, 0, 0, C, 12, 107, 459, 652, C
+pagTabs = 0, 0, 0, 0, C, 12, 107, 459, 652, C
+colTabs = 176, 176, 998, 620, 
+clsTab = 44, 44, 836, 457, 
+clsButton = 0, 0, 0, 0, C
+colButtons = 198, 198, 1020, 642, 
+ctlErrorMessage = 0, 0, 822, 444, , 12, 107, 459, 652, C
+basRegistra = 0, 0, 0, 0, C
+basRegistryAPI = 22, 22, 844, 466, 
+basRBLibrary = 117, 90, 1153, 557, 
+frmStartScreen = 110, 110, 417, 552, , 176, 62, 935, 620, C
+frmErros = 154, 154, 954, 599, , 110, 110, 682, 554, C
+basStartScreen = 0, 0, 822, 442, 

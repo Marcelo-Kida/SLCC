@@ -1,0 +1,60 @@
+--
+--Criaçao de Trigger de Log  : A7PROC.TGAR_SIST
+--Tabela associada           : TB_SIST
+--Data Criaçao               : 30-09-2003 10:57:44
+--
+CREATE OR REPLACE TRIGGER TGAR_SIST
+	AFTER UPDATE OR DELETE OR INSERT
+	ON A7.TB_SIST
+	FOR EACH ROW
+--
+DECLARE
+	--
+	--Variável de controle de Operaçao (1 = Alter ; 2 = Delete, 3 = Insert)
+	nIN_TIPO_OPER  NUMBER := 0;
+	--
+BEGIN
+	--
+	IF UPDATING THEN
+		nIN_TIPO_OPER := 1;
+	ELSIF DELETING THEN
+		nIN_TIPO_OPER := 2;
+	ELSE
+		nIN_TIPO_OPER := 3;
+	END IF;
+	--
+	INSERT	INTO A7.TB_LOG_SIST
+			(CO_EMPR,
+			SG_SIST,
+			NO_SIST,
+			DT_INIC_VIGE_SIST,
+			DT_FIM_VIGE_SIST,
+			CO_USUA_ULTI_ATLZ,
+			CO_ETCA_TRAB_ULTI_ATLZ,
+			DH_ULTI_ATLZ,
+			IN_TIPO_OPER,
+			CO_USUA_OPER,
+			CO_ETCA_TRAB_OPER,
+			DH_OPER)
+	VALUES	(:OLD.CO_EMPR,
+			:OLD.SG_SIST,
+			:OLD.NO_SIST,
+			:OLD.DT_INIC_VIGE_SIST,
+			:OLD.DT_FIM_VIGE_SIST,
+			:OLD.CO_USUA_ULTI_ATLZ,
+			:OLD.CO_ETCA_TRAB_ULTI_ATLZ,
+			:OLD.DH_ULTI_ATLZ,
+			nIN_TIPO_OPER,
+			NULL,
+			NULL,
+			SYSDATE);
+	--
+	EXCEPTION
+		WHEN OTHERS THEN
+			RAISE_APPLICATION_ERROR(-20001,'Erro na execuçao da Trigger TGAR_SIST'
+									||'A7.TB_LOG_SIST'
+									|| SQLCODE || ' - '
+									|| SUBSTR(SQLERRM, 1, 100));
+	--
+END;
+/

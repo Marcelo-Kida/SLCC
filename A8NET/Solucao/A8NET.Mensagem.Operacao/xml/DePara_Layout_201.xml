@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CAMPOS>
+  <DePara campo_layout="VA_MOED_NACIO" campo_tabela="VA_OPER_ATIV"/>
+  <DePara campo_layout="TP_OPER_CAMB"  campo_tabela="IN_ENTR_SAID_RECU_FINC">
+     <DOMINIOS>
+       <DePara dominio_layout="V" dominio_tabela="1" />
+       <DePara dominio_layout="C" dominio_tabela="2" />
+     </DOMINIOS> 
+  </DePara>
+  <DePara campo_layout="CO_CNPJ_BASE_CORRT" campo_tabela="NO_CNPT"/>
+</CAMPOS>
+

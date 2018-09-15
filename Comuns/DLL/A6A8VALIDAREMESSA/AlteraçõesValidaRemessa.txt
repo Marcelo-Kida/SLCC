@@ -1,0 +1,191 @@
+Nick/Cas
+
+ 
+
+Segue fonte do A6A8Validaremessa com as alterações das query´s
+
+ 
+
+1) Compilar os fontes anexos , e configurar compatibiliade binária.
+
+ 
+
+ 
+
+2) Inativar ou excluir serviço A6A8AtivaValidaRemessa
+
+ 
+
+3) Alterar o exe do instalador (A6A7A8SetupCOMPlus.exe) para não registar o executável A6A8ValidaRemessa.exe
+
+ 
+
+5) Alterar SLCC_Componentes_COMPLUS.xml
+
+ 
+
+<Repeat_Components Path="C:\SLCC\Server">
+
+<Grupo_A6A7A8>
+
+  <A6A7A8Miu.dll>Mecanismos de Interface com Usuários</A6A7A8Miu.dll>
+
+  <A6A7A8CA.dll>Serviços de Banco de Dados e MQSeries</A6A7A8CA.dll>
+
+  <A6A7A8.dll>Componentes Comuns SLCC</A6A7A8.dll>
+
+  <A6A7A8Publisher.dll EventClass="1">Publisher Evento COM+</A6A7A8Publisher.dll>
+
+  <A6A7A8VerificaServer.dll>A6A7A8 VERIFICA SERVER</A6A7A8VerificaServer.dll>
+
+  <A6A7A8ServicoCOM.dll>A6A7A8 VERIFICA SERVER NOVO</A6A7A8ServicoCOM.dll>
+
+  <A6A8ValidaRemessa.dll>Valida remessa DLL</A6A8ValidaRemessa.dll>
+
+</Grupo_A6A7A8>
+
+ 
+
+......
+
+</Repeat_Components>
+
+ 
+
+<Repeat_Class_TransactionConfig>
+
+      ......
+
+ 
+
+      <Grupo_Not_Supported>
+
+         ......
+
+ 
+
+         <A6A8ValidaRemessa>
+
+            <Class>clsMovimentoCaixa</Class>     à Adicionar este grupo aoscomponentes Not Supported   
+
+            <Class>clsValidaRemessa</Class>          
+
+         </A6A8ValidaRemessa>
+
+      </Grupo_Not_Supported>
+
+ 
+
+</Repeat_Class_TransactionConfig>
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Qualquer dúvida me ligue
+
+ 
+
+ 
+
+Marcelo Hiroaki Kida
+
+Marcelo.kida@maps.com.br
+
+Tel: +55 11 5085-5844
+
+www.maps.com.br
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Esta mensagem, incluindo qualquer anexo e os arquivos nela contidos, é confidencial
+
+e legalmente protegida, somente podendo ser usada pelo indivíduo ou entidade a quem 
+
+foi endereçada. 
+
+Caso você a tenha recebido por engano, deverá devolvê-la ao remetente e, posteriormente,
+
+apagá-la, pois, a disseminação, encaminhamento, uso, impressão ou cópia do conteúdo desta
+
+mensagem é expressamente proibido. 
+
+ 
+
+ 
+
+This message (including any attachments) contains confidential information intended for a
+
+specific individual and purpose, and is protected by law. 
+
+If you are not the intended recipient, you should delete this message. Any disclosure, 
+
+copying, or distribution of this message, or the taking of any action based on it, is
+
+strictly prohibited.
+
+ 
+
+-----Original Message-----
+From: Nick Torres Pacheco (P) [mailto:npacheco@prservicos.com.br] 
+Sent: sexta-feira, 15 de agosto de 2008 17:32
+To: marcelo.kida@maps.com.br; Cassiano Nicolosi
+Subject: Valida Remessa...
+
+ 
+
+Kida,
+
+ 
+
+Segue anexo valida remessa + XML do instalador...
+
+ 
+
+À disposição!
+
+ 
+
+Att.
+
+ 
+
+Nick
+
+Tel. 5854-8204
+
+ 
+
+The message is ready to be sent with the following file or link attachments:
+
+ 
+
+A6A8ValidaRemessa.zip
+
+ 
+
+ 
+
+Note: To protect against computer viruses, e-mail programs may prevent sending or receiving certain types of file attachments.  Check your e-mail security settings to determine how attachments are handled.
+
+ 
+
+Essa mensagem é destinada exclusivamente ao seu destinatário e pode conter informações confidenciais, protegidas por sigilo profissional ou cuja divulgação seja proibida por lei. O uso não autorizado de tais informações é proibido e está sujeito às penalidades cabíveis.
+
+ 
+
+This message is intended exclusively for its addressee and may contain information that is confidential and protected by a professional privilege or whose disclosure is prohibited by law. Unauthorized use of such information is prohibited and subject to applicable penalties.

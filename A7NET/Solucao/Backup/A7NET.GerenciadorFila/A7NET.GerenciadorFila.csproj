@@ -1,0 +1,74 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1D6851A3-C8BC-4820-BE09-BBAC3F125E05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>A7NET.GerenciadorFila</RootNamespace>
+    <AssemblyName>A7NET.GerenciadorFila</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="amqmdnet, Version=1.0.0.3, Culture=neutral, PublicKeyToken=dd3cb1c9aae9ec97">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\amqmdnet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Executor.cs" />
+    <Compile Include="Fila.cs" />
+    <Compile Include="Filas.cs" />
+    <Compile Include="GerenciadorRecebimento.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VerificaFila.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A7NET.ConfiguracaoMQ\A7NET.ConfiguracaoMQ.csproj">
+      <Project>{F63FAF80-375B-48AA-971D-C839CAC401C9}</Project>
+      <Name>A7NET.ConfiguracaoMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\A7NET.Data\A7NET.Data.csproj">
+      <Project>{3CE5B06F-81C6-415E-93ED-635B6AA74699}</Project>
+      <Name>A7NET.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\A7NET.Factory\A7NET.Factory.csproj">
+      <Project>{D813740E-0490-4303-8DDB-F9F3E946FBBF}</Project>
+      <Name>A7NET.Factory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\A7NET.Mensagem\A7NET.Mensagem.csproj">
+      <Project>{BF9DCF9F-004D-4075-93EA-1CE122ECAC5E}</Project>
+      <Name>A7NET.Mensagem</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

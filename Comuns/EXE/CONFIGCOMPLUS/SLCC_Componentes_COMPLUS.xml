@@ -1,0 +1,148 @@
+﻿<Application_Descriptor>
+   <!--Considerações : os nomes de classes e componentes são CASE-SENSITIVES-->
+   <Properties>
+      <Name>A6A7A8</Name>
+      <Description>A6A7A8</Description>
+      <QueuingEnabled Boolean="">1</QueuingEnabled>
+      <QueueListenerEnabled Boolean="">1</QueueListenerEnabled>
+   </Properties>
+   <Repeat_Components Path="C:\SLCC\Server">
+      <Grupo_A6A7A8>
+         <A6A7A8Miu.dll>Mecanismos de Interface com Usuários</A6A7A8Miu.dll>
+         <A6A7A8CA.dll>Serviços de Acesso a Banco de Dados e MQSeries</A6A7A8CA.dll>
+         <A6A7A8.dll>Componentes Comuns SLCC</A6A7A8.dll>
+         <A6A7A8Publisher.dll EventClass="1">Publisher Evento COM+</A6A7A8Publisher.dll>
+         <A6A7A8ServicoCOM.dll>A6A7A8 VERIFICA SERVER NOVO</A6A7A8ServicoCOM.dll>
+	 <A6A8ValidaRemessa.dll>Valida remessa DLL</A6A8ValidaRemessa.dll>
+      </Grupo_A6A7A8>
+      <Grupo_A6>
+         <A6MIU.dll>Mecanismos de Interface com Usuários</A6MIU.dll>
+         <A6SubReserva.dll>Regras de Negócio e Requisição de Dados</A6SubReserva.dll>
+      </Grupo_A6>
+      <Grupo_A7>
+         <A7Miu.dll>Mecanismo de Interface de Usuário</A7Miu.dll>
+         <A7Server.dll>Componentes A7 Bus Server</A7Server.dll>
+      </Grupo_A7>
+      <Grupo_A8>
+         <A8MIU.dll>Mecanismos de Interface com Usuários</A8MIU.dll>
+         <A8LQS.dll>Liquidação e Controle Selic</A8LQS.dll>
+      </Grupo_A8>
+   </Repeat_Components>
+   <Repeat_Class_TransactionConfig>
+      <Grupo_Suported/>
+      <!--Engloba todas as classes não especificadas em Grupo_Not_Suported ou Grupo_Required-->
+      <Grupo_RequiredNew>
+	<A8LQS>
+	   <Class>clsNovaTransacao</Class>
+	</A8LQS>
+      </Grupo_RequiredNew>
+      <Grupo_Not_Supported>
+         <A7Miu>
+            <Class>clsConsulta</Class>
+         </A7Miu>
+         <A6A7A8>
+            <Class>clsControleAcesso</Class>
+            <Class>clsSharedPropMem</Class>
+            <Class>clsPerfil</Class>
+         </A6A7A8>
+         <A7Publisher>
+            <Class>clsBusPublisher</Class>
+         </A7Publisher>
+         <A7Server>
+            <Class>clsSubscriber</Class>
+            <Class>clsInterfaceSubscriber</Class>
+            <Class>clsBusPublisher</Class>
+            <Class>clsInterfaceSubscriber</Class>
+         </A7Server>
+         <A6A7A8CA>
+            <Class>clsDBLConsulta</Class>
+         </A6A7A8CA>
+         <A6A8ValidaRemessa>
+            <Class>clsMovimentoCaixa</Class>
+            <Class>clsValidaRemessa</Class>          
+         </A6A8ValidaRemessa>
+         <A6A7A8VerificaServer>
+            <Class>clsInterfaceSubsc</Class>
+            <Class>clsSubscriber</Class>
+         </A6A7A8VerificaServer>
+         <A6A7A8Publisher>
+            <Class>clsPublisher</Class>
+         </A6A7A8Publisher>
+         <A8LQS>
+            <Class>clsRemessa</Class>
+            <Class>clsGerenciadorReprocCC</Class>
+         </A8LQS>
+         <A6SubReserva>
+            <Class>clsRemessa</Class>
+         </A6SubReserva>
+         <A6A7A8ServicoCOM>
+            <Class>clsProcesso_A6</Class>
+            <Class>clsProcesso_A7</Class>
+            <Class>clsProcesso_A8</Class>
+            <Class>clsProcesso_Batch</Class>
+         </A6A7A8ServicoCOM>
+
+      </Grupo_Not_Supported>
+      <Grupo_Required>
+         <A6MIU>
+            <Class>clsTAjusteAgendamento</Class>
+            <Class>clsTCaixaSubReserva</Class>
+            <Class>clsTFechamentoCaixa</Class>
+            <Class>clsTProdutoPJTipoOperacao</Class>
+            <Class>clsTransacao</Class>
+         </A6MIU>
+         <A8MIU>
+            <Class>clsTConciliacao</Class>
+            <Class>clsTFatoGeraAlerBkOffice</Class>
+            <Class>clsTMensagem</Class>
+            <Class>clsTOperacao</Class>
+            <Class>clsTransacao</Class>
+            <Class>clsTVeiculoLegal</Class>
+            <Class>clsTContaCorrente</Class>
+         </A8MIU>
+         <A7MIU>
+            <Class>clsTransacao</Class>
+         </A7MIU>
+         <A7Server>
+            <Class>clsGerenciadorRecebimento</Class>
+            <Class>clsGerenciadorEnvio</Class>
+            <Class>clsGerenciadorEntrega</Class>
+            <Class>clsFilaErro</Class>
+         </A7Server>
+         <A8LQS>
+            <Class>clsTRemessa</Class>
+            <Class>clsGerenciadorReprocCCT</Class>
+         </A8LQS>
+         <A6SubReserva>
+            <Class>clsTRemessa</Class>
+         </A6SubReserva>
+      </Grupo_Required>
+   </Repeat_Class_TransactionConfig>
+   <Repeat_Class_ObjectConstructor>
+      <Grupo_ObjectConstructor>
+         <A6A7A8>
+            <Class ConstructorString="OFF">clsA6A7A8Funcoes</Class>
+         </A6A7A8>
+         <A6A7A8>
+            <Class ConstructorString="OFF">clsPerfil</Class>
+         </A6A7A8>
+         <A6A7A8>
+            <Class ConstructorString="OFF">clsControleAcesso</Class>
+         </A6A7A8>
+         <A8LQS>
+            <Class ConstructorString="OFF">clsContaCorrente</Class>
+         </A8LQS>
+         <A6A7A8CA>
+            <Class ConstructorString="SRVSMTP1">clsEmail</Class>
+         </A6A7A8CA>
+      </Grupo_ObjectConstructor>
+   </Repeat_Class_ObjectConstructor>
+   <Subscriber_Info>
+      <A6A7A8VerificaServer>
+         <Class>
+            <Name>clsSubscriber</Name>
+            <SubscribesTo>A6A7A8Publisher.clsPublisher</SubscribesTo>
+         </Class>
+      </A6A7A8VerificaServer>
+   </Subscriber_Info>
+</Application_Descriptor>

@@ -1,0 +1,17 @@
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Mensagem.SPB.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Mensagem.SPB.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Comum.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.ConfiguracaoMQ.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Data.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Historico.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Mensagem.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\amqmdnet.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\MBS_Client.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Data.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Comum.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Historico.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.ConfiguracaoMQ.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\bin\Debug\A8NET.Mensagem.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\obj\Debug\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\obj\Debug\A8NET.Mensagem.SPB.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Mensagem.SPB\obj\Debug\A8NET.Mensagem.SPB.pdb

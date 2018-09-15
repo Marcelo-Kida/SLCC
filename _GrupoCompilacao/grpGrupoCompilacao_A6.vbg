@@ -1,0 +1,4 @@
+VBGROUP 5.0
+Project=..\A6\DLL\A6Miu\A6MIU.vbp
+Project=..\A6\DLL\A6SubReserva\A6SubReserva.vbp
+StartupProject=..\A6\EXE\A6\A6.vbp

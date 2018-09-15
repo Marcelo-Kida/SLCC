@@ -1,0 +1,7 @@
+VBGROUP 5.0
+Project=..\Comuns\DLL\A6A7A8\A6A7A8.vbp
+Project=..\Comuns\DLL\A6A7A8Miu\A6A7A8MIU.vbp
+Project=..\Comuns\DLL\A6A7A8PUBLISHER\A6A7A8Publisher.vbp
+StartupProject=..\Comuns\EXE\STARTSCREEN\A6A7A8StartScreen.vbp
+Project=..\Comuns\DLL\A6A7A8CA\A6A7A78CA.vbp
+Project=..\Comuns\DLL\A6A7A8ServicoCOM\A6A7A8ServicoCOM.vbp

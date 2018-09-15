@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsTB_CNCL_OPER_ATIV" targetNamespace="http://tempuri.org/DsTB_CNCL_OPER_ATIV.xsd" xmlns:mstns="http://tempuri.org/DsTB_CNCL_OPER_ATIV.xsd" xmlns="http://tempuri.org/DsTB_CNCL_OPER_ATIV.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="True" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.A8NET.Data.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient">
+          </Connection>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DsTB_CNCL_OPER_ATIV" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DsTB_CNCL_OPER_ATIV" msprop:Generator_DataSetName="DsTB_CNCL_OPER_ATIV">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TB_CNCL_OPER_ATIV" msprop:Generator_UserTableName="TB_CNCL_OPER_ATIV" msprop:Generator_RowDeletedName="TB_CNCL_OPER_ATIVRowDeleted" msprop:Generator_TableClassName="TB_CNCL_OPER_ATIVDataTable" msprop:Generator_RowChangedName="TB_CNCL_OPER_ATIVRowChanged" msprop:Generator_RowClassName="TB_CNCL_OPER_ATIVRow" msprop:Generator_RowChangingName="TB_CNCL_OPER_ATIVRowChanging" msprop:Generator_RowEvArgName="TB_CNCL_OPER_ATIVRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_CNCL_OPER_ATIVRowChangeEventHandler" msprop:Generator_TablePropName="TB_CNCL_OPER_ATIV" msprop:Generator_TableVarName="tableTB_CNCL_OPER_ATIV" msprop:Generator_RowDeletingName="TB_CNCL_OPER_ATIVRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NU_SEQU_CNCL_OPER_ATIV_MESG" msprop:Generator_UserColumnName="NU_SEQU_CNCL_OPER_ATIV_MESG" msprop:Generator_ColumnPropNameInRow="NU_SEQU_CNCL_OPER_ATIV_MESG" msprop:Generator_ColumnVarNameInTable="columnNU_SEQU_CNCL_OPER_ATIV_MESG" msprop:Generator_ColumnPropNameInTable="NU_SEQU_CNCL_OPER_ATIV_MESGColumn" type="xs:decimal" />
+              <xs:element name="NU_SEQU_OPER_ATIV" msprop:Generator_UserColumnName="NU_SEQU_OPER_ATIV" msprop:Generator_ColumnPropNameInRow="NU_SEQU_OPER_ATIV" msprop:Generator_ColumnVarNameInTable="columnNU_SEQU_OPER_ATIV" msprop:Generator_ColumnPropNameInTable="NU_SEQU_OPER_ATIVColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NU_CTRL_IF" msprop:Generator_UserColumnName="NU_CTRL_IF" msprop:Generator_ColumnPropNameInRow="NU_CTRL_IF" msprop:Generator_ColumnVarNameInTable="columnNU_CTRL_IF" msprop:Generator_ColumnPropNameInTable="NU_CTRL_IFColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DH_REGT_MESG_SPB" msprop:Generator_UserColumnName="DH_REGT_MESG_SPB" msprop:Generator_ColumnPropNameInRow="DH_REGT_MESG_SPB" msprop:Generator_ColumnVarNameInTable="columnDH_REGT_MESG_SPB" msprop:Generator_ColumnPropNameInTable="DH_REGT_MESG_SPBColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="QT_ATIV_MERC_CNCL" msprop:Generator_UserColumnName="QT_ATIV_MERC_CNCL" msprop:Generator_ColumnPropNameInRow="QT_ATIV_MERC_CNCL" msprop:Generator_ColumnVarNameInTable="columnQT_ATIV_MERC_CNCL" msprop:Generator_ColumnPropNameInTable="QT_ATIV_MERC_CNCLColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NU_SEQU_CNTR_REPE" msprop:Generator_UserColumnName="NU_SEQU_CNTR_REPE" msprop:Generator_ColumnPropNameInRow="NU_SEQU_CNTR_REPE" msprop:Generator_ColumnVarNameInTable="columnNU_SEQU_CNTR_REPE" msprop:Generator_ColumnPropNameInTable="NU_SEQU_CNTR_REPEColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

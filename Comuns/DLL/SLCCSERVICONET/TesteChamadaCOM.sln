@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLCCServicoNET", "SLCCServicoNET\SLCCServicoNET.csproj", "{707E6B74-5720-45E6-BC1B-3E34C86BFACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLCCServico", "SLCCServico\SLCCServico.csproj", "{D805C2A7-E4C6-4A12-B984-B1546C4ACFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteSLCCServicoNET", "TesteSLCCServicoNET\TesteSLCCServicoNET.csproj", "{B40A0F5B-ADDA-4F08-918E-B1CFB9D46CB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{707E6B74-5720-45E6-BC1B-3E34C86BFACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707E6B74-5720-45E6-BC1B-3E34C86BFACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707E6B74-5720-45E6-BC1B-3E34C86BFACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707E6B74-5720-45E6-BC1B-3E34C86BFACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D805C2A7-E4C6-4A12-B984-B1546C4ACFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D805C2A7-E4C6-4A12-B984-B1546C4ACFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D805C2A7-E4C6-4A12-B984-B1546C4ACFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D805C2A7-E4C6-4A12-B984-B1546C4ACFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B40A0F5B-ADDA-4F08-918E-B1CFB9D46CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B40A0F5B-ADDA-4F08-918E-B1CFB9D46CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B40A0F5B-ADDA-4F08-918E-B1CFB9D46CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B40A0F5B-ADDA-4F08-918E-B1CFB9D46CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

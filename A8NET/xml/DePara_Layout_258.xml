@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CAMPOS>
+  <DePara campo_layout="VA_MOED_NACIO" campo_tabela="VA_OPER_ATIV"/>
+  <DePara campo_layout="VA_MOED_ESTRG" campo_tabela="VA_MOED_ESTR"/>
+  <DePara campo_layout="NM_CLIE_MOED_ESTR" campo_tabela="NO_CNPT"/>
+</CAMPOS>
+
+

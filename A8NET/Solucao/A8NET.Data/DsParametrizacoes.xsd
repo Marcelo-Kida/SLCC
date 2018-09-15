@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsParametrizacoes" targetNamespace="http://tempuri.org/DsParametrizacoes.xsd" xmlns:mstns="http://tempuri.org/DsParametrizacoes.xsd" xmlns="http://tempuri.org/DsParametrizacoes.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="True" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.A8NET.Data.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient">
+          </Connection>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="True" Modifier="Assembly" Name="ConnectionString1 (Settings)" PropertyReference="ApplicationSettings.A8NET.Data.Properties.Settings.GlobalReference.Default.ConnectionString1" Provider="System.Data.OracleClient">
+          </Connection>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DsParametrizacoes" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DsParametrizacoes" msprop:Generator_DataSetName="DsParametrizacoes">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TB_TIPO_OPER" msprop:Generator_UserTableName="TB_TIPO_OPER" msprop:Generator_RowDeletedName="TB_TIPO_OPERRowDeleted" msprop:Generator_RowChangedName="TB_TIPO_OPERRowChanged" msprop:Generator_RowClassName="TB_TIPO_OPERRow" msprop:Generator_RowChangingName="TB_TIPO_OPERRowChanging" msprop:Generator_RowEvArgName="TB_TIPO_OPERRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_TIPO_OPERRowChangeEventHandler" msprop:Generator_TableClassName="TB_TIPO_OPERDataTable" msprop:Generator_TableVarName="tableTB_TIPO_OPER" msprop:Generator_RowDeletingName="TB_TIPO_OPERRowDeleting" msprop:Generator_TablePropName="TB_TIPO_OPER">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TP_OPER" msprop:Generator_UserColumnName="TP_OPER" msprop:Generator_ColumnPropNameInRow="TP_OPER" msprop:Generator_ColumnVarNameInTable="columnTP_OPER" msprop:Generator_ColumnPropNameInTable="TP_OPERColumn" type="xs:decimal" />
+              <xs:element name="TP_BKOF" msprop:Generator_UserColumnName="TP_BKOF" msprop:Generator_ColumnPropNameInRow="TP_BKOF" msprop:Generator_ColumnVarNameInTable="columnTP_BKOF" msprop:Generator_ColumnPropNameInTable="TP_BKOFColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CO_LOCA_LIQU" msprop:Generator_UserColumnName="CO_LOCA_LIQU" msprop:Generator_ColumnPropNameInRow="CO_LOCA_LIQU" msprop:Generator_ColumnVarNameInTable="columnCO_LOCA_LIQU" msprop:Generator_ColumnPropNameInTable="CO_LOCA_LIQUColumn" type="xs:decimal" />
+              <xs:element name="NO_TIPO_OPER" msprop:Generator_UserColumnName="NO_TIPO_OPER" msprop:Generator_ColumnPropNameInRow="NO_TIPO_OPER" msprop:Generator_ColumnVarNameInTable="columnNO_TIPO_OPER" msprop:Generator_ColumnPropNameInTable="NO_TIPO_OPERColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TP_MESG_RECB_INTE" msprop:Generator_UserColumnName="TP_MESG_RECB_INTE" msprop:Generator_ColumnPropNameInRow="TP_MESG_RECB_INTE" msprop:Generator_ColumnVarNameInTable="columnTP_MESG_RECB_INTE" msprop:Generator_ColumnPropNameInTable="TP_MESG_RECB_INTEColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TP_MESG_RETN_INTE" msprop:Generator_UserColumnName="TP_MESG_RETN_INTE" msprop:Generator_ColumnPropNameInRow="TP_MESG_RETN_INTE" msprop:Generator_ColumnVarNameInTable="columnTP_MESG_RETN_INTE" msprop:Generator_ColumnPropNameInTable="TP_MESG_RETN_INTEColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_MESG_SPB_REGT_OPER" msprop:Generator_UserColumnName="CO_MESG_SPB_REGT_OPER" msprop:Generator_ColumnPropNameInRow="CO_MESG_SPB_REGT_OPER" msprop:Generator_ColumnVarNameInTable="columnCO_MESG_SPB_REGT_OPER" msprop:Generator_ColumnPropNameInTable="CO_MESG_SPB_REGT_OPERColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DT_INIC_VIGE" msprop:Generator_UserColumnName="DT_INIC_VIGE" msprop:Generator_ColumnPropNameInRow="DT_INIC_VIGE" msprop:Generator_ColumnVarNameInTable="columnDT_INIC_VIGE" msprop:Generator_ColumnPropNameInTable="DT_INIC_VIGEColumn" type="xs:dateTime" />
+              <xs:element name="DT_FIM_VIGE" msprop:Generator_UserColumnName="DT_FIM_VIGE" msprop:Generator_ColumnPropNameInRow="DT_FIM_VIGE" msprop:Generator_ColumnVarNameInTable="columnDT_FIM_VIGE" msprop:Generator_ColumnPropNameInTable="DT_FIM_VIGEColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CO_USUA_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_USUA_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_ETCA_TRAB_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DH_ULTI_ATLZ" msprop:Generator_UserColumnName="DH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="DH_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnDH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="DH_ULTI_ATLZColumn" type="xs:dateTime" />
+              <xs:element name="CO_OPER_SELIC" msprop:Generator_UserColumnName="CO_OPER_SELIC" msprop:Generator_ColumnPropNameInRow="CO_OPER_SELIC" msprop:Generator_ColumnVarNameInTable="columnCO_OPER_SELIC" msprop:Generator_ColumnPropNameInTable="CO_OPER_SELICColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_CTRL_PROC_OPER_ATIV" msprop:Generator_UserTableName="TB_CTRL_PROC_OPER_ATIV" msprop:Generator_RowDeletedName="TB_CTRL_PROC_OPER_ATIVRowDeleted" msprop:Generator_RowChangedName="TB_CTRL_PROC_OPER_ATIVRowChanged" msprop:Generator_RowClassName="TB_CTRL_PROC_OPER_ATIVRow" msprop:Generator_RowChangingName="TB_CTRL_PROC_OPER_ATIVRowChanging" msprop:Generator_RowEvArgName="TB_CTRL_PROC_OPER_ATIVRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_CTRL_PROC_OPER_ATIVRowChangeEventHandler" msprop:Generator_TableClassName="TB_CTRL_PROC_OPER_ATIVDataTable" msprop:Generator_TableVarName="tableTB_CTRL_PROC_OPER_ATIV" msprop:Generator_RowDeletingName="TB_CTRL_PROC_OPER_ATIVRowDeleting" msprop:Generator_TablePropName="TB_CTRL_PROC_OPER_ATIV">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TP_OPER" msprop:Generator_UserColumnName="TP_OPER" msprop:Generator_ColumnPropNameInRow="TP_OPER" msprop:Generator_ColumnVarNameInTable="columnTP_OPER" msprop:Generator_ColumnPropNameInTable="TP_OPERColumn" type="xs:decimal" />
+              <xs:element name="CO_SITU_PROC" msprop:Generator_UserColumnName="CO_SITU_PROC" msprop:Generator_ColumnPropNameInRow="CO_SITU_PROC" msprop:Generator_ColumnVarNameInTable="columnCO_SITU_PROC" msprop:Generator_ColumnPropNameInTable="CO_SITU_PROCColumn" type="xs:decimal" />
+              <xs:element name="NO_PROC_OPER_ATIV" msprop:Generator_UserColumnName="NO_PROC_OPER_ATIV" msprop:Generator_ColumnPropNameInRow="NO_PROC_OPER_ATIV" msprop:Generator_ColumnVarNameInTable="columnNO_PROC_OPER_ATIV" msprop:Generator_ColumnPropNameInTable="NO_PROC_OPER_ATIVColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IN_ENVI_PREV_PJ" msprop:Generator_UserColumnName="IN_ENVI_PREV_PJ" msprop:Generator_ColumnPropNameInRow="IN_ENVI_PREV_PJ" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_PREV_PJ" msprop:Generator_ColumnPropNameInTable="IN_ENVI_PREV_PJColumn" type="xs:decimal" />
+              <xs:element name="TP_LIQU_OPER_ATIV" msprop:Generator_UserColumnName="TP_LIQU_OPER_ATIV" msprop:Generator_ColumnPropNameInRow="TP_LIQU_OPER_ATIV" msprop:Generator_ColumnVarNameInTable="columnTP_LIQU_OPER_ATIV" msprop:Generator_ColumnPropNameInTable="TP_LIQU_OPER_ATIVColumn" type="xs:decimal" />
+              <xs:element name="IN_ENVI_PREV_A6" msprop:Generator_UserColumnName="IN_ENVI_PREV_A6" msprop:Generator_ColumnPropNameInRow="IN_ENVI_PREV_A6" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_PREV_A6" msprop:Generator_ColumnPropNameInTable="IN_ENVI_PREV_A6Column" type="xs:decimal" />
+              <xs:element name="IN_ENVI_RELZ_PJ" msprop:Generator_UserColumnName="IN_ENVI_RELZ_PJ" msprop:Generator_ColumnPropNameInRow="IN_ENVI_RELZ_PJ" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_RELZ_PJ" msprop:Generator_ColumnPropNameInTable="IN_ENVI_RELZ_PJColumn" type="xs:decimal" />
+              <xs:element name="IN_ENVI_RELZ_SOLI_A6" msprop:Generator_UserColumnName="IN_ENVI_RELZ_SOLI_A6" msprop:Generator_ColumnPropNameInRow="IN_ENVI_RELZ_SOLI_A6" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_RELZ_SOLI_A6" msprop:Generator_ColumnPropNameInTable="IN_ENVI_RELZ_SOLI_A6Column" type="xs:decimal" />
+              <xs:element name="IN_ENVI_RELZ_CONF_A6" msprop:Generator_UserColumnName="IN_ENVI_RELZ_CONF_A6" msprop:Generator_ColumnPropNameInRow="IN_ENVI_RELZ_CONF_A6" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_RELZ_CONF_A6" msprop:Generator_ColumnPropNameInTable="IN_ENVI_RELZ_CONF_A6Column" type="xs:decimal" />
+              <xs:element name="IN_VERI_REGR_CONF" msprop:Generator_UserColumnName="IN_VERI_REGR_CONF" msprop:Generator_ColumnPropNameInRow="IN_VERI_REGR_CONF" msprop:Generator_ColumnVarNameInTable="columnIN_VERI_REGR_CONF" msprop:Generator_ColumnPropNameInTable="IN_VERI_REGR_CONFColumn" type="xs:decimal" />
+              <xs:element name="IN_VERI_REGR_CNCL" msprop:Generator_UserColumnName="IN_VERI_REGR_CNCL" msprop:Generator_ColumnPropNameInRow="IN_VERI_REGR_CNCL" msprop:Generator_ColumnVarNameInTable="columnIN_VERI_REGR_CNCL" msprop:Generator_ColumnPropNameInTable="IN_VERI_REGR_CNCLColumn" type="xs:decimal" />
+              <xs:element name="IN_VERI_REGR_LIBE" msprop:Generator_UserColumnName="IN_VERI_REGR_LIBE" msprop:Generator_ColumnPropNameInRow="IN_VERI_REGR_LIBE" msprop:Generator_ColumnVarNameInTable="columnIN_VERI_REGR_LIBE" msprop:Generator_ColumnPropNameInTable="IN_VERI_REGR_LIBEColumn" type="xs:decimal" />
+              <xs:element name="IN_ENVI_MESG_RETN" msprop:Generator_UserColumnName="IN_ENVI_MESG_RETN" msprop:Generator_ColumnPropNameInRow="IN_ENVI_MESG_RETN" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_MESG_RETN" msprop:Generator_ColumnPropNameInTable="IN_ENVI_MESG_RETNColumn" type="xs:decimal" />
+              <xs:element name="IN_ENVI_MESG_SPB" msprop:Generator_UserColumnName="IN_ENVI_MESG_SPB" msprop:Generator_ColumnPropNameInRow="IN_ENVI_MESG_SPB" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_MESG_SPB" msprop:Generator_ColumnPropNameInTable="IN_ENVI_MESG_SPBColumn" type="xs:decimal" />
+              <xs:element name="IN_DISP_LANC_CNTA_CRRT" msprop:Generator_UserColumnName="IN_DISP_LANC_CNTA_CRRT" msprop:Generator_ColumnPropNameInRow="IN_DISP_LANC_CNTA_CRRT" msprop:Generator_ColumnVarNameInTable="columnIN_DISP_LANC_CNTA_CRRT" msprop:Generator_ColumnPropNameInTable="IN_DISP_LANC_CNTA_CRRTColumn" type="xs:decimal" />
+              <xs:element name="IN_ESTO_PJ_A6" msprop:Generator_UserColumnName="IN_ESTO_PJ_A6" msprop:Generator_ColumnPropNameInRow="IN_ESTO_PJ_A6" msprop:Generator_ColumnVarNameInTable="columnIN_ESTO_PJ_A6" msprop:Generator_ColumnPropNameInTable="IN_ESTO_PJ_A6Column" type="xs:decimal" />
+              <xs:element name="IN_ENVI_ALER" msprop:Generator_UserColumnName="IN_ENVI_ALER" msprop:Generator_ColumnPropNameInRow="IN_ENVI_ALER" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_ALER" msprop:Generator_ColumnPropNameInTable="IN_ENVI_ALERColumn" type="xs:decimal" />
+              <xs:element name="IN_ENVI_PREV_PJ_ME" msprop:Generator_UserColumnName="IN_ENVI_PREV_PJ_ME" msprop:Generator_ColumnPropNameInRow="IN_ENVI_PREV_PJ_ME" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_PREV_PJ_ME" msprop:Generator_ColumnPropNameInTable="IN_ENVI_PREV_PJ_MEColumn" type="xs:decimal" />
+              <xs:element name="IN_ENVI_RELZ_PJ_ME" msprop:Generator_UserColumnName="IN_ENVI_RELZ_PJ_ME" msprop:Generator_ColumnPropNameInRow="IN_ENVI_RELZ_PJ_ME" msprop:Generator_ColumnVarNameInTable="columnIN_ENVI_RELZ_PJ_ME" msprop:Generator_ColumnPropNameInTable="IN_ENVI_RELZ_PJ_MEColumn" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_FCAO_SIST_TIPO_OPER" msprop:Generator_UserTableName="TB_FCAO_SIST_TIPO_OPER" msprop:Generator_RowDeletedName="TB_FCAO_SIST_TIPO_OPERRowDeleted" msprop:Generator_RowChangedName="TB_FCAO_SIST_TIPO_OPERRowChanged" msprop:Generator_RowClassName="TB_FCAO_SIST_TIPO_OPERRow" msprop:Generator_RowChangingName="TB_FCAO_SIST_TIPO_OPERRowChanging" msprop:Generator_RowEvArgName="TB_FCAO_SIST_TIPO_OPERRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_FCAO_SIST_TIPO_OPERRowChangeEventHandler" msprop:Generator_TableClassName="TB_FCAO_SIST_TIPO_OPERDataTable" msprop:Generator_TableVarName="tableTB_FCAO_SIST_TIPO_OPER" msprop:Generator_RowDeletingName="TB_FCAO_SIST_TIPO_OPERRowDeleting" msprop:Generator_TablePropName="TB_FCAO_SIST_TIPO_OPER">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TP_OPER" msprop:Generator_UserColumnName="TP_OPER" msprop:Generator_ColumnPropNameInRow="TP_OPER" msprop:Generator_ColumnVarNameInTable="columnTP_OPER" msprop:Generator_ColumnPropNameInTable="TP_OPERColumn" type="xs:decimal" />
+              <xs:element name="CO_FCAO_SIST" msprop:Generator_UserColumnName="CO_FCAO_SIST" msprop:Generator_ColumnPropNameInRow="CO_FCAO_SIST" msprop:Generator_ColumnVarNameInTable="columnCO_FCAO_SIST" msprop:Generator_ColumnPropNameInTable="CO_FCAO_SISTColumn" type="xs:decimal" />
+              <xs:element name="NU_ORDE_EXEC_FCAO_SIST" msprop:Generator_UserColumnName="NU_ORDE_EXEC_FCAO_SIST" msprop:Generator_ColumnPropNameInRow="NU_ORDE_EXEC_FCAO_SIST" msprop:Generator_ColumnVarNameInTable="columnNU_ORDE_EXEC_FCAO_SIST" msprop:Generator_ColumnPropNameInTable="NU_ORDE_EXEC_FCAO_SISTColumn" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_PARM_FCAO_SIST" msprop:Generator_UserTableName="TB_PARM_FCAO_SIST" msprop:Generator_RowDeletedName="TB_PARM_FCAO_SISTRowDeleted" msprop:Generator_RowChangedName="TB_PARM_FCAO_SISTRowChanged" msprop:Generator_RowClassName="TB_PARM_FCAO_SISTRow" msprop:Generator_RowChangingName="TB_PARM_FCAO_SISTRowChanging" msprop:Generator_RowEvArgName="TB_PARM_FCAO_SISTRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_PARM_FCAO_SISTRowChangeEventHandler" msprop:Generator_TableClassName="TB_PARM_FCAO_SISTDataTable" msprop:Generator_TableVarName="tableTB_PARM_FCAO_SIST" msprop:Generator_RowDeletingName="TB_PARM_FCAO_SISTRowDeleting" msprop:Generator_TablePropName="TB_PARM_FCAO_SIST">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TP_OPER" msprop:Generator_UserColumnName="TP_OPER" msprop:Generator_ColumnPropNameInRow="TP_OPER" msprop:Generator_ColumnVarNameInTable="columnTP_OPER" msprop:Generator_ColumnPropNameInTable="TP_OPERColumn" type="xs:decimal" />
+              <xs:element name="CO_FCAO_SIST" msprop:Generator_UserColumnName="CO_FCAO_SIST" msprop:Generator_ColumnPropNameInRow="CO_FCAO_SIST" msprop:Generator_ColumnVarNameInTable="columnCO_FCAO_SIST" msprop:Generator_ColumnPropNameInTable="CO_FCAO_SISTColumn" type="xs:decimal" />
+              <xs:element name="TP_BKOF" msprop:Generator_UserColumnName="TP_BKOF" msprop:Generator_ColumnPropNameInRow="TP_BKOF" msprop:Generator_ColumnVarNameInTable="columnTP_BKOF" msprop:Generator_ColumnPropNameInTable="TP_BKOFColumn" type="xs:decimal" />
+              <xs:element name="CO_EMPR" msprop:Generator_UserColumnName="CO_EMPR" msprop:Generator_ColumnPropNameInRow="CO_EMPR" msprop:Generator_ColumnVarNameInTable="columnCO_EMPR" msprop:Generator_ColumnPropNameInTable="CO_EMPRColumn" type="xs:decimal" />
+              <xs:element name="IN_FCAO_SIST_AUTM" msprop:Generator_UserColumnName="IN_FCAO_SIST_AUTM" msprop:Generator_ColumnPropNameInRow="IN_FCAO_SIST_AUTM" msprop:Generator_ColumnVarNameInTable="columnIN_FCAO_SIST_AUTM" msprop:Generator_ColumnPropNameInTable="IN_FCAO_SIST_AUTMColumn" type="xs:decimal" />
+              <xs:element name="CO_USUA_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_USUA_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_ETCA_TRAB_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DH_ULTI_ATLZ" msprop:Generator_UserColumnName="DH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="DH_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnDH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="DH_ULTI_ATLZColumn" type="xs:dateTime" />
+              <xs:element name="TP_COND_SALD" msprop:Generator_UserColumnName="TP_COND_SALD" msprop:Generator_ColumnPropNameInRow="TP_COND_SALD" msprop:Generator_ColumnVarNameInTable="columnTP_COND_SALD" msprop:Generator_ColumnPropNameInTable="TP_COND_SALDColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_SITU_SPB_SITU_PROC" msprop:Generator_UserTableName="TB_SITU_SPB_SITU_PROC" msprop:Generator_RowDeletedName="TB_SITU_SPB_SITU_PROCRowDeleted" msprop:Generator_RowChangedName="TB_SITU_SPB_SITU_PROCRowChanged" msprop:Generator_RowClassName="TB_SITU_SPB_SITU_PROCRow" msprop:Generator_RowChangingName="TB_SITU_SPB_SITU_PROCRowChanging" msprop:Generator_RowEvArgName="TB_SITU_SPB_SITU_PROCRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_SITU_SPB_SITU_PROCRowChangeEventHandler" msprop:Generator_TableClassName="TB_SITU_SPB_SITU_PROCDataTable" msprop:Generator_TableVarName="tableTB_SITU_SPB_SITU_PROC" msprop:Generator_RowDeletingName="TB_SITU_SPB_SITU_PROCRowDeleting" msprop:Generator_TablePropName="TB_SITU_SPB_SITU_PROC">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SG_GRUP_MESG_SPB" msprop:Generator_UserColumnName="SG_GRUP_MESG_SPB" msprop:Generator_ColumnVarNameInTable="columnSG_GRUP_MESG_SPB" msprop:Generator_ColumnPropNameInRow="SG_GRUP_MESG_SPB" msprop:Generator_ColumnPropNameInTable="SG_GRUP_MESG_SPBColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_TAG" msprop:Generator_UserColumnName="NO_TAG" msprop:Generator_ColumnVarNameInTable="columnNO_TAG" msprop:Generator_ColumnPropNameInRow="NO_TAG" msprop:Generator_ColumnPropNameInTable="NO_TAGColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DE_DOMI" msprop:Generator_UserColumnName="DE_DOMI" msprop:Generator_ColumnVarNameInTable="columnDE_DOMI" msprop:Generator_ColumnPropNameInRow="DE_DOMI" msprop:Generator_ColumnPropNameInTable="DE_DOMIColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_SITU_PROC_OPER_ATIV" msprop:Generator_UserColumnName="CO_SITU_PROC_OPER_ATIV" msprop:Generator_ColumnVarNameInTable="columnCO_SITU_PROC_OPER_ATIV" msprop:Generator_ColumnPropNameInRow="CO_SITU_PROC_OPER_ATIV" msprop:Generator_ColumnPropNameInTable="CO_SITU_PROC_OPER_ATIVColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="CO_SITU_PROC_MESG_SPB" msprop:Generator_UserColumnName="CO_SITU_PROC_MESG_SPB" msprop:Generator_ColumnVarNameInTable="columnCO_SITU_PROC_MESG_SPB" msprop:Generator_ColumnPropNameInRow="CO_SITU_PROC_MESG_SPB" msprop:Generator_ColumnPropNameInTable="CO_SITU_PROC_MESG_SPBColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="CO_USUA_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_USUA_ULTI_ATLZColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_ETCA_TRAB_ULTI_ATLZColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SQ_TIPO_TAG" msprop:Generator_UserColumnName="SQ_TIPO_TAG" msprop:Generator_ColumnVarNameInTable="columnSQ_TIPO_TAG" msprop:Generator_ColumnPropNameInRow="SQ_TIPO_TAG" msprop:Generator_ColumnPropNameInTable="SQ_TIPO_TAGColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="DH_ULTI_ATLZ" msprop:Generator_UserColumnName="DH_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnDH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="DH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="DH_ULTI_ATLZColumn" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_REGR_SIST_DEST" msprop:Generator_UserTableName="TB_REGR_SIST_DEST" msprop:Generator_RowDeletedName="TB_REGR_SIST_DESTRowDeleted" msprop:Generator_RowChangedName="TB_REGR_SIST_DESTRowChanged" msprop:Generator_RowClassName="TB_REGR_SIST_DESTRow" msprop:Generator_RowChangingName="TB_REGR_SIST_DESTRowChanging" msprop:Generator_RowEvArgName="TB_REGR_SIST_DESTRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_REGR_SIST_DESTRowChangeEventHandler" msprop:Generator_TableClassName="TB_REGR_SIST_DESTDataTable" msprop:Generator_TableVarName="tableTB_REGR_SIST_DEST" msprop:Generator_RowDeletingName="TB_REGR_SIST_DESTRowDeleting" msprop:Generator_TablePropName="TB_REGR_SIST_DEST">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TP_FORM_MESG_SAID" msprop:Generator_UserColumnName="TP_FORM_MESG_SAID" msprop:Generator_ColumnPropNameInRow="TP_FORM_MESG_SAID" msprop:Generator_ColumnVarNameInTable="columnTP_FORM_MESG_SAID" msprop:Generator_ColumnPropNameInTable="TP_FORM_MESG_SAIDColumn" type="xs:decimal" />
+              <xs:element name="TP_MESG" msprop:Generator_UserColumnName="TP_MESG" msprop:Generator_ColumnPropNameInRow="TP_MESG" msprop:Generator_ColumnVarNameInTable="columnTP_MESG" msprop:Generator_ColumnPropNameInTable="TP_MESGColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SG_SIST_ORIG" msprop:Generator_UserColumnName="SG_SIST_ORIG" msprop:Generator_ColumnPropNameInRow="SG_SIST_ORIG" msprop:Generator_ColumnVarNameInTable="columnSG_SIST_ORIG" msprop:Generator_ColumnPropNameInTable="SG_SIST_ORIGColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_EMPR_ORIG" msprop:Generator_UserColumnName="CO_EMPR_ORIG" msprop:Generator_ColumnPropNameInRow="CO_EMPR_ORIG" msprop:Generator_ColumnVarNameInTable="columnCO_EMPR_ORIG" msprop:Generator_ColumnPropNameInTable="CO_EMPR_ORIGColumn" type="xs:decimal" />
+              <xs:element name="DH_INIC_VIGE_REGR_TRAP" msprop:Generator_UserColumnName="DH_INIC_VIGE_REGR_TRAP" msprop:Generator_ColumnPropNameInRow="DH_INIC_VIGE_REGR_TRAP" msprop:Generator_ColumnVarNameInTable="columnDH_INIC_VIGE_REGR_TRAP" msprop:Generator_ColumnPropNameInTable="DH_INIC_VIGE_REGR_TRAPColumn" type="xs:dateTime" />
+              <xs:element name="SG_SIST_DEST" msprop:Generator_UserColumnName="SG_SIST_DEST" msprop:Generator_ColumnPropNameInRow="SG_SIST_DEST" msprop:Generator_ColumnVarNameInTable="columnSG_SIST_DEST" msprop:Generator_ColumnPropNameInTable="SG_SIST_DESTColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_EMPR_DEST" msprop:Generator_UserColumnName="CO_EMPR_DEST" msprop:Generator_ColumnPropNameInRow="CO_EMPR_DEST" msprop:Generator_ColumnVarNameInTable="columnCO_EMPR_DEST" msprop:Generator_ColumnPropNameInTable="CO_EMPR_DESTColumn" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_MENSAGEM" msprop:Generator_UserTableName="TB_MENSAGEM" msprop:Generator_RowDeletedName="TB_MENSAGEMRowDeleted" msprop:Generator_RowChangedName="TB_MENSAGEMRowChanged" msprop:Generator_RowClassName="TB_MENSAGEMRow" msprop:Generator_RowChangingName="TB_MENSAGEMRowChanging" msprop:Generator_RowEvArgName="TB_MENSAGEMRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_MENSAGEMRowChangeEventHandler" msprop:Generator_TableClassName="TB_MENSAGEMDataTable" msprop:Generator_TableVarName="tableTB_MENSAGEM" msprop:Generator_RowDeletingName="TB_MENSAGEMRowDeleting" msprop:Generator_TablePropName="TB_MENSAGEM">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SQ_MESG" msprop:Generator_UserColumnName="SQ_MESG" msprop:Generator_ColumnVarNameInTable="columnSQ_MESG" msprop:Generator_ColumnPropNameInRow="SQ_MESG" msprop:Generator_ColumnPropNameInTable="SQ_MESGColumn" type="xs:decimal" />
+              <xs:element name="SQ_EVEN" msprop:Generator_UserColumnName="SQ_EVEN" msprop:Generator_ColumnVarNameInTable="columnSQ_EVEN" msprop:Generator_ColumnPropNameInRow="SQ_EVEN" msprop:Generator_ColumnPropNameInTable="SQ_EVENColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CO_MESG" msprop:Generator_UserColumnName="CO_MESG" msprop:Generator_ColumnVarNameInTable="columnCO_MESG" msprop:Generator_ColumnPropNameInRow="CO_MESG" msprop:Generator_ColumnPropNameInTable="CO_MESGColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_MESG" msprop:Generator_UserColumnName="NO_MESG" msprop:Generator_ColumnVarNameInTable="columnNO_MESG" msprop:Generator_ColumnPropNameInRow="NO_MESG" msprop:Generator_ColumnPropNameInTable="NO_MESGColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_TAG_PRIN_MESG" msprop:Generator_UserColumnName="NO_TAG_PRIN_MESG" msprop:Generator_ColumnVarNameInTable="columnNO_TAG_PRIN_MESG" msprop:Generator_ColumnPropNameInRow="NO_TAG_PRIN_MESG" msprop:Generator_ColumnPropNameInTable="NO_TAG_PRIN_MESGColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ID_USUA_ULTI_ATLZ" msprop:Generator_UserColumnName="ID_USUA_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnID_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="ID_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="ID_USUA_ULTI_ATLZColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DH_ULTI_ATLZ" msprop:Generator_UserColumnName="DH_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnDH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="DH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="DH_ULTI_ATLZColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="SQ_TIPO_FLUX" msprop:Generator_UserColumnName="SQ_TIPO_FLUX" msprop:Generator_ColumnVarNameInTable="columnSQ_TIPO_FLUX" msprop:Generator_ColumnPropNameInRow="SQ_TIPO_FLUX" msprop:Generator_ColumnPropNameInTable="SQ_TIPO_FLUXColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MBS_GRUPO" msprop:Generator_UserTableName="MBS_GRUPO" msprop:Generator_RowDeletedName="MBS_GRUPORowDeleted" msprop:Generator_RowChangedName="MBS_GRUPORowChanged" msprop:Generator_RowClassName="MBS_GRUPORow" msprop:Generator_RowChangingName="MBS_GRUPORowChanging" msprop:Generator_RowEvArgName="MBS_GRUPORowChangeEvent" msprop:Generator_RowEvHandlerName="MBS_GRUPORowChangeEventHandler" msprop:Generator_TableClassName="MBS_GRUPODataTable" msprop:Generator_TableVarName="tableMBS_GRUPO" msprop:Generator_RowDeletingName="MBS_GRUPORowDeleting" msprop:Generator_TablePropName="MBS_GRUPO">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CD_USR" msprop:Generator_UserColumnName="CD_USR" msprop:Generator_ColumnPropNameInRow="CD_USR" msprop:Generator_ColumnVarNameInTable="columnCD_USR" msprop:Generator_ColumnPropNameInTable="CD_USRColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CD_GR_USR" msprop:Generator_UserColumnName="CD_GR_USR" msprop:Generator_ColumnPropNameInRow="CD_GR_USR" msprop:Generator_ColumnVarNameInTable="columnCD_GR_USR" msprop:Generator_ColumnPropNameInTable="CD_GR_USRColumn" type="xs:decimal" />
+              <xs:element name="NM_GR_USR" msprop:Generator_UserColumnName="NM_GR_USR" msprop:Generator_ColumnPropNameInRow="NM_GR_USR" msprop:Generator_ColumnVarNameInTable="columnNM_GR_USR" msprop:Generator_ColumnPropNameInTable="NM_GR_USRColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_PARM_FCAO_SIST_EXCE" msprop:Generator_UserTableName="TB_PARM_FCAO_SIST_EXCE" msprop:Generator_RowDeletedName="TB_PARM_FCAO_SIST_EXCERowDeleted" msprop:Generator_RowChangedName="TB_PARM_FCAO_SIST_EXCERowChanged" msprop:Generator_RowClassName="TB_PARM_FCAO_SIST_EXCERow" msprop:Generator_RowChangingName="TB_PARM_FCAO_SIST_EXCERowChanging" msprop:Generator_RowEvArgName="TB_PARM_FCAO_SIST_EXCERowChangeEvent" msprop:Generator_RowEvHandlerName="TB_PARM_FCAO_SIST_EXCERowChangeEventHandler" msprop:Generator_TableClassName="TB_PARM_FCAO_SIST_EXCEDataTable" msprop:Generator_TableVarName="tableTB_PARM_FCAO_SIST_EXCE" msprop:Generator_RowDeletingName="TB_PARM_FCAO_SIST_EXCERowDeleting" msprop:Generator_TablePropName="TB_PARM_FCAO_SIST_EXCE">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TP_OPER" msprop:Generator_UserColumnName="TP_OPER" msprop:Generator_ColumnPropNameInRow="TP_OPER" msprop:Generator_ColumnVarNameInTable="columnTP_OPER" msprop:Generator_ColumnPropNameInTable="TP_OPERColumn" type="xs:decimal" />
+              <xs:element name="CO_FCAO_SIST" msprop:Generator_UserColumnName="CO_FCAO_SIST" msprop:Generator_ColumnPropNameInRow="CO_FCAO_SIST" msprop:Generator_ColumnVarNameInTable="columnCO_FCAO_SIST" msprop:Generator_ColumnPropNameInTable="CO_FCAO_SISTColumn" type="xs:decimal" />
+              <xs:element name="TP_BKOF" msprop:Generator_UserColumnName="TP_BKOF" msprop:Generator_ColumnPropNameInRow="TP_BKOF" msprop:Generator_ColumnVarNameInTable="columnTP_BKOF" msprop:Generator_ColumnPropNameInTable="TP_BKOFColumn" type="xs:decimal" />
+              <xs:element name="CO_EMPR" msprop:Generator_UserColumnName="CO_EMPR" msprop:Generator_ColumnPropNameInRow="CO_EMPR" msprop:Generator_ColumnVarNameInTable="columnCO_EMPR" msprop:Generator_ColumnPropNameInTable="CO_EMPRColumn" type="xs:decimal" />
+              <xs:element name="SG_SIST" msprop:Generator_UserColumnName="SG_SIST" msprop:Generator_ColumnPropNameInRow="SG_SIST" msprop:Generator_ColumnVarNameInTable="columnSG_SIST" msprop:Generator_ColumnPropNameInTable="SG_SISTColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_LOCA_LIQU" msprop:Generator_UserColumnName="CO_LOCA_LIQU" msprop:Generator_ColumnPropNameInRow="CO_LOCA_LIQU" msprop:Generator_ColumnVarNameInTable="columnCO_LOCA_LIQU" msprop:Generator_ColumnPropNameInTable="CO_LOCA_LIQUColumn" type="xs:decimal" />
+              <xs:element name="CO_GRUP_USUA" msprop:Generator_UserColumnName="CO_GRUP_USUA" msprop:Generator_ColumnPropNameInRow="CO_GRUP_USUA" msprop:Generator_ColumnVarNameInTable="columnCO_GRUP_USUA" msprop:Generator_ColumnPropNameInTable="CO_GRUP_USUAColumn" type="xs:decimal" />
+              <xs:element name="CO_USUA_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_USUA_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_ETCA_TRAB_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DH_ULTI_ATLZ" msprop:Generator_UserColumnName="DH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="DH_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnDH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="DH_ULTI_ATLZColumn" type="xs:dateTime" />
+              <xs:element name="TP_COND_SALD" msprop:Generator_UserColumnName="TP_COND_SALD" msprop:Generator_ColumnPropNameInRow="TP_COND_SALD" msprop:Generator_ColumnVarNameInTable="columnTP_COND_SALD" msprop:Generator_ColumnPropNameInTable="TP_COND_SALDColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_VEIC_LEGA" msprop:Generator_UserTableName="TB_VEIC_LEGA" msprop:Generator_RowDeletedName="TB_VEIC_LEGARowDeleted" msprop:Generator_RowChangedName="TB_VEIC_LEGARowChanged" msprop:Generator_RowClassName="TB_VEIC_LEGARow" msprop:Generator_RowChangingName="TB_VEIC_LEGARowChanging" msprop:Generator_RowEvArgName="TB_VEIC_LEGARowChangeEvent" msprop:Generator_RowEvHandlerName="TB_VEIC_LEGARowChangeEventHandler" msprop:Generator_TableClassName="TB_VEIC_LEGADataTable" msprop:Generator_TableVarName="tableTB_VEIC_LEGA" msprop:Generator_RowDeletingName="TB_VEIC_LEGARowDeleting" msprop:Generator_TablePropName="TB_VEIC_LEGA">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CO_VEIC_LEGA" msprop:Generator_UserColumnName="CO_VEIC_LEGA" msprop:Generator_ColumnPropNameInRow="CO_VEIC_LEGA" msprop:Generator_ColumnVarNameInTable="columnCO_VEIC_LEGA" msprop:Generator_ColumnPropNameInTable="CO_VEIC_LEGAColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SG_SIST" msprop:Generator_UserColumnName="SG_SIST" msprop:Generator_ColumnPropNameInRow="SG_SIST" msprop:Generator_ColumnVarNameInTable="columnSG_SIST" msprop:Generator_ColumnPropNameInTable="SG_SISTColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_EMPR" msprop:Generator_UserColumnName="CO_EMPR" msprop:Generator_ColumnPropNameInRow="CO_EMPR" msprop:Generator_ColumnVarNameInTable="columnCO_EMPR" msprop:Generator_ColumnPropNameInTable="CO_EMPRColumn" type="xs:decimal" />
+              <xs:element name="CO_GRUP_VEIC_LEGA" msprop:Generator_UserColumnName="CO_GRUP_VEIC_LEGA" msprop:Generator_ColumnPropNameInRow="CO_GRUP_VEIC_LEGA" msprop:Generator_ColumnVarNameInTable="columnCO_GRUP_VEIC_LEGA" msprop:Generator_ColumnPropNameInTable="CO_GRUP_VEIC_LEGAColumn" type="xs:decimal" />
+              <xs:element name="TP_BKOF" msprop:Generator_UserColumnName="TP_BKOF" msprop:Generator_ColumnPropNameInRow="TP_BKOF" msprop:Generator_ColumnVarNameInTable="columnTP_BKOF" msprop:Generator_ColumnPropNameInTable="TP_BKOFColumn" type="xs:decimal" />
+              <xs:element name="NO_VEIC_LEGA" msprop:Generator_UserColumnName="NO_VEIC_LEGA" msprop:Generator_ColumnPropNameInRow="NO_VEIC_LEGA" msprop:Generator_ColumnVarNameInTable="columnNO_VEIC_LEGA" msprop:Generator_ColumnPropNameInTable="NO_VEIC_LEGAColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_REDU_VEIC_LEGA" msprop:Generator_UserColumnName="NO_REDU_VEIC_LEGA" msprop:Generator_ColumnPropNameInRow="NO_REDU_VEIC_LEGA" msprop:Generator_ColumnVarNameInTable="columnNO_REDU_VEIC_LEGA" msprop:Generator_ColumnPropNameInTable="NO_REDU_VEIC_LEGAColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_CNPJ_VEIC_LEGA" msprop:Generator_UserColumnName="CO_CNPJ_VEIC_LEGA" msprop:Generator_ColumnPropNameInRow="CO_CNPJ_VEIC_LEGA" msprop:Generator_ColumnVarNameInTable="columnCO_CNPJ_VEIC_LEGA" msprop:Generator_ColumnPropNameInTable="CO_CNPJ_VEIC_LEGAColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DT_INIC_VIGE" msprop:Generator_UserColumnName="DT_INIC_VIGE" msprop:Generator_ColumnPropNameInRow="DT_INIC_VIGE" msprop:Generator_ColumnVarNameInTable="columnDT_INIC_VIGE" msprop:Generator_ColumnPropNameInTable="DT_INIC_VIGEColumn" type="xs:dateTime" />
+              <xs:element name="DT_FIM_VIGE" msprop:Generator_UserColumnName="DT_FIM_VIGE" msprop:Generator_ColumnPropNameInRow="DT_FIM_VIGE" msprop:Generator_ColumnVarNameInTable="columnDT_FIM_VIGE" msprop:Generator_ColumnPropNameInTable="DT_FIM_VIGEColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CO_USUA_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_USUA_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_ETCA_TRAB_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DH_ULTI_ATLZ" msprop:Generator_UserColumnName="DH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="DH_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnDH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="DH_ULTI_ATLZColumn" type="xs:dateTime" />
+              <xs:element name="CO_CNTA_CUTD_PADR_SELIC" msprop:Generator_UserColumnName="CO_CNTA_CUTD_PADR_SELIC" msprop:Generator_ColumnPropNameInRow="CO_CNTA_CUTD_PADR_SELIC" msprop:Generator_ColumnVarNameInTable="columnCO_CNTA_CUTD_PADR_SELIC" msprop:Generator_ColumnPropNameInTable="CO_CNTA_CUTD_PADR_SELICColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TP_TITL_BMA" msprop:Generator_UserColumnName="TP_TITL_BMA" msprop:Generator_ColumnPropNameInRow="TP_TITL_BMA" msprop:Generator_ColumnVarNameInTable="columnTP_TITL_BMA" msprop:Generator_ColumnPropNameInTable="TP_TITL_BMAColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ID_PART_CAMR_CETIP" msprop:Generator_UserColumnName="ID_PART_CAMR_CETIP" msprop:Generator_ColumnPropNameInRow="ID_PART_CAMR_CETIP" msprop:Generator_ColumnVarNameInTable="columnID_PART_CAMR_CETIP" msprop:Generator_ColumnPropNameInTable="ID_PART_CAMR_CETIPColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CO_TITL_BMA" msprop:Generator_UserColumnName="CO_TITL_BMA" msprop:Generator_ColumnPropNameInRow="CO_TITL_BMA" msprop:Generator_ColumnVarNameInTable="columnCO_TITL_BMA" msprop:Generator_ColumnPropNameInTable="CO_TITL_BMAColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_CTRL_DOMI" msprop:Generator_UserTableName="TB_CTRL_DOMI" msprop:Generator_RowDeletedName="TB_CTRL_DOMIRowDeleted" msprop:Generator_RowChangedName="TB_CTRL_DOMIRowChanged" msprop:Generator_RowClassName="TB_CTRL_DOMIRow" msprop:Generator_RowChangingName="TB_CTRL_DOMIRowChanging" msprop:Generator_RowEvArgName="TB_CTRL_DOMIRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_CTRL_DOMIRowChangeEventHandler" msprop:Generator_TableClassName="TB_CTRL_DOMIDataTable" msprop:Generator_TableVarName="tableTB_CTRL_DOMI" msprop:Generator_RowDeletingName="TB_CTRL_DOMIRowDeleting" msprop:Generator_TablePropName="TB_CTRL_DOMI">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NO_ATRB" msprop:Generator_UserColumnName="NO_ATRB" msprop:Generator_ColumnVarNameInTable="columnNO_ATRB" msprop:Generator_ColumnPropNameInRow="NO_ATRB" msprop:Generator_ColumnPropNameInTable="NO_ATRBColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_TIPO_TAG" msprop:Generator_UserColumnName="NO_TIPO_TAG" msprop:Generator_ColumnVarNameInTable="columnNO_TIPO_TAG" msprop:Generator_ColumnPropNameInRow="NO_TIPO_TAG" msprop:Generator_ColumnPropNameInTable="NO_TIPO_TAGColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TP_CNTR_DOMI" msprop:Generator_UserColumnName="TP_CNTR_DOMI" msprop:Generator_ColumnVarNameInTable="columnTP_CNTR_DOMI" msprop:Generator_ColumnPropNameInRow="TP_CNTR_DOMI" msprop:Generator_ColumnPropNameInTable="TP_CNTR_DOMIColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DE_DOMI" msprop:Generator_UserColumnName="DE_DOMI" msprop:Generator_ColumnVarNameInTable="columnDE_DOMI" msprop:Generator_ColumnPropNameInRow="DE_DOMI" msprop:Generator_ColumnPropNameInTable="DE_DOMIColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_DOMI" msprop:Generator_UserColumnName="CO_DOMI" msprop:Generator_ColumnVarNameInTable="columnCO_DOMI" msprop:Generator_ColumnPropNameInRow="CO_DOMI" msprop:Generator_ColumnPropNameInTable="CO_DOMIColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_PRODUTO" msprop:Generator_UserTableName="TB_PRODUTO" msprop:Generator_RowDeletedName="TB_PRODUTORowDeleted" msprop:Generator_RowChangedName="TB_PRODUTORowChanged" msprop:Generator_RowClassName="TB_PRODUTORow" msprop:Generator_RowChangingName="TB_PRODUTORowChanging" msprop:Generator_RowEvArgName="TB_PRODUTORowChangeEvent" msprop:Generator_RowEvHandlerName="TB_PRODUTORowChangeEventHandler" msprop:Generator_TableClassName="TB_PRODUTODataTable" msprop:Generator_TableVarName="tableTB_PRODUTO" msprop:Generator_RowDeletingName="TB_PRODUTORowDeleting" msprop:Generator_TablePropName="TB_PRODUTO">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CO_PROD" msprop:Generator_UserColumnName="CO_PROD" msprop:Generator_ColumnPropNameInRow="CO_PROD" msprop:Generator_ColumnVarNameInTable="columnCO_PROD" msprop:Generator_ColumnPropNameInTable="CO_PRODColumn" type="xs:decimal" />
+              <xs:element name="CO_EMPR_FUSI" msprop:Generator_UserColumnName="CO_EMPR_FUSI" msprop:Generator_ColumnPropNameInRow="CO_EMPR_FUSI" msprop:Generator_ColumnVarNameInTable="columnCO_EMPR_FUSI" msprop:Generator_ColumnPropNameInTable="CO_EMPR_FUSIColumn" type="xs:decimal" />
+              <xs:element name="SQ_ITEM_CAIX" msprop:Generator_UserColumnName="SQ_ITEM_CAIX" msprop:Generator_ColumnPropNameInRow="SQ_ITEM_CAIX" msprop:Generator_ColumnVarNameInTable="columnSQ_ITEM_CAIX" msprop:Generator_ColumnPropNameInTable="SQ_ITEM_CAIXColumn" type="xs:decimal" />
+              <xs:element name="DE_PROD" msprop:Generator_UserColumnName="DE_PROD" msprop:Generator_ColumnPropNameInRow="DE_PROD" msprop:Generator_ColumnVarNameInTable="columnDE_PROD" msprop:Generator_ColumnPropNameInTable="DE_PRODColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QT_DIAS_MAIR_VALO" msprop:Generator_UserColumnName="QT_DIAS_MAIR_VALO" msprop:Generator_ColumnPropNameInRow="QT_DIAS_MAIR_VALO" msprop:Generator_ColumnVarNameInTable="columnQT_DIAS_MAIR_VALO" msprop:Generator_ColumnPropNameInTable="QT_DIAS_MAIR_VALOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VA_MINI_MAIR_VALO" msprop:Generator_UserColumnName="VA_MINI_MAIR_VALO" msprop:Generator_ColumnPropNameInRow="VA_MINI_MAIR_VALO" msprop:Generator_ColumnVarNameInTable="columnVA_MINI_MAIR_VALO" msprop:Generator_ColumnPropNameInTable="VA_MINI_MAIR_VALOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QT_REGT_MAIR_VALO" msprop:Generator_UserColumnName="QT_REGT_MAIR_VALO" msprop:Generator_ColumnPropNameInRow="QT_REGT_MAIR_VALO" msprop:Generator_ColumnVarNameInTable="columnQT_REGT_MAIR_VALO" msprop:Generator_ColumnPropNameInTable="QT_REGT_MAIR_VALOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DT_INIC_VIGE" msprop:Generator_UserColumnName="DT_INIC_VIGE" msprop:Generator_ColumnPropNameInRow="DT_INIC_VIGE" msprop:Generator_ColumnVarNameInTable="columnDT_INIC_VIGE" msprop:Generator_ColumnPropNameInTable="DT_INIC_VIGEColumn" type="xs:dateTime" />
+              <xs:element name="DT_FIM_VIGE" msprop:Generator_UserColumnName="DT_FIM_VIGE" msprop:Generator_ColumnPropNameInRow="DT_FIM_VIGE" msprop:Generator_ColumnVarNameInTable="columnDT_FIM_VIGE" msprop:Generator_ColumnPropNameInTable="DT_FIM_VIGEColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ID_USUA_ULTI_ATLZ" msprop:Generator_UserColumnName="ID_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="ID_USUA_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnID_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="ID_USUA_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DH_ULTI_ATLZ" msprop:Generator_UserColumnName="DH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="DH_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnDH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="DH_ULTI_ATLZColumn" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TB_TIPO_OPER_CNTD_ATRB" msprop:Generator_UserTableName="TB_TIPO_OPER_CNTD_ATRB" msprop:Generator_RowDeletedName="TB_TIPO_OPER_CNTD_ATRBRowDeleted" msprop:Generator_RowChangedName="TB_TIPO_OPER_CNTD_ATRBRowChanged" msprop:Generator_RowClassName="TB_TIPO_OPER_CNTD_ATRBRow" msprop:Generator_RowChangingName="TB_TIPO_OPER_CNTD_ATRBRowChanging" msprop:Generator_RowEvArgName="TB_TIPO_OPER_CNTD_ATRBRowChangeEvent" msprop:Generator_RowEvHandlerName="TB_TIPO_OPER_CNTD_ATRBRowChangeEventHandler" msprop:Generator_TableClassName="TB_TIPO_OPER_CNTD_ATRBDataTable" msprop:Generator_TableVarName="tableTB_TIPO_OPER_CNTD_ATRB" msprop:Generator_RowDeletingName="TB_TIPO_OPER_CNTD_ATRBRowDeleting" msprop:Generator_TablePropName="TB_TIPO_OPER_CNTD_ATRB">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TP_OPER" msprop:Generator_UserColumnName="TP_OPER" msprop:Generator_ColumnVarNameInTable="columnTP_OPER" msprop:Generator_ColumnPropNameInRow="TP_OPER" msprop:Generator_ColumnPropNameInTable="TP_OPERColumn" type="xs:decimal" />
+              <xs:element name="DE_CNTD_ATRB" msprop:Generator_UserColumnName="DE_CNTD_ATRB" msprop:Generator_ColumnVarNameInTable="columnDE_CNTD_ATRB" msprop:Generator_ColumnPropNameInRow="DE_CNTD_ATRB" msprop:Generator_ColumnPropNameInTable="DE_CNTD_ATRBColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_ATRB_MESG" msprop:Generator_UserColumnName="NO_ATRB_MESG" msprop:Generator_ColumnVarNameInTable="columnNO_ATRB_MESG" msprop:Generator_ColumnPropNameInRow="NO_ATRB_MESG" msprop:Generator_ColumnPropNameInTable="NO_ATRB_MESGColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_USUA_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_USUA_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_USUA_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_UserColumnName="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnCO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="CO_ETCA_TRAB_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="CO_ETCA_TRAB_ULTI_ATLZColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DH_ULTI_ATLZ" msprop:Generator_UserColumnName="DH_ULTI_ATLZ" msprop:Generator_ColumnVarNameInTable="columnDH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInRow="DH_ULTI_ATLZ" msprop:Generator_ColumnPropNameInTable="DH_ULTI_ATLZColumn" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_TIPO_OPER" />
+      <xs:field xpath="mstns:TP_OPER" />
+    </xs:unique>
+    <xs:unique name="TB_CTRL_PROC_OPER_ATIV_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_CTRL_PROC_OPER_ATIV" />
+      <xs:field xpath="mstns:TP_OPER" />
+      <xs:field xpath="mstns:CO_SITU_PROC" />
+      <xs:field xpath="mstns:NO_PROC_OPER_ATIV" />
+      <xs:field xpath="mstns:TP_LIQU_OPER_ATIV" />
+    </xs:unique>
+    <xs:unique name="TB_FCAO_SIST_TIPO_OPER_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_FCAO_SIST_TIPO_OPER" />
+      <xs:field xpath="mstns:TP_OPER" />
+      <xs:field xpath="mstns:CO_FCAO_SIST" />
+    </xs:unique>
+    <xs:unique name="TB_PARM_FCAO_SIST_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_PARM_FCAO_SIST" />
+      <xs:field xpath="mstns:TP_OPER" />
+      <xs:field xpath="mstns:CO_FCAO_SIST" />
+      <xs:field xpath="mstns:TP_BKOF" />
+      <xs:field xpath="mstns:CO_EMPR" />
+    </xs:unique>
+    <xs:unique name="TB_SITU_SPB_SITU_PROC_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_SITU_SPB_SITU_PROC" />
+      <xs:field xpath="mstns:SG_GRUP_MESG_SPB" />
+      <xs:field xpath="mstns:NO_TAG" />
+      <xs:field xpath="mstns:DE_DOMI" />
+    </xs:unique>
+    <xs:unique name="TB_REGR_SIST_DEST_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_REGR_SIST_DEST" />
+      <xs:field xpath="mstns:TP_FORM_MESG_SAID" />
+      <xs:field xpath="mstns:TP_MESG" />
+      <xs:field xpath="mstns:SG_SIST_ORIG" />
+      <xs:field xpath="mstns:CO_EMPR_ORIG" />
+      <xs:field xpath="mstns:DH_INIC_VIGE_REGR_TRAP" />
+      <xs:field xpath="mstns:SG_SIST_DEST" />
+      <xs:field xpath="mstns:CO_EMPR_DEST" />
+    </xs:unique>
+    <xs:unique name="TB_MENSAGEM_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_MENSAGEM" />
+      <xs:field xpath="mstns:SQ_MESG" />
+    </xs:unique>
+    <xs:unique name="TB_PARM_FCAO_SIST_EXCE_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_PARM_FCAO_SIST_EXCE" />
+      <xs:field xpath="mstns:TP_OPER" />
+      <xs:field xpath="mstns:CO_FCAO_SIST" />
+      <xs:field xpath="mstns:TP_BKOF" />
+      <xs:field xpath="mstns:CO_EMPR" />
+      <xs:field xpath="mstns:SG_SIST" />
+      <xs:field xpath="mstns:CO_LOCA_LIQU" />
+      <xs:field xpath="mstns:CO_GRUP_USUA" />
+    </xs:unique>
+    <xs:unique name="TB_VEIC_LEGA_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_VEIC_LEGA" />
+      <xs:field xpath="mstns:CO_VEIC_LEGA" />
+      <xs:field xpath="mstns:SG_SIST" />
+    </xs:unique>
+    <xs:unique name="TB_PRODUTO_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_PRODUTO" />
+      <xs:field xpath="mstns:CO_PROD" />
+      <xs:field xpath="mstns:CO_EMPR_FUSI" />
+    </xs:unique>
+    <xs:unique name="TB_TIPO_OPER_CNTD_ATRB_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_TIPO_OPER_CNTD_ATRB" />
+      <xs:field xpath="mstns:TP_OPER" />
+      <xs:field xpath="mstns:DE_CNTD_ATRB" />
+      <xs:field xpath="mstns:NO_ATRB_MESG" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

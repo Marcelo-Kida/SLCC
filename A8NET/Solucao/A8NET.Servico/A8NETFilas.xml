@@ -1,0 +1,21 @@
+<ConfiguracaoEntrada>
+   <NomeQueueManager>QM.SLCC.01</NomeQueueManager>
+
+   <QuantidadeTotalThreads>15</QuantidadeTotalThreads>
+
+   <QuantidadePorThread>100</QuantidadePorThread>
+
+<!-- em segundos -->
+   <TempoEspera>1</TempoEspera>
+
+   <Repet_Parametros_Entrada>
+      <Grupo_Parametros_Entrada>
+         <QtdeMaxThread>15</QtdeMaxThread>
+         <Fila>A8Q.E.ENTRADA_NET</Fila>
+         <NomeObjeto>A8NET.GerenciadorFila.GerenciadorRecebimento</NomeObjeto>
+         <Metodo>ProcessaMensagemMQ</Metodo>
+         <Tipo>NET</Tipo>
+      </Grupo_Parametros_Entrada>
+   </Repet_Parametros_Entrada>
+</ConfiguracaoEntrada>
+

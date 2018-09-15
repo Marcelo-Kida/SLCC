@@ -1,0 +1,499 @@
+<MAPA_DE_NAVEGACAO>
+   <!-- 
+	__________________________________________________________________________________
+	Funcionalidades do Sistema BUS
+	_________________________________________________________________________________
+	-->
+   <BUS>
+      <frmParametroPostagem>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ParametroControlePostagem">A7Server.clsParamCtrlPostagem</Objeto>
+         </Grupo_Objetos>
+      </frmParametroPostagem>
+      <frmAtributo>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="AtributoMensagem">A7Server.clsAtributoMensagem</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="TipoMensagemAtributo">A7Server.clsTipoMesgAtributo</Objeto>
+         </Grupo_Objetos>
+      </frmAtributo>
+      <frmMonitoracao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoMensagem">A7Server.clsTipoMensagem</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmMonitoracao>
+      <frmParamComunicacaoSistema>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ParametrosSistema">A7Server.clsParametrosSistema</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="OcorrenciaMensagem">A7Server.clsOcorrenciaMensagem</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="OcorrenciaMensagem">A7Server.clsOcorrenciaMensagem</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="ParametrosSistema">A7Server.clsParametrosSistema</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+         </Grupo_Objetos>
+      </frmParamComunicacaoSistema>
+      <frmTipoMensagem>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="TipoMensagem">A7Server.clsTipoMensagem</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="AtributoMensagem">A7Server.clsAtributoMensagem</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmTipoMensagem>
+      <frmRegraTransporte>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="RegraTransporte">A7Server.clsRegraTransporte</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="TipoMensagem">A7Server.clsTipoMensagem</Objeto>
+         </Grupo_Objetos>
+      </frmRegraTransporte>
+      <frmOcorrenciaMensagem>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="OcorrenciaMensagem">A7Server.clsOcorrenciaMensagem</Objeto>
+         </Grupo_Objetos>
+      </frmOcorrenciaMensagem>
+      <frmSistema>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmSistema>
+      <frmTesteConectividade>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="InstituicaoSPB">A8LQS.clsInstituicaoISPB</Objeto>
+         </Grupo_Objetos>
+      </frmTesteConectividade>
+      <frmCadastroProcOperAtiv>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+         </Grupo_Objetos>
+      </frmCadastroProcOperAtiv>
+      <mdiBUS>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="TipoMensagem">A7Server.clsTipoMensagem</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="OcorrenciaMensagem">A7Server.clsOcorrenciaMensagem</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </mdiBUS>
+      <frmControleAcessoUsuario>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ControleUsuarioSistema">A7Server.clsControleUsuarioSistema</Objeto>
+         </Grupo_Objetos>
+      </frmControleAcessoUsuario>
+   </BUS>
+   <!-- 
+	__________________________________________________________________________________
+	Funcionalidades do Sistema LQS
+	_________________________________________________________________________________
+	-->
+   <LQS>
+      <frmConsultaLiquidacaoMultilateral>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaLiquidacaoMultilateral>
+      <frmConsultaVeiculoLegal>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="VeiculoLegal">A6A7A8.clsVeiculoLegal</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaVeiculoLegal>
+      <frmCadastroIdentificadorPartCamara>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="VeiculoLegal">A6A7A8.clsVeiculoLegal</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="IdentificadorCamara">A6A7A8.clsIdPartCamaraVeicLegal</Objeto>
+         </Grupo_Objetos>
+      </frmCadastroIdentificadorPartCamara>
+      <frmTipoLiquidacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="TipoLiquidacao">A8LQS.clsTipoLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmTipoLiquidacao>
+      <frmTipoOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="TipoOperacao">A8LQS.clsTipoOperacao</Objeto>
+         </Grupo_Objetos>
+      </frmTipoOperacao>
+      <frmTipoJustificativaConciliacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="TipoJustificativa">A8LQS.clsTipoJustificativa</Objeto>
+         </Grupo_Objetos>
+      </frmTipoJustificativaConciliacao>
+      <frmGrupoVeiculoLegal>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+         </Grupo_Objetos>
+      </frmGrupoVeiculoLegal>
+      <frmGrupoUsuario>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoUsuario">A6A7A8.clsGrupoUsuario</Objeto>
+         </Grupo_Objetos>
+      </frmGrupoUsuario>
+      <frmConsultaOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaOperacao>
+      <frmConsultaMovimentacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaMovimentacao>
+      <frmConsultaMovimentacaoRejeitada>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaMovimentacaoRejeitada>
+      <frmConsultaMovimentacaoCC_HA>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaMovimentacaoCC_HA>
+      <frmEntradaManual>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+         </Grupo_Objetos>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmEntradaManual>
+      <frmCadastroWorkflow>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+         </Grupo_Objetos>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoUsuario">A6A7A8.clsGrupoUsuario</Objeto>
+         </Grupo_Objetos>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ParamExcecoes">A8LQS.clsCadastroWorkflow</Objeto>
+         </Grupo_Objetos>
+      </frmCadastroWorkflow>
+      <frmRemessaRejeitada>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+         </Grupo_Objetos>
+      </frmRemessaRejeitada>
+      <frmAssocGrupoUsuarioMensSPB>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="SistemaMensagem">A8LQS.clsSistemaMensagem</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoUsuario">A6A7A8.clsGrupoUsuario</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoUsuarioMensSPB">A8LQS.clsGrupoUsuarioMensSPB</Objeto>
+         </Grupo_Objetos>
+      </frmAssocGrupoUsuarioMensSPB>
+      <frmCadastroAlerta>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="FatoGeradorAlerta">A8LQS.clsFatoGeradorAlerta</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+         </Grupo_Objetos>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="FatoGeraAlerBkOffice">A8LQS.clsFatoGeraAlerBkOffice</Objeto>
+         </Grupo_Objetos>
+      </frmCadastroAlerta>
+      <frmHorarioLimiteIntegracao>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="HoraLimIntSistLega">A8LQS.clsHoraLimIntSistLega</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmHorarioLimiteIntegracao>
+      <frmConfirmacaoOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConfirmacaoOperacao>
+      <frmComplementacaoOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmComplementacaoOperacao>
+      <frmLiberacaoOperacaoMensagem>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmLiberacaoOperacaoMensagem>
+      <frmParametrizacaoSituacaoContingencia>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ParamSituContigencia">A8LQS.clsParamSituContigencia</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+         </Grupo_Objetos>
+      </frmParametrizacaoSituacaoContingencia>
+      <frmCadastroConversaoMBS>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="ControleAcessDado">A8LQS.clsControleAcessDado</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoUsuario">A6A7A8.clsGrupoUsuario</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+         </Grupo_Objetos>
+      </frmCadastroConversaoMBS>
+      <frmConsultaMensagem>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaMensagem>
+      <frmCancelamentoEntradaManual>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmCancelamentoEntradaManual>
+      <frmGradeHorario>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="GradeHorario">A8LQS.clsGradeHorario</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="GradeHorario">A8LQS.clsGradeHorario</Objeto>
+         </Grupo_Objetos>
+      </frmGradeHorario>
+      <frmGrupoVeicLegalVeiculoLegal>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+         </Grupo_Objetos>
+      </frmGrupoVeicLegalVeiculoLegal>
+      <frmAlteracaoStatusOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmAlteracaoStatusOperacao>
+      <frmConciliacaoTitulos>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+         </Grupo_Objetos>
+      </frmConciliacaoTitulos>
+      <frmConciliacaoOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoJustificativa">A8LQS.clsTipoJustificativa</Objeto>
+         </Grupo_Objetos>
+      </frmConciliacaoOperacao>
+      <frmConciliacaoRegistroOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConciliacaoRegistroOperacao>
+      <frmConciliacaoFinanceiraMultilateral>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConciliacaoFinanceiraMultilateral>
+      <frmConciliacaoEventos>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="ObterDominioSPB" NomeXML="TipoPagamento" NomeDominio="TpPgtoLDL">A8MIU.clsA6A7A8Funcoes</Objeto>
+         </Grupo_Objetos>
+      </frmConciliacaoEventos>
+      <frmAlerta>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="FatoGeradorAlerta">A8LQS.clsFatoGeradorAlerta</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="Alerta">A8LQS.clsAlerta</Objeto>
+         </Grupo_Objetos>
+      </frmAlerta>
+      <frmSoliRepasseFincPagtoDespesas>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmSoliRepasseFincPagtoDespesas>
+      <frmTipoConta>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoOperacao">A6A7A8.clsTipoOperacao</Objeto>
+         </Grupo_Objetos>
+      </frmTipoConta>
+      <frmSuspenderDisponibilizarLancamentoCC>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmSuspenderDisponibilizarLancamentoCC>
+      <frmConsultaContaCorrente>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaContaCorrente>
+      <frmHistLancamentoCC>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="HistSituacaoIntegracao">A8LQS.clsHistSituacaoIntegracao</Objeto>
+         </Grupo_Objetos>
+      </frmHistLancamentoCC>
+      <frmCadastroConta>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoOperacao">A6A7A8.clsTipoOperacao</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="ParametroHistoricoCC">A8LQS.clsParametroHistoricoCC</Objeto>
+         </Grupo_Objetos>
+      </frmCadastroConta>
+      <frmParamHistCntaCntb>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoBackOffice">A8LQS.clsTipoBackOffice</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+  	    <Objeto Metodo="LerTodos" NomeXML="TipoOperacao">A6A7A8.clsTipoOperacao</Objeto>			
+            <Objeto Metodo="Propriedades" NomeXML="ParamHistCntaCntb">A8LQS.clsParmHistCntaCntb</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+         </Grupo_Objetos>
+      </frmParamHistCntaCntb>
+      <frmIntegrarCCOnLine>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmIntegrarCCOnLine>
+      <frmIntegracaoCCBatch>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmIntegracaoCCBatch>
+      <frmConciliacaoFinanceira>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmConciliacaoFinanceira>
+      <frmLiquidacaoCorretoras>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoJustificativa">A8LQS.clsTipoJustificativa</Objeto>
+         </Grupo_Objetos>
+      </frmLiquidacaoCorretoras>
+      <frmCompromissadaGenerica>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmCompromissadaGenerica>
+      <frmLiquidacaoBruta>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmLiquidacaoBruta>
+      <frmLiquidacaoMultilateralCBLC>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmLiquidacaoMultilateralCBLC>
+      <frmLiquidacaoMultilateralBMF>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmLiquidacaoMultilateralBMF>
+      <frmParamReprocCC>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ParamReprocCC">A8LQS.clsParamReprocCC</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoOperacao">A6A7A8.clsTipoOperacao</Objeto>
+         </Grupo_Objetos>
+      </frmParamReprocCC>
+      <frmLiquidacaoPagDespesas>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Mensagens">A8LQS.clsMensagem</Objeto>
+         </Grupo_Objetos>
+      </frmLiquidacaoPagDespesas> 
+      <frmConsultaMensagemSisbacen>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmConsultaMensagemSisbacen> 		
+	-->
+   </LQS>
+	__________________________________________________________________________________
+	Funcionalidades do Sistema LQS
+	_________________________________________________________________________________
+	-->
+   <SBR>
+      <frmItemCaixa>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ItemCaixa">A6SubReserva.clsItemCaixa</Objeto>
+         </Grupo_Objetos>
+      </frmItemCaixa>
+      <frmSubReservaAbertura>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+         </Grupo_Objetos>
+      </frmSubReservaAbertura>
+      <frmControleRemessa>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+         </Grupo_Objetos>
+      </frmControleRemessa>
+      <frmSubReservaFechamento>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+         </Grupo_Objetos>
+      </frmSubReservaFechamento>
+      <frmRemessaRejeitada>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="Sistema">A6A7A8.clsSistema</Objeto>
+         </Grupo_Objetos>
+      </frmRemessaRejeitada>
+      <frmCaixaFuturo>
+         <Grupo_Objetos>
+            <Objeto Metodo="ObterMovimentoFuturo" NomeXML="CaixaFuturo">A6SubReserva.clsCaixaFuturo</Objeto>
+         </Grupo_Objetos>
+      </frmCaixaFuturo>
+      <frmProdutoPJTipoOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="TipoOperacao">A6A7A8.clsTipoOperacao</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="ProdutoPJ">A6SubReserva.clsProdutoPJ</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="ProdutoPJTipoOperacao">A6SubReserva.clsProdutoPJTipoOperacao</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="Propriedades">A6SubReserva.clsProdutoPJTipoOperacao</Objeto>
+         </Grupo_Objetos>
+      </frmProdutoPJTipoOperacao>
+      <frmItemCaixaTipoOperacao>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ItemCaixaTipoOperacao">A6SubReserva.clsItemCaixaTipoOperacao</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="ItemCaixa">A6SubReserva.clsItemCaixa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoOperacao">A6A7A8.clsTipoOperacao</Objeto>
+         </Grupo_Objetos>
+      </frmItemCaixaTipoOperacao>
+      <frmItemCaixaGrupoVeicLegal>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="ItemCaixaGrupoVeicLegal">A6SubReserva.clsItemCaixaGrupoVeicLegal</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="ItemCaixa">A6SubReserva.clsItemCaixa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+         </Grupo_Objetos>
+      </frmItemCaixaGrupoVeicLegal>
+      <frmSubReservaMonitoracao>
+         <Grupo_Objetos>
+            <Objeto Metodo="LerTodos" NomeXML="BancoLiquidante">A6A7A8.clsLocalLiquidacao</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+         </Grupo_Objetos>
+      </frmSubReservaMonitoracao>
+      <frmAjuste>
+         <Grupo_Objetos>
+            <Objeto Metodo="Propriedades" NomeXML="MovimentoFuturo">A6SubReserva.clsMovimentoFuturo</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="MovimentoSubReserva">A6SubReserva.clsMovimentoSubReserva</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="GrupoVeiculoLegal">A6A7A8.clsGrupoVeiculoLegal</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="Empresa">A6A7A8.clsEmpresa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="LocalLiquidacao">A6A7A8.clsLocalLiquidacao</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoOperacao">A6A7A8.clsTipoOperacao</Objeto>
+            <Objeto Metodo="Propriedades" NomeXML="ItemCaixa">A6SubReserva.clsItemCaixa</Objeto>
+            <Objeto Metodo="LerTodos" NomeXML="TipoLiquidacao">A6A7A8.clsTipoLiquidacao</Objeto>
+         </Grupo_Objetos>
+      </frmAjuste>
+   </SBR>
+</MAPA_DE_NAVEGACAO>

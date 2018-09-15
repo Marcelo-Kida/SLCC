@@ -1,0 +1,16 @@
+obj\Debug\TesteSLCCServicoNET.exe
+obj\Debug\TesteSLCCServicoNET.pdb
+bin\Debug\TesteSLCCServicoNET.exe
+bin\Debug\TesteSLCCServicoNET.pdb
+bin\Debug\SLCCServicoNET.dll
+bin\Debug\amqmdnet.dll
+bin\Debug\SLCCServicoNET.pdb
+obj\Debug\ResolveAssemblyReference.cache
+bin\Release\TesteSLCCServicoNET.exe
+bin\Release\TesteSLCCServicoNET.pdb
+bin\Release\SLCCServicoNET.dll
+bin\Release\amqmdnet.dll
+bin\Release\SLCCServicoNET.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\TesteSLCCServicoNET.exe
+obj\Release\TesteSLCCServicoNET.pdb

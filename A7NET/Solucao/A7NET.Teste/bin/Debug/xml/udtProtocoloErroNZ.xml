@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtProtocoloErroNZ>
+  <CodigoMensagem tipo="A" tamanho="9" decimais="0" inicio="0"  />
+  <ControleRemessaNZ tipo="A" tamanho="20" decimais="0" inicio="9"/>
+  <CodigoEmpresa tipo="A" tamanho="5" decimais="0" inicio="29"/>
+  <OrigemErro tipo="A" tamanho="1" decimais="0" inicio="34"/>
+  <DataRemessa tipo="A" tamanho="8" decimais="0" inicio="35"/>
+  <NomeDoCampo1 tipo="A" tamanho="80" decimais="0" inicio="43"/>
+  <CodigoErro1 tipo="A" tamanho="9" decimais="0" inicio="123"/>
+  <ConteúdoCampoErro1 tipo="A" tamanho="30" decimais="0" inicio="132"/>
+  <NomeDoCampo2 tipo="A" tamanho="80" decimais="0" inicio="162"/>
+  <CodigoErro2 tipo="A" tamanho="9" decimais="0" inicio="242"/>
+  <ConteúdoCampoErro2 tipo="A" tamanho="30" decimais="0" inicio="251"/>
+  <NomeDoCampo3 tipo="A" tamanho="80" decimais="0" inicio="281"/>
+  <CodigoErro3 tipo="A" tamanho="9" decimais="0" inicio="361"/>
+  <ConteúdoCampoErro3 tipo="A" tamanho="30" decimais="0" inicio="370"/>
+  <NomeDoCampo4 tipo="A" tamanho="80" decimais="0" inicio="400"/>
+  <CodigoErro4 tipo="A" tamanho="9" decimais="0" inicio="480"/>
+  <ConteúdoCampoErro4 tipo="A" tamanho="30" decimais="0" inicio="489"/>
+  <NomeDoCampo5 tipo="A" tamanho="80" decimais="0" inicio="519"/>
+  <CodigoErro5 tipo="A" tamanho="9" decimais="0" inicio="599"/>
+  <ConteúdoCampoErro5 tipo="A" tamanho="30" decimais="0" inicio="608"/>
+</udtProtocoloErroNZ>

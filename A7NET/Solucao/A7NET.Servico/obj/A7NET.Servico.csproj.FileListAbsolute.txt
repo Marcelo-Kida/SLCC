@@ -1,0 +1,22 @@
+C:\ProjetosSVN\SLCC\Componentes de Software\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Servico.exe.config
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Servico.exe.config
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Servico.exe
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Servico.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.GerenciadorFila.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Data.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\amqmdnet.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Comum.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Mensagem.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Factory.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.ConfiguracaoMQ.dll
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Data.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Comum.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Mensagem.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.GerenciadorFila.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.Factory.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\bin\Debug\A7NET.ConfiguracaoMQ.pdb
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\obj\Debug\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\obj\Debug\A7NET.Servico.ProjectInstaller.resources
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\obj\Debug\A7NET.Servico.csproj.GenerateResource.Cache
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\obj\Debug\A7NET.Servico.exe
+C:\SLCC\FontesDS\A7NET\Solucao\A7NET.Servico\obj\Debug\A7NET.Servico.pdb

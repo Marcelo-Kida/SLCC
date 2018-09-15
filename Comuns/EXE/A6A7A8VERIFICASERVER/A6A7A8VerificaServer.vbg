@@ -1,0 +1,4 @@
+VBGROUP 5.0
+StartupProject=A6A7A8VerificaServer.vbp
+Project=..\..\DLL\A6A7A8\A6A7A8.vbp
+Project=..\..\DLL\A6A7A8CA\A6A7A78CA.vbp

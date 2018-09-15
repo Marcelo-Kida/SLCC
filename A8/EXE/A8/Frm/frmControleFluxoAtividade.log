@@ -1,0 +1,4 @@
+Line 25: Class MSComctlLib.ImageList of control imgIcons was not a loaded control class.
+Line 123: Class MSComctlLib.Toolbar of control tlbCadastro was not a loaded control class.
+Line 154: Class MSComctlLib.ListView of control lvwMensagem was not a loaded control class.
+Line 196: Class MSComctlLib.ListView of control lvwOperacao was not a loaded control class.

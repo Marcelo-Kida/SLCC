@@ -1,0 +1,2070 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+  Persistable = 0  'NotPersistable
+  DataBindingBehavior = 0  'vbNone
+  DataSourceBehavior  = 0  'vbNone
+  MTSTransactionMode  = 0  'NotAnMTSObject
+END
+Attribute VB_Name = "clsOperacaoMensagem"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+
+' Este componente tem como objetivo, agrupar os métodos responsáveis pela ligação entre a camada de Interface
+' e a camada de Negócios, no que diz respeito às Operações de Conciliação entre Mensagens e Operações.
+' É responsável também pelo acionamento das classes transacionais envolvidas com os processos de atualização de
+' tabelas e processamentos em lote.
+
+Option Explicit
+
+'Variável utilizada para tratamento de erros
+Private lngCodigoErroNegocio                As Long
+Private intNumeroSequencialErro             As Integer
+
+Private Const COD_OP_ERRO_NEGOCIO_ESPEC     As Long = 3013
+Private Const COD_MSG_ERRO_NEGOCIO_ESPEC    As Long = 3014
+
+Private Const COD_TIPO_ERRO_NEGOCIO         As Integer = 1
+Private Const COD_TIPO_ERRO_INTERNO         As Integer = 2
+
+Private ObjectContext                       As COMSVCSLib.ObjectContext
+Implements COMSVCSLib.ObjectControl
+
+Private Sub ObjectControl_Activate()
+    Set ObjectContext = COMSVCSLib.GetObjectContext()
+End Sub
+
+Private Function ObjectControl_CanBePooled() As Boolean
+    ObjectControl_CanBePooled = True
+End Function
+
+Private Sub ObjectControl_Deactivate()
+    Set ObjectContext = Nothing
+End Sub
+
+' Este método instancia as classes clsTOperacao e clsTMensagem para a confirmação de operações e mensagens, na camada
+' de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+Public Function Confirmar(ByVal xmlLoteOperacaoMensagem As String, _
+                          ByRef pvntCodErro As Variant, _
+                          ByRef pvntMensagemErro As Variant) As String
+    
+Dim objTOperacao                            As A8MIU.clsTOperacao
+Dim objTMensagem                            As A8MIU.clsTMensagem
+
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+Dim xmlDocument                             As MSXML2.DOMDocument40
+Dim objDomNode                              As MSXML2.IXMLDOMNode
+
+Dim intTipoConfirmacao                      As Integer
+Dim vntSequenciaOperacao                    As Variant
+Dim vntProtocolo                            As Variant  '<-- Protocolo para a verificação de Limites e Alçadas
+Dim strNumeroControleIF                     As String
+Dim strDTRegistroMensagemSPB                As String
+Dim strCodigoMensagem                       As String
+Dim intStatus                               As Integer  '<-- Conteúdo: enumStatusOperacao ou enumStatusMensagem
+Dim strDHUltimaAtualizacao                  As String
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+    
+    Set xmlDocument = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    If Not xmlDocument.loadXML(xmlLoteOperacaoMensagem) Then
+        '100 - Documento XML Inválido.
+        lngCodigoErroNegocio = 100
+        GoTo ErrorHandler
+    End If
+
+    For Each objDomNode In xmlDocument.documentElement.childNodes
+        'Captura parâmetros
+        intTipoConfirmacao = objDomNode.selectSingleNode("TipoConfirmacao").Text
+        
+        If Not objDomNode.selectSingleNode("Operacao") Is Nothing Then
+            vntSequenciaOperacao = objDomNode.selectSingleNode("Operacao").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("Protocolo") Is Nothing Then
+            vntProtocolo = objDomNode.selectSingleNode("Protocolo").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("CodigoMensagem") Is Nothing Then
+            strCodigoMensagem = objDomNode.selectSingleNode("CodigoMensagem").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("NumeroControleIF") Is Nothing Then
+            strNumeroControleIF = objDomNode.selectSingleNode("NumeroControleIF").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("DTRegistroMensagemSPB") Is Nothing Then
+            strDTRegistroMensagemSPB = objDomNode.selectSingleNode("DTRegistroMensagemSPB").Text
+        End If
+        
+        intStatus = objDomNode.selectSingleNode("Status").Text
+        strDHUltimaAtualizacao = objDomNode.selectSingleNode("DHUltimaAtualizacao").Text
+        
+        'Incrementa o controle de erros com a OPERAÇÃO/MENSAGEM atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", intTipoConfirmacao, "Repeat_ControleErro")
+        
+        If intTipoConfirmacao = enumTipoConfirmacao.Operacao Then
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vntSequenciaOperacao, "Repeat_ControleErro")
+        
+            Set objTOperacao = CreateObject("A8MIU.clsTOperacao")
+            strxmlErro = objTOperacao.Confirmar(vntSequenciaOperacao, intStatus, strDHUltimaAtualizacao, vntProtocolo)
+            Set objTOperacao = Nothing
+        
+        ElseIf intTipoConfirmacao = enumTipoConfirmacao.MENSAGEM Then
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "NumeroControleIF", strNumeroControleIF, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DTRegistroMensagemSPB", strDTRegistroMensagemSPB, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoMensagem", strCodigoMensagem, "Repeat_ControleErro")
+        
+            Set objTMensagem = CreateObject("A8MIU.clsTMensagem")
+            strxmlErro = objTMensagem.Confirmar(strNumeroControleIF, strDTRegistroMensagemSPB, intStatus, strDHUltimaAtualizacao, vntProtocolo)
+            Set objTMensagem = Nothing
+        
+        End If
+        
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+            
+            'Verifica se ocorreu um erro de negócio específico
+            If intTipoErro = COD_TIPO_ERRO_NEGOCIO And _
+              (lngCodErro = COD_OP_ERRO_NEGOCIO_ESPEC Or lngCodErro = COD_MSG_ERRO_NEGOCIO_ESPEC) Then
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 1, "Repeat_ControleErro")
+            Else
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+            End If
+            
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+            
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+            
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+    
+    Confirmar = xmlControleResultado.xml
+    
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+    Exit Function
+    
+ErrorHandler:
+    Set objTOperacao = Nothing
+    Set objTMensagem = Nothing
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "Confirmar Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método instancia as classes clsTOperacao e clsTMensagem para a liberação de operações e mensagens, na camada
+' de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+Public Function Liberar(ByVal xmlLoteOperacaoMensagem As String, _
+                        ByRef pvntCodErro As Variant, _
+                        ByRef pvntMensagemErro As Variant) As String
+    
+Dim objTOperacao                            As A8MIU.clsTOperacao
+Dim objTMensagem                            As A8MIU.clsTMensagem
+
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+Dim xmlDocument                             As MSXML2.DOMDocument40
+Dim objDomNode                              As MSXML2.IXMLDOMNode
+
+Dim intTipoConfirmacao                      As Integer
+Dim vntSequenciaOperacao                    As Variant
+Dim strNumeroControleIF                     As String
+Dim strDTRegistroMensagemSPB                As String
+Dim strCodigoMensagem                       As String
+Dim intStatus                               As Integer  '<-- Conteúdo: enumStatusOperacao ou enumStatusMensagem
+Dim strDHUltimaAtualizacao                  As String
+Dim intAcao                                 As Integer  '<-- Conteúdo: enumTipoAcao
+Dim lngNumeroComandoAcao                    As Long
+Dim vntProtocoloAlcada                      As Variant
+Dim vntContingencia                         As Variant
+Dim blnIgnoraGradeHorario                   As Boolean
+
+Dim strxmlErro                              As String
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+Dim lngCodErro                              As Long
+
+On Error GoTo ErrorHandler
+    
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+    
+    Set xmlDocument = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    If Not xmlDocument.loadXML(xmlLoteOperacaoMensagem) Then
+        '100 - Documento XML Inválido.
+        lngCodigoErroNegocio = 100
+        GoTo ErrorHandler
+    End If
+
+    For Each objDomNode In xmlDocument.documentElement.childNodes
+        'Captura parâmetros
+        intTipoConfirmacao = objDomNode.selectSingleNode("TipoConfirmacao").Text
+        
+        If Not objDomNode.selectSingleNode("Operacao") Is Nothing Then
+            vntSequenciaOperacao = objDomNode.selectSingleNode("Operacao").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("TipoAcao") Is Nothing Then
+            If objDomNode.selectSingleNode("TipoAcao").Text <> vbNullString Then
+                intAcao = objDomNode.selectSingleNode("TipoAcao").Text
+            End If
+        End If
+        
+        If Not objDomNode.selectSingleNode("NumeroComandoAcao") Is Nothing Then
+            If objDomNode.selectSingleNode("NumeroComandoAcao").Text <> vbNullString Then
+                lngNumeroComandoAcao = objDomNode.selectSingleNode("NumeroComandoAcao").Text
+            End If
+        End If
+        
+        If Not objDomNode.selectSingleNode("ProtocoloAlcada") Is Nothing Then
+            If Val(objDomNode.selectSingleNode("ProtocoloAlcada").Text) <> 0 Then
+                vntProtocoloAlcada = objDomNode.selectSingleNode("ProtocoloAlcada").Text
+            End If
+        End If
+        
+        If Not objDomNode.selectSingleNode("Contingencia") Is Nothing Then
+            If Val(objDomNode.selectSingleNode("Contingencia").Text) <> 0 Then
+                vntContingencia = objDomNode.selectSingleNode("Contingencia").Text
+            Else
+                vntContingencia = 0
+            End If
+        End If
+        
+        If Not objDomNode.selectSingleNode("CodigoMensagem") Is Nothing Then
+            strCodigoMensagem = objDomNode.selectSingleNode("CodigoMensagem").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("NumeroControleIF") Is Nothing Then
+            strNumeroControleIF = objDomNode.selectSingleNode("NumeroControleIF").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("DTRegistroMensagemSPB") Is Nothing Then
+            strDTRegistroMensagemSPB = objDomNode.selectSingleNode("DTRegistroMensagemSPB").Text
+        End If
+        
+        blnIgnoraGradeHorario = Val(objDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+        
+        intStatus = objDomNode.selectSingleNode("Status").Text
+        strDHUltimaAtualizacao = objDomNode.selectSingleNode("DHUltimaAtualizacao").Text
+        
+        'Incrementa o controle de erros com a OPERAÇÃO/MENSAGEM atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", intTipoConfirmacao, "Repeat_ControleErro")
+        
+        If intTipoConfirmacao = enumTipoConfirmacao.Operacao Then
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vntSequenciaOperacao, "Repeat_ControleErro")
+        
+            Set objTOperacao = CreateObject("A8MIU.clsTOperacao")
+            strxmlErro = objTOperacao.Liberar(vntSequenciaOperacao, _
+                                              intStatus, _
+                                              intAcao, _
+                                              lngNumeroComandoAcao, _
+                                              strDHUltimaAtualizacao, _
+                                              blnIgnoraGradeHorario)
+            Set objTOperacao = Nothing
+        
+        ElseIf intTipoConfirmacao = enumTipoConfirmacao.MENSAGEM Then
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "NumeroControleIF", strNumeroControleIF, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DTRegistroMensagemSPB", strDTRegistroMensagemSPB, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoMensagem", strCodigoMensagem, "Repeat_ControleErro")
+        
+            Set objTMensagem = CreateObject("A8MIU.clsTMensagem")
+            
+            If vntContingencia <> 0 Then
+                strxmlErro = objTMensagem.LiberarContingencia(strNumeroControleIF, _
+                                                              strDTRegistroMensagemSPB, _
+                                                              vntSequenciaOperacao, _
+                                                              intStatus, _
+                                                              strDHUltimaAtualizacao, _
+                                                              blnIgnoraGradeHorario)
+            Else
+                If vntProtocoloAlcada <> 0 And _
+                  (intStatus = enumStatusMensagem.PendenteLibAlcadaAdmArea Or _
+                   intStatus = enumStatusMensagem.PendenteLibAlcadaAdmGeral) Then
+                
+                    strxmlErro = objTMensagem.LiberarMensagemControleAlcada(objDomNode, blnIgnoraGradeHorario)
+                
+                Else
+                
+                    strxmlErro = objTMensagem.Liberar(strNumeroControleIF, _
+                                                      strDTRegistroMensagemSPB, _
+                                                      vntSequenciaOperacao, _
+                                                      intStatus, _
+                                                      strDHUltimaAtualizacao, _
+                                                      blnIgnoraGradeHorario)
+                End If
+            End If
+            
+            Set objTMensagem = Nothing
+        
+        End If
+        
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+            
+            'Verifica se ocorreu um erro de negócio específico
+            If intTipoErro = COD_TIPO_ERRO_NEGOCIO And _
+              (lngCodErro = COD_OP_ERRO_NEGOCIO_ESPEC Or lngCodErro = COD_MSG_ERRO_NEGOCIO_ESPEC) Then
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 1, "Repeat_ControleErro")
+            Else
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+            End If
+            
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+            
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+            
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+    
+    Liberar = xmlControleResultado.xml
+    
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+    Exit Function
+    
+ErrorHandler:
+    Set objTOperacao = Nothing
+    Set objTMensagem = Nothing
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "Liberar Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método instancia as classes clsTOperacao e clsTMensagem para o cancelamento de entrada manual,
+' de operações e mensagens, na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function CancelarEntradaManual(ByVal xmlLoteOperacaoMensagem As String, _
+                                      ByRef pvntCodErro As Variant, _
+                                      ByRef pvntMensagemErro As Variant) As String
+    
+Dim objTOperacao                            As A8MIU.clsTOperacao
+Dim objTMensagem                            As A8MIU.clsTMensagem
+
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+Dim xmlDocument                             As MSXML2.DOMDocument40
+Dim objDomNode                              As MSXML2.IXMLDOMNode
+
+Dim intTipoConfirmacao                      As Integer
+Dim vntSequenciaOperacao                    As Variant
+Dim strNumeroControleIF                     As String
+Dim strCodigoMensagem                       As String
+Dim strDTRegistroMensagemSPB                As String
+Dim intStatus                               As Integer  '<-- Conteúdo: enumStatusOperacao ou enumStatusMensagem
+Dim strDHUltimaAtualizacao                  As String
+
+Dim strxmlErro                              As String
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+Dim lngCodErro                              As Long
+
+On Error GoTo ErrorHandler
+    
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+    
+    Set xmlDocument = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    If Not xmlDocument.loadXML(xmlLoteOperacaoMensagem) Then
+        '100 - Documento XML Inválido.
+        lngCodigoErroNegocio = 100
+        GoTo ErrorHandler
+    End If
+
+    For Each objDomNode In xmlDocument.documentElement.childNodes
+        'Captura parâmetros
+        intTipoConfirmacao = objDomNode.selectSingleNode("TipoConfirmacao").Text
+        
+        If Not objDomNode.selectSingleNode("Operacao") Is Nothing Then
+            vntSequenciaOperacao = objDomNode.selectSingleNode("Operacao").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("NumeroControleIF") Is Nothing Then
+            strNumeroControleIF = objDomNode.selectSingleNode("NumeroControleIF").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("CodigoMensagem") Is Nothing Then
+            strCodigoMensagem = objDomNode.selectSingleNode("CodigoMensagem").Text
+        End If
+        
+        If Not objDomNode.selectSingleNode("DTRegistroMensagemSPB") Is Nothing Then
+            strDTRegistroMensagemSPB = objDomNode.selectSingleNode("DTRegistroMensagemSPB").Text
+        End If
+        
+        intStatus = objDomNode.selectSingleNode("Status").Text
+        strDHUltimaAtualizacao = objDomNode.selectSingleNode("DHUltimaAtualizacao").Text
+        
+        'Incrementa o controle de erros com a OPERAÇÃO/MENSAGEM atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", intTipoConfirmacao, "Repeat_ControleErro")
+        
+        If intTipoConfirmacao = enumTipoConfirmacao.Operacao Then
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vntSequenciaOperacao, "Repeat_ControleErro")
+        
+            Set objTOperacao = CreateObject("A8MIU.clsTOperacao")
+            strxmlErro = objTOperacao.CancelarEntradaManual(vntSequenciaOperacao, intStatus, strDHUltimaAtualizacao)
+            Set objTOperacao = Nothing
+        
+        ElseIf intTipoConfirmacao = enumTipoConfirmacao.MENSAGEM Then
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "NumeroControleIF", strNumeroControleIF, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DTRegistroMensagemSPB", strDTRegistroMensagemSPB, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoMensagem", strCodigoMensagem, "Repeat_ControleErro")
+        
+            Set objTMensagem = CreateObject("A8MIU.clsTMensagem")
+            strxmlErro = objTMensagem.CancelarEntradaManual(strNumeroControleIF, strDTRegistroMensagemSPB, intStatus, strDHUltimaAtualizacao)
+            Set objTMensagem = Nothing
+        
+        End If
+        
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+            
+            'Verifica se ocorreu um erro de negócio específico
+            If intTipoErro = COD_TIPO_ERRO_NEGOCIO And _
+              (lngCodErro = COD_OP_ERRO_NEGOCIO_ESPEC Or lngCodErro = COD_MSG_ERRO_NEGOCIO_ESPEC) Then
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 1, "Repeat_ControleErro")
+            Else
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+            End If
+            
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+            
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+            
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+    
+    CancelarEntradaManual = xmlControleResultado.xml
+    
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    
+    Set objTOperacao = Nothing
+    Set objTMensagem = Nothing
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "CancelarEntradaManual Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+Public Function AlterarStatusLote(ByVal pintIdLote As Integer, ByVal pstrSiglaSistema, ByVal pdtDataLote As Date, ByVal pintSituacaoLote As Integer, ByRef pvntCodErro As Variant, ByRef pvntMensagemErro As Variant) As String
+Dim objConciliacao                         As A8LQS.clsConciliacao
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+
+    Set objConciliacao = CreateObject("A8LQS.clsConciliacao")
+    AlterarStatusLote = objConciliacao.AlterarStatusLote(pintIdLote, pstrSiglaSistema, pdtDataLote, pintSituacaoLote)
+    Set objConciliacao = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    
+    Set objConciliacao = Nothing
+    
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+
+' Este método instancia a classe clsTConciliacao para a conciliação de operações e mensagens,
+' na camada de negócios, e retorna para a camada de interface.
+
+Public Function Conciliar(ByVal xmlLoteOperacaoMensagem As String, _
+                          ByRef pvntCodErro As Variant, _
+                          ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+Dim xmlDomLeitura                           As MSXML2.DOMDocument40
+
+On Error GoTo ErrorHandler
+    
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    Set xmlDomLeitura = CreateObject("MSXML2.DOMDocument.4.0")
+    If Not xmlDomLeitura.loadXML(xmlLoteOperacaoMensagem) Then
+        '100 - Documento XML Inválido.
+        lngCodigoErroNegocio = 100
+        GoTo ErrorHandler
+    End If
+    
+    Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+    Conciliar = objTConciliacao.Conciliar(xmlDomLeitura)
+    Set objTConciliacao = Nothing
+    
+    Set xmlDomLeitura = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+    
+Exit Function
+ErrorHandler:
+    
+    Set objTConciliacao = Nothing
+    Set xmlDomLeitura = Nothing
+    
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "Conciliar Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+    
+End Function
+
+' Este método instancia a classe clsTConciliacao para a conciliação de operações e mensagens,
+' na camada de negócios, e retorna para a camada de interface.
+
+Public Function ConciliarCamara(ByVal pintTipo As Integer, _
+                                ByVal pintAcao As Integer, _
+                                ByVal pxmlChaveOperacao As String, _
+                                ByVal pxmlChaveMensagem As String, _
+                                ByRef pvntCodErro As Variant, _
+                                ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+Dim xmlOperacao                             As MSXML2.DOMDocument40
+Dim xmlMensagem                             As MSXML2.DOMDocument40
+
+On Error GoTo ErrorHandler
+    
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    Set xmlOperacao = CreateObject("MSXML2.DOMDocument.4.0")
+    Set xmlMensagem = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    If pxmlChaveOperacao <> vbNullString Then
+        If Not xmlOperacao.loadXML(pxmlChaveOperacao) Then
+            '100 - Documento XML Inválido.
+            lngCodigoErroNegocio = 100
+            GoTo ErrorHandler
+        End If
+    End If
+    
+    If pxmlChaveMensagem <> vbNullString Then
+        If Not xmlMensagem.loadXML(pxmlChaveMensagem) Then
+            '100 - Documento XML Inválido.
+            lngCodigoErroNegocio = 100
+            GoTo ErrorHandler
+        End If
+    End If
+    
+    Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+    ConciliarCamara = objTConciliacao.ConciliarCamara(pintTipo, pintAcao, xmlOperacao, xmlMensagem)
+    Set objTConciliacao = Nothing
+    
+    Set xmlOperacao = Nothing
+    Set xmlMensagem = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+    
+Exit Function
+ErrorHandler:
+    
+    Set objTConciliacao = Nothing
+    Set xmlOperacao = Nothing
+    Set xmlMensagem = Nothing
+    
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "ConciliarCamara Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+    
+End Function
+
+' Este método instancia a classe clsTConciliacao para a conciliação de operações e mensagens,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function ConciliarCamaraLote(ByVal pintTipo As Integer, _
+                                    ByVal pintAcao As Integer, _
+                                    ByVal pxmlChaveMensagem As String, _
+                                    ByRef pvntCodErro As Variant, _
+                                    ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocConciliar                         As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim xmlMensagem                             As MSXML2.DOMDocument40
+
+Dim strNumeroControleIF                     As String
+Dim strDTRegistroMensagemSPB                As String
+Dim strSequenciaControleRepeticao           As String
+Dim strCodigoMensagem                       As String
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+Dim blnProcessaMensgem                      As Boolean
+Dim blnIgnoraGradeHorario                   As Boolean
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+
+    'Inicia XML para quebra de transações
+    Set xmlMensagem = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlMensagem, "", "Repeat_Mensagem", "")
+    
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+    
+    Set xmlDocConciliar = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocConciliar.loadXML pxmlChaveMensagem
+
+    For Each xmlDomNode In xmlDocConciliar.documentElement.childNodes
+        Call fgAppendXML(xmlMensagem, "Repeat_Mensagem", xmlDomNode.xml)
+        
+        blnProcessaMensgem = (xmlDomNode.selectSingleNode("FIM_MSG") Is Nothing)
+        
+        If Not blnProcessaMensgem Then
+            blnProcessaMensgem = (xmlDomNode.selectSingleNode("FIM_MSG").Text = "TRUE")
+        End If
+        
+        If blnProcessaMensgem Then
+            strNumeroControleIF = xmlDomNode.selectSingleNode("NU_CTRL_IF").Text
+            strDTRegistroMensagemSPB = xmlDomNode.selectSingleNode("DH_REGT_MESG_SPB").Text
+            strSequenciaControleRepeticao = xmlDomNode.selectSingleNode("NU_SEQU_CNTR_REPE").Text
+            strCodigoMensagem = xmlDomNode.selectSingleNode("CO_MESG_SPB").Text
+            
+            If Not xmlDomNode.selectSingleNode("IgnoraGradeHorario") Is Nothing Then
+                blnIgnoraGradeHorario = Val(xmlDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+            Else
+                blnIgnoraGradeHorario = False
+            End If
+            
+            'Incrementa o controle de erros com a MENSAGEM atual
+            Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", enumTipoConfirmacao.MENSAGEM, "Repeat_ControleErro")
+            
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "NumeroControleIF", strNumeroControleIF, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DTRegistroMensagemSPB", strDTRegistroMensagemSPB, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "SequenciaRepeticao", strSequenciaControleRepeticao, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoMensagem", strCodigoMensagem, "Repeat_ControleErro")
+            
+            Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+            strxmlErro = objTConciliacao.ConciliarCamaraLote(pintTipo, pintAcao, xmlMensagem, blnIgnoraGradeHorario)
+            Set objTConciliacao = Nothing
+        
+            If strxmlErro <> vbNullString Then
+                Call xmlControleErro.loadXML(strxmlErro)
+                intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+                lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+                
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+                
+                strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+                
+                'Incrementa o controle de erros com o STATUS do processo (ERRO)
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+            Else
+                lngCodErro = 0
+                
+                'Incrementa o controle de erros com o STATUS do processo (OK)
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+            End If
+        
+            Set xmlMensagem = CreateObject("MSXML2.DOMDocument.4.0")
+            Call fgAppendNode(xmlMensagem, "", "Repeat_Mensagem", "")
+        End If
+    Next
+    
+    ConciliarCamaraLote = xmlControleResultado.xml
+    
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocConciliar = Nothing
+    Set xmlMensagem = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    
+    Set xmlMensagem = Nothing
+    Set objTConciliacao = Nothing
+    Set xmlDocConciliar = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "ConciliarCamaraLote Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método instancia a classe clsTOperacao para o registro de operações,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function LiberarRegistro(ByVal xmlLoteOperacao As String, _
+                                ByRef pvntCodErro As Variant, _
+                                ByRef pvntMensagemErro As Variant) As String
+
+Dim objTOperacao                            As A8MIU.clsTOperacao
+
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+Dim xmlDocument                             As MSXML2.DOMDocument40
+Dim objDomNode                              As MSXML2.IXMLDOMNode
+
+Dim intTipoConfirmacao                      As Integer
+Dim vntSequenciaOperacao                    As Variant
+Dim intTipoOperacao                         As Long
+Dim lngLocalLiquidacao                      As Long
+Dim intStatus                               As Integer  '<-- Conteúdo: enumStatusOperacao ou enumStatusMensagem
+Dim strDHUltimaAtualizacao                  As String
+Dim intAcao                                 As Integer  '<-- Conteúdo: enumTipoAcao
+Dim lngNumeroComandoAcao                    As Long
+Dim blnIgnoraGradeHorario                   As Boolean
+
+Dim strxmlErro                              As String
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+Dim lngCodErro                              As Long
+
+On Error GoTo ErrorHandler
+    
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+    
+    Set xmlDocument = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    If Not xmlDocument.loadXML(xmlLoteOperacao) Then
+        '100 - Documento XML Inválido.
+        lngCodigoErroNegocio = 100
+        GoTo ErrorHandler
+    End If
+
+    For Each objDomNode In xmlDocument.documentElement.childNodes
+        'Captura parâmetros
+        
+        lngLocalLiquidacao = objDomNode.selectSingleNode("LocalLiquidacao").Text
+        vntSequenciaOperacao = objDomNode.selectSingleNode("NU_SEQU_OPER_ATIV").Text
+        intTipoOperacao = objDomNode.selectSingleNode("TP_OPER").Text
+        strDHUltimaAtualizacao = objDomNode.selectSingleNode("DH_ULTI_ATLZ").Text
+        blnIgnoraGradeHorario = Val(objDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+        intTipoConfirmacao = Val(objDomNode.selectSingleNode("TipoConfirmacao").Text)
+        
+        'Incrementa o controle de erros com a OPERAÇÃO atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vntSequenciaOperacao, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", intTipoConfirmacao, "Repeat_ControleErro")
+    
+        Set objTOperacao = CreateObject("A8MIU.clsTOperacao")
+        strxmlErro = objTOperacao.LiberarRegistro(lngLocalLiquidacao, _
+                                            vntSequenciaOperacao, _
+                                            intTipoOperacao, _
+                                            strDHUltimaAtualizacao, _
+                                            blnIgnoraGradeHorario)
+        Set objTOperacao = Nothing
+        
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+            
+            'Verifica se ocorreu um erro de negócio específico
+            If intTipoErro = COD_TIPO_ERRO_NEGOCIO And _
+              (lngCodErro = COD_OP_ERRO_NEGOCIO_ESPEC Or lngCodErro = COD_MSG_ERRO_NEGOCIO_ESPEC) Then
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 1, "Repeat_ControleErro")
+            Else
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+            End If
+            
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+            
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+            
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+    
+    LiberarRegistro = xmlControleResultado.xml
+    
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    Set objTOperacao = Nothing
+    
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "LiberarRegistro Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método instancia a classe clsTConciliacao para a liquidação multilateral financeira, de operações e mensagens,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function LiquidarMultilateralFinanceira(ByVal plngPerfilAcesso As Long, _
+                                               ByVal pintAcao As Long, _
+                                               ByVal xmlLoteOperacao As String, _
+                                               ByRef pvntCodErro As Variant, _
+                                               ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+Dim xmlDocument                             As MSXML2.DOMDocument40
+Dim xmlBranch                               As MSXML2.DOMDocument40
+Dim objDomNode                              As MSXML2.IXMLDOMNode
+
+Dim intTipoConfirmacao                      As Integer
+Dim vntSequenciaOperacao                    As Variant
+Dim intTipoOperacao                         As Long
+Dim lngLocalLiquidacao                      As Long
+Dim intStatus                               As Integer  '<-- Conteúdo: enumStatusOperacao ou enumStatusMensagem
+Dim strDHUltimaAtualizacao                  As String
+Dim intAcao                                 As Integer  '<-- Conteúdo: enumTipoAcao
+Dim lngNumeroComandoAcao                    As Long
+Dim blnIgnoraGradeHorario                   As Boolean
+
+Dim strxmlErro                              As String
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+Dim lngCodErro                              As Long
+Dim strSelecaoXML                           As String 'para ver qual parte do XML enviar, dependendo do tipo de acesso
+
+On Error GoTo ErrorHandler
+    
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+   'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+    
+    Set xmlDocument = CreateObject("MSXML2.DOMDocument.4.0")
+    Set xmlBranch = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    If plngPerfilAcesso = enumPerfilAcesso.AdmGeral _
+        And fgIN(pintAcao, _
+                enumAcaoConciliacao.AdmGeralEnviarConcordancia, _
+                enumAcaoConciliacao.AdmGeralEnviarDiscordancia, _
+                enumAcaoConciliacao.AdmGeralPagamento, _
+                enumAcaoConciliacao.AdmGeralPagamentoContingencia, _
+                enumAcaoConciliacao.AdmGeralRegularizar) Then
+        
+        'No Perfil AdmGeral, para alguns comandos, tem que processar o XML inteiro, aí manda tudo de uma vez (Msg Mãe >> Msgs Filhas >> Operações)
+        strSelecaoXML = "//Repeat_Conciliacao"
+    Else
+        strSelecaoXML = "//Repeat_Conciliacao/Grupo_Mensagem"
+    End If
+    
+    If Not xmlDocument.loadXML(xmlLoteOperacao) Then
+        '100 - Documento XML Inválido.
+        lngCodigoErroNegocio = 100
+        GoTo ErrorHandler
+    End If
+
+    For Each objDomNode In xmlDocument.selectNodes(strSelecaoXML)
+        'Captura parâmetros
+        
+        'lngLocalLiquidacao = objDomNode.selectSingleNode("LocalLiquidacao").Text
+        'vntSequenciaOperacao = objDomNode.selectSingleNode("NU_SEQU_OPER_ATIV").Text
+        'intTipoOperacao = objDomNode.selectSingleNode("TP_OPER").Text
+        'strDHUltimaAtualizacao = objDomNode.selectSingleNode("DH_ULTI_ATLZ").Text
+        'blnIgnoraGradeHorario = Val(objDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+        'intTipoConfirmacao = Val(objDomNode.selectSingleNode("TipoConfirmacao").Text)
+        
+        'Incrementa o controle de erros com a OPERAÇÃO atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vntSequenciaOperacao, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", 0, "Repeat_ControleErro")
+    
+        xmlBranch.loadXML objDomNode.xml
+    
+        Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+        strxmlErro = objTConciliacao.LiquidarMultilateralFinanceira(plngPerfilAcesso, pintAcao, xmlBranch)
+        Set objTConciliacao = Nothing
+        
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+            
+            'Verifica se ocorreu um erro de negócio específico
+            If intTipoErro = COD_TIPO_ERRO_NEGOCIO And _
+              (lngCodErro = COD_OP_ERRO_NEGOCIO_ESPEC Or lngCodErro = COD_MSG_ERRO_NEGOCIO_ESPEC) Then
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 1, "Repeat_ControleErro")
+            Else
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+            End If
+            
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+            
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+            
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+    
+    LiquidarMultilateralFinanceira = xmlControleResultado.xml
+    
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    
+    Set objTConciliacao = Nothing
+    
+    Set xmlDocument = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "LiquidarMultilateralFinanceira Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método aciona a leitura dos registros da tabela de finalidade IF na camada de negócios,
+' e retorna para a camada de interface.
+
+Public Function ObterDominioFinalidadeMsgSTR(ByRef pvntCodErro As Variant, _
+                                             ByRef pvntMensagemErro As Variant) As String
+
+Dim objMensagemSLCC                         As A8LQS.clsMensagemSLCC
+
+On Error GoTo ErrorHandler
+    
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    Set objMensagemSLCC = CreateObject("A8LQS.clsMensagemSLCC")
+    ObterDominioFinalidadeMsgSTR = objMensagemSLCC.ObterDominioSPB("FinlddIF")
+    Set objMensagemSLCC = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+    
+Exit Function
+ErrorHandler:
+    
+    Set objMensagemSLCC = Nothing
+    
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "ObterDominioFinalidadeMsgSTR Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+    
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+    
+End Function
+
+' Este método instancia a classe clsTConciliacao para a liquidação com corretoras, de operações e mensagens,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+Public Function LiquidarCorretoras(ByVal pintAcao As Integer, _
+                                   ByVal strXMLOperacoes As String, _
+                                   ByRef pvntCodErro As Variant, _
+                                   ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocProcessar                         As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+Dim blnIgnoraGradeHorario                   As Boolean
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+
+    Set xmlDocProcessar = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocProcessar.loadXML strXMLOperacoes
+
+    For Each xmlDomNode In xmlDocProcessar.documentElement.childNodes
+        blnIgnoraGradeHorario = Val(xmlDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+
+        'Incrementa o controle de erros com a MENSAGEM atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", 0, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vbNullString, "Repeat_ControleErro")
+
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_LOCA_LIQU", xmlDomNode.selectSingleNode("CO_LOCA_LIQU").Text, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_ISPB_CNPT", xmlDomNode.selectSingleNode("CO_ISPB_CNPT").Text, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_CNPJ_CNPT", xmlDomNode.selectSingleNode("CO_CNPJ_CNPT").Text, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TP_IF_CRED_DEBT", xmlDomNode.selectSingleNode("TP_IF_CRED_DEBT").Text, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_AGEN_COTR", xmlDomNode.selectSingleNode("CO_AGEN_COTR").Text, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "NU_CC_COTR", xmlDomNode.selectSingleNode("NU_CC_COTR").Text, "Repeat_ControleErro")
+        
+        Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+        strxmlErro = objTConciliacao.LiquidarCorretoras(pintAcao, xmlDomNode, blnIgnoraGradeHorario)
+        Set objTConciliacao = Nothing
+
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+
+    LiquidarCorretoras = xmlControleResultado.xml
+
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocProcessar = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    Set objTConciliacao = Nothing
+    Set xmlDocProcessar = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "LiquidarCorretoras Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método instancia a classe clsTConciliacao para o processamento de compromissadas genéricas,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function ProcessarCompromissadaGenerica(ByVal pintAcao As Integer, _
+                                               ByVal strXMLOperacoes As String, _
+                                               ByRef pvntCodErro As Variant, _
+                                               ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocProcessar                         As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+Dim blnIgnoraGradeHorario                   As Boolean
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+
+    Set xmlDocProcessar = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocProcessar.loadXML strXMLOperacoes
+
+    For Each xmlDomNode In xmlDocProcessar.documentElement.childNodes
+        blnIgnoraGradeHorario = Val(xmlDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+
+        'Incrementa o controle de erros com a MENSAGEM atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", 0)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vbNullString)
+
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_VEIC_LEGA", xmlDocProcessar.selectSingleNode("//CO_VEIC_LEGA").Text)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DT_OPER_ATIV", xmlDocProcessar.selectSingleNode("//DT_OPER_ATIV").Text)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DT_LIQU_OPER_ATIV", xmlDocProcessar.selectSingleNode("//DT_LIQU_OPER_ATIV").Text)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DT_OPER_ATIV_RETN", xmlDocProcessar.selectSingleNode("//DT_OPER_ATIV_RETN").Text)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_ULTI_SITU_PROC", xmlDocProcessar.selectSingleNode("//CO_ULTI_SITU_PROC").Text)
+        
+        Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+        strxmlErro = objTConciliacao.ConciliarCompromissadaGenerica(pintAcao, xmlDomNode, blnIgnoraGradeHorario)
+        Set objTConciliacao = Nothing
+
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+
+    ProcessarCompromissadaGenerica = xmlControleResultado.xml
+
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocProcessar = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    
+    Set objTConciliacao = Nothing
+    Set xmlDocProcessar = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "ProcessarCompromissadaGenerica Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método instancia a classe clsTConciliacao para a conciliação de operações e mensagens,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function ProcessarLoteLiquidacaoBrutaCBLC(ByVal pintAcao As Integer, _
+                                                 ByVal pstrXMLProcessamento As String, _
+                                                 ByRef pvntCodErro As Variant, _
+                                                 ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocProcessamento                     As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim xmlLoteProc                             As MSXML2.DOMDocument40
+
+Dim strNumeroControleIF                     As String
+Dim strDTRegistroMensagemSPB                As String
+Dim strSequenciaControleRepeticao           As String
+Dim strCodigoMensagem                       As String
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+Dim blnIgnoraGradeHorario                   As Boolean
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+
+    'Inicia XML para quebra de transações
+    Set xmlLoteProc = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlLoteProc, "", "Repeat_Mensagem", "")
+    
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+    
+    Set xmlDocProcessamento = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocProcessamento.loadXML pstrXMLProcessamento
+
+    For Each xmlDomNode In xmlDocProcessamento.documentElement.childNodes
+        Call fgAppendXML(xmlLoteProc, "Repeat_Mensagem", xmlDomNode.xml)
+        
+        strNumeroControleIF = xmlDomNode.selectSingleNode("NU_CTRL_IF").Text
+        strDTRegistroMensagemSPB = xmlDomNode.selectSingleNode("DH_REGT_MESG_SPB").Text
+        strSequenciaControleRepeticao = xmlDomNode.selectSingleNode("NU_SEQU_CNTR_REPE").Text
+        strCodigoMensagem = xmlDomNode.selectSingleNode("CO_MESG_SPB").Text
+        
+        If Not xmlDomNode.selectSingleNode("IgnoraGradeHorario") Is Nothing Then
+            blnIgnoraGradeHorario = Val(xmlDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+        Else
+            blnIgnoraGradeHorario = False
+        End If
+        
+        'Incrementa o controle de erros com a MENSAGEM atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", enumTipoConfirmacao.MENSAGEM, "Repeat_ControleErro")
+        
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "NumeroControleIF", strNumeroControleIF, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DTRegistroMensagemSPB", strDTRegistroMensagemSPB, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "SequenciaRepeticao", strSequenciaControleRepeticao, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoMensagem", strCodigoMensagem, "Repeat_ControleErro")
+        
+        Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+        strxmlErro = objTConciliacao.LiquidarBrutaCBLC(pintAcao, xmlLoteProc, blnIgnoraGradeHorario)
+        Set objTConciliacao = Nothing
+    
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+            
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+            
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+            
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+            
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    
+        Set xmlLoteProc = CreateObject("MSXML2.DOMDocument.4.0")
+        Call fgAppendNode(xmlLoteProc, "", "Repeat_Mensagem", "")
+    Next
+    
+    ProcessarLoteLiquidacaoBrutaCBLC = xmlControleResultado.xml
+    
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocProcessamento = Nothing
+    Set xmlLoteProc = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+    Exit Function
+    
+ErrorHandler:
+    Set xmlLoteProc = Nothing
+    Set objTConciliacao = Nothing
+    Set xmlDocProcessamento = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "ProcessarLoteLiquidacaoBrutaCBLC Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método instancia a classe clsTConciliacao para a conciliação de operações e mensagens,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function ProcessarLoteLiberacaoRodaDolarPronto(ByVal pintAcao As Integer, _
+                                                      ByVal pstrXMLProcessamento As String, _
+                                                      ByRef pvntCodErro As Variant, _
+                                                      ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocProcessamento                     As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim xmlLoteProc                             As MSXML2.DOMDocument40
+
+Dim strNumeroControleIF                     As String
+Dim strDTRegistroMensagemSPB                As String
+Dim strSequenciaControleRepeticao           As String
+Dim strCodigoMensagem                       As String
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+
+    'Inicia XML para quebra de transações
+    Set xmlLoteProc = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlLoteProc, "", "Repeat_Mensagem", "")
+    
+    'Monta XML para controle de erros
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+    
+    'Monta XML para controle de resultados
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+    
+    Set xmlDocProcessamento = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocProcessamento.loadXML pstrXMLProcessamento
+
+    For Each xmlDomNode In xmlDocProcessamento.documentElement.childNodes
+        Call fgAppendXML(xmlLoteProc, "Repeat_Mensagem", xmlDomNode.xml)
+        
+        strNumeroControleIF = xmlDomNode.selectSingleNode("NU_CTRL_IF").Text
+        strDTRegistroMensagemSPB = xmlDomNode.selectSingleNode("DH_REGT_MESG_SPB").Text
+        strSequenciaControleRepeticao = xmlDomNode.selectSingleNode("NU_SEQU_CNTR_REPE").Text
+        strCodigoMensagem = xmlDomNode.selectSingleNode("CO_MESG_SPB").Text
+        
+        'Incrementa o controle de erros com a MENSAGEM atual
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", enumTipoConfirmacao.MENSAGEM, "Repeat_ControleErro")
+        
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "NumeroControleIF", strNumeroControleIF, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "DTRegistroMensagemSPB", strDTRegistroMensagemSPB, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "SequenciaRepeticao", strSequenciaControleRepeticao, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoMensagem", strCodigoMensagem, "Repeat_ControleErro")
+        
+        Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+        strxmlErro = objTConciliacao.LiberarRodaDolarPronto(pintAcao, xmlLoteProc)
+        Set objTConciliacao = Nothing
+    
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+            
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+            
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+            
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+            
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    
+        Set xmlLoteProc = CreateObject("MSXML2.DOMDocument.4.0")
+        Call fgAppendNode(xmlLoteProc, "", "Repeat_Mensagem", "")
+    Next
+    
+    ProcessarLoteLiberacaoRodaDolarPronto = xmlControleResultado.xml
+    
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocProcessamento = Nothing
+    Set xmlLoteProc = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    Set xmlLoteProc = Nothing
+    Set objTConciliacao = Nothing
+    Set xmlDocProcessamento = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "ProcessarLoteLiberacaoRodaDolarPronto Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método aciona a leitura de dados sobre a conciliação de uma única operação ou mensagem na camada de negócios,
+' e retorna para a camada de interface.
+
+Public Function ObterConciliacao(ByVal plngNumeroSequenciaOper As Long, _
+                                 ByVal pstrNumeroControleIF As String) As String
+
+Dim objOperacao                             As A8LQS.clsConciliacao
+
+    On Error GoTo ErrorHandler
+
+    Set objOperacao = CreateObject("A8LQS.clsConciliacao")
+    ObterConciliacao = objOperacao.LerTodos(, plngNumeroSequenciaOper, pstrNumeroControleIF)
+    Set objOperacao = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+    Exit Function
+    
+ErrorHandler:
+    Set objOperacao = Nothing
+    
+    If Not ObjectContext Is Nothing Then
+       'ObjectContext.SetAbort
+    End If
+
+    If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    Call fgRaiseError(App.EXEName, TypeName(Me), "ObterConciliacao Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+End Function
+
+' Este método instancia a classe clsTConciliacao para o processamento multilateral CBLC,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function ProcessarLoteLiquidacaoMultilateralCBLC(ByVal pintAcao As Integer, _
+                                                        ByVal strXMLOperacoes As String, _
+                                                        ByRef pvntCodErro As Variant, _
+                                                        ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocProcessar                         As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+Dim blnIgnoraGradeHorario                   As Boolean
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+
+    Set xmlDocProcessar = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocProcessar.loadXML strXMLOperacoes
+
+    For Each xmlDomNode In xmlDocProcessar.documentElement.childNodes
+        blnIgnoraGradeHorario = Val(xmlDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+        
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", 0)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vbNullString)
+
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_EMPR", xmlDocProcessar.selectSingleNode("//CO_EMPR").Text)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_PARP_CAMR", xmlDocProcessar.selectSingleNode("//CO_PARP_CAMR").Text)
+        
+        Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+        strxmlErro = objTConciliacao.LiquidarMultilateralCBLC(pintAcao, xmlDomNode, blnIgnoraGradeHorario)
+        Set objTConciliacao = Nothing
+
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+
+    ProcessarLoteLiquidacaoMultilateralCBLC = xmlControleResultado.xml
+
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocProcessar = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+    Exit Function
+
+ErrorHandler:
+    Set objTConciliacao = Nothing
+    Set xmlDocProcessar = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "ProcessarLoteLiquidacaoMultilateralCBLC Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+' Este método instancia a classe clsTConciliacao para o processamento de eventos CBLC,
+' na camada de negócios, e retorna para a camada de interface.
+' Também devolve à camada de interface o resultado do processamento em lote.
+
+Public Function ProcessarLoteLiquidacaoEventosCBLC(ByVal pintAcao As Integer, _
+                                                   ByVal strXMLOperacoes As String, _
+                                                   ByRef pvntCodErro As Variant, _
+                                                   ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocProcessar                         As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+Dim blnIgnoraGradeHorario                   As Boolean
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+
+    Set xmlDocProcessar = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocProcessar.loadXML strXMLOperacoes
+
+    For Each xmlDomNode In xmlDocProcessar.documentElement.childNodes
+        blnIgnoraGradeHorario = Val(xmlDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+        
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", 0)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vbNullString)
+
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_EMPR", xmlDocProcessar.selectSingleNode("//CO_EMPR").Text)
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_PARP_CAMR", xmlDocProcessar.selectSingleNode("//CO_PARP_CAMR").Text)
+        
+        Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+        strxmlErro = objTConciliacao.LiquidarEventosCBLC(pintAcao, xmlDomNode, blnIgnoraGradeHorario)
+        Set objTConciliacao = Nothing
+
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+
+    ProcessarLoteLiquidacaoEventosCBLC = xmlControleResultado.xml
+
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocProcessar = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    
+    Set objTConciliacao = Nothing
+    Set xmlDocProcessar = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    'Comentado devido ao novo tratamento de erro do SOAP
+    'If lngCodigoErroNegocio <> 0 And Err.Number = 0 Then On Error GoTo 0
+    'Call fgRaiseError(App.EXEName, TypeName(Me), "ProcessarLoteLiquidacaoEventosCBLC Function", lngCodigoErroNegocio, intNumeroSequencialErro)
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+Public Function ProcessarLoteLiquidacaoMultilateralBMF(ByVal pintAcao As Integer, _
+                                                       ByVal strXMLOperacoes As String, _
+                                                       ByRef pvntCodErro As Variant, _
+                                                       ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocProcessar                         As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+
+Dim blnIgnoraGradeHorario                   As Boolean
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+    
+    Set xmlDocProcessar = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocProcessar.loadXML strXMLOperacoes
+    
+    ProcessarLoteLiquidacaoMultilateralBMF = ProcessarLoteLiquidacaoMultilateralBMFPrevia(pintAcao, _
+                                                                                          strXMLOperacoes, _
+                                                                                          pvntCodErro, _
+                                                                                          pvntMensagemErro)
+    Set xmlDocProcessar = Nothing
+    
+
+
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocProcessar = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    Set objTConciliacao = Nothing
+    Set xmlDocProcessar = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+
+Private Function ProcessarLoteLiquidacaoMultilateralBMFPrevia(ByVal pintAcao As Integer, _
+                                                              ByVal strXMLOperacoes As String, _
+                                                              ByRef pvntCodErro As Variant, _
+                                                              ByRef pvntMensagemErro As Variant) As String
+
+Dim objTConciliacao                         As A8MIU.clsTConciliacao
+
+Dim xmlDocProcessar                         As MSXML2.DOMDocument40
+Dim xmlDomNode                              As MSXML2.IXMLDOMNode
+Dim xmlControleResultado                    As MSXML2.DOMDocument40
+Dim xmlControleErro                         As MSXML2.DOMDocument40
+
+Dim strxmlErro                              As String
+Dim lngCodErro                              As Long
+Dim intTipoErro                             As Integer
+Dim strErro                                 As String
+Dim lngCont                                 As Long
+Dim blnIgnoraGradeHorario                   As Boolean
+
+On Error GoTo ErrorHandler
+
+    pvntCodErro = 0
+    pvntMensagemErro = ""
+
+    Set xmlControleErro = CreateObject("MSXML2.DOMDocument.4.0")
+
+    Set xmlControleResultado = CreateObject("MSXML2.DOMDocument.4.0")
+    Call fgAppendNode(xmlControleResultado, "", "Repeat_ControleErro", "")
+
+    Set xmlDocProcessar = CreateObject("MSXML2.DOMDocument.4.0")
+    xmlDocProcessar.loadXML strXMLOperacoes
+    
+    
+    '----------------------- DEBITOS --------------------------------------------------------------
+    For Each xmlDomNode In xmlDocProcessar.selectNodes("Repeat_Processamento/*[IN_DEBT_CRED='D']")
+        blnIgnoraGradeHorario = Val(xmlDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+        lngCont = xmlDocProcessar.selectNodes("Repeat_Processamento/*[IN_DEBT_CRED='D']").length
+        
+        Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", 0, "Repeat_ControleErro")
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vbNullString, "Repeat_ControleErro")
+
+        Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_EMPR", xmlDocProcessar.selectSingleNode("//CO_EMPR").Text, "Repeat_ControleErro")
+        
+        If Not xmlDocProcessar.selectSingleNode("//CO_PARP_CAMR") Is Nothing Then
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_PARP_CAMR", xmlDocProcessar.selectSingleNode("//CO_PARP_CAMR").Text, "Repeat_ControleErro")
+        End If
+                
+        'KIDA - BMF
+        If Not xmlDomNode.selectSingleNode("IN_ULTI_MESG") Is Nothing Then
+            If xmlDocProcessar.selectNodes("Repeat_Processamento/*[IN_DEBT_CRED='D']").Item(lngCont - 1).xml = xmlDomNode.xml Then
+                xmlDomNode.selectSingleNode("IN_ULTI_MESG").Text = "S"
+            Else
+                xmlDomNode.selectSingleNode("IN_ULTI_MESG").Text = "N"
+            End If
+        End If
+                
+        Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+        
+        strxmlErro = objTConciliacao.LiquidarMultilateralBMF(pintAcao, _
+                                                             xmlDomNode, _
+                                                             xmlDocProcessar, _
+                                                             blnIgnoraGradeHorario)
+        Set objTConciliacao = Nothing
+
+        If strxmlErro <> vbNullString Then
+            Call xmlControleErro.loadXML(strxmlErro)
+            intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+            lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+
+            strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+
+            'Incrementa o controle de erros com o STATUS do processo (ERRO)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+        Else
+            lngCodErro = 0
+
+            'Incrementa o controle de erros com o STATUS do processo (OK)
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+        End If
+    Next
+    
+    xmlDocProcessar.loadXML strXMLOperacoes
+    '----------------------- CREDITOS --------------------------------------------------------------
+    
+    'If pintAcao = enumAcaoConciliacao.AdmGeralPagamento Or pintAcao = enumAcaoConciliacao.AdmGeralRecebimento Then
+    
+        For Each xmlDomNode In xmlDocProcessar.selectNodes("Repeat_Processamento/*[IN_DEBT_CRED='C']")
+            
+            lngCont = xmlDocProcessar.selectNodes("Repeat_Processamento/*[IN_DEBT_CRED='C']").length
+            blnIgnoraGradeHorario = Val(xmlDomNode.selectSingleNode("IgnoraGradeHorario").Text)
+            
+            Call fgAppendNode(xmlControleResultado, "Repeat_ControleErro", "Grupo_ControleErro", "")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoConfirmacao", 0, "Repeat_ControleErro")
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Operacao", vbNullString, "Repeat_ControleErro")
+    
+            Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_EMPR", xmlDocProcessar.selectSingleNode("//CO_EMPR").Text, "Repeat_ControleErro")
+            
+            If Not xmlDomNode.selectSingleNode("CO_PARP_CAMR") Is Nothing Then
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CO_PARP_CAMR", xmlDomNode.selectSingleNode("//CO_PARP_CAMR").Text, "Repeat_ControleErro")
+            End If
+                    
+            'KIDA - BMF
+            
+            If Not xmlDomNode.selectSingleNode("IN_ULTI_MESG") Is Nothing Then
+                If xmlDocProcessar.selectNodes("Repeat_Processamento/*[IN_DEBT_CRED='C']").Item(lngCont - 1).xml = xmlDomNode.xml Then
+                    xmlDomNode.selectSingleNode("IN_ULTI_MESG").Text = "S"
+                Else
+                    xmlDomNode.selectSingleNode("IN_ULTI_MESG").Text = "N"
+                End If
+            End If
+                    
+            Set objTConciliacao = CreateObject("A8MIU.clsTConciliacao")
+            
+            If pintAcao = enumAcaoConciliacao.AdmGeralPagamento Or pintAcao = enumAcaoConciliacao.AdmGeralRecebimento Then
+            
+                strxmlErro = objTConciliacao.LiquidarMultilateralBMF(enumAcaoConciliacao.AdmGeralRecebimento, _
+                                                                     xmlDomNode, _
+                                                                     xmlDocProcessar, _
+                                                                     blnIgnoraGradeHorario)
+            Else
+                strxmlErro = objTConciliacao.LiquidarMultilateralBMF(pintAcao, _
+                                                                     xmlDomNode, _
+                                                                     xmlDocProcessar, _
+                                                                     blnIgnoraGradeHorario)
+            End If
+            
+            Set objTConciliacao = Nothing
+    
+            If strxmlErro <> vbNullString Then
+                Call xmlControleErro.loadXML(strxmlErro)
+                intTipoErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/ErrorType").Text
+                lngCodErro = Val(xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Number").Text)
+    
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "ErroNegocioEspecifico", 0, "Repeat_ControleErro")
+    
+                strErro = xmlControleErro.selectSingleNode("Erro/Grupo_ErrorInfo/Description").Text
+    
+                'Incrementa o controle de erros com o STATUS do processo (ERRO)
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "TipoErro", intTipoErro, "Repeat_ControleErro")
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", strErro, "Repeat_ControleErro")
+            Else
+                lngCodErro = 0
+    
+                'Incrementa o controle de erros com o STATUS do processo (OK)
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "CodigoErro", lngCodErro, "Repeat_ControleErro")
+                Call fgAppendNode(xmlControleResultado, "Grupo_ControleErro", "Status", "OK", "Repeat_ControleErro")
+            End If
+        Next
+    'End If
+    
+    ProcessarLoteLiquidacaoMultilateralBMFPrevia = xmlControleResultado.xml
+
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+    Set xmlDocProcessar = Nothing
+
+    If Not ObjectContext Is Nothing Then
+        ObjectContext.SetComplete
+    End If
+
+Exit Function
+ErrorHandler:
+    Set objTConciliacao = Nothing
+    Set xmlDocProcessar = Nothing
+    Set xmlControleResultado = Nothing
+    Set xmlControleErro = Nothing
+
+    pvntCodErro = Err.Number
+    pvntMensagemErro = Err.Description
+
+End Function
+
+

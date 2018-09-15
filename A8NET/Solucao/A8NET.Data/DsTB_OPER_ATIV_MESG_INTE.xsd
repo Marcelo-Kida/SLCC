@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsTB_OPER_ATIV_MESG_INTE" targetNamespace="http://tempuri.org/DsTB_OPER_ATIV_MESG_INTE.xsd" xmlns:mstns="http://tempuri.org/DsTB_OPER_ATIV_MESG_INTE.xsd" xmlns="http://tempuri.org/DsTB_OPER_ATIV_MESG_INTE.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="True" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.A8NET.Data.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient">
+          </Connection>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DsTB_OPER_ATIV_MESG_INTE" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DsTB_OPER_ATIV_MESG_INTE" msprop:Generator_DataSetName="DsTB_OPER_ATIV_MESG_INTE">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TB_OPER_ATIV_MESG_INTE" msprop:Generator_UserTableName="TB_OPER_ATIV_MESG_INTE" msprop:Generator_RowDeletedName="TB_OPER_ATIV_MESG_INTERowDeleted" msprop:Generator_TableClassName="TB_OPER_ATIV_MESG_INTEDataTable" msprop:Generator_RowChangedName="TB_OPER_ATIV_MESG_INTERowChanged" msprop:Generator_RowClassName="TB_OPER_ATIV_MESG_INTERow" msprop:Generator_RowChangingName="TB_OPER_ATIV_MESG_INTERowChanging" msprop:Generator_RowEvArgName="TB_OPER_ATIV_MESG_INTERowChangeEvent" msprop:Generator_RowEvHandlerName="TB_OPER_ATIV_MESG_INTERowChangeEventHandler" msprop:Generator_TablePropName="TB_OPER_ATIV_MESG_INTE" msprop:Generator_TableVarName="tableTB_OPER_ATIV_MESG_INTE" msprop:Generator_RowDeletingName="TB_OPER_ATIV_MESG_INTERowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NU_SEQU_OPER_ATIV" msprop:Generator_UserColumnName="NU_SEQU_OPER_ATIV" msprop:Generator_ColumnPropNameInRow="NU_SEQU_OPER_ATIV" msprop:Generator_ColumnVarNameInTable="columnNU_SEQU_OPER_ATIV" msprop:Generator_ColumnPropNameInTable="NU_SEQU_OPER_ATIVColumn" type="xs:decimal" />
+              <xs:element name="DH_MESG_INTE" msprop:Generator_UserColumnName="DH_MESG_INTE" msprop:Generator_ColumnPropNameInRow="DH_MESG_INTE" msprop:Generator_ColumnVarNameInTable="columnDH_MESG_INTE" msprop:Generator_ColumnPropNameInTable="DH_MESG_INTEColumn" type="xs:dateTime" />
+              <xs:element name="TP_MESG_INTE" msprop:Generator_UserColumnName="TP_MESG_INTE" msprop:Generator_ColumnPropNameInRow="TP_MESG_INTE" msprop:Generator_ColumnVarNameInTable="columnTP_MESG_INTE" msprop:Generator_ColumnPropNameInTable="TP_MESG_INTEColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TP_SOLI_MESG_INTE" msprop:Generator_UserColumnName="TP_SOLI_MESG_INTE" msprop:Generator_ColumnPropNameInRow="TP_SOLI_MESG_INTE" msprop:Generator_ColumnVarNameInTable="columnTP_SOLI_MESG_INTE" msprop:Generator_ColumnPropNameInTable="TP_SOLI_MESG_INTEColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CO_TEXT_XML" msprop:Generator_UserColumnName="CO_TEXT_XML" msprop:Generator_ColumnPropNameInRow="CO_TEXT_XML" msprop:Generator_ColumnVarNameInTable="columnCO_TEXT_XML" msprop:Generator_ColumnPropNameInTable="CO_TEXT_XMLColumn" type="xs:decimal" />
+              <xs:element name="TP_FORM_MESG_SAID" msprop:Generator_UserColumnName="TP_FORM_MESG_SAID" msprop:Generator_ColumnPropNameInRow="TP_FORM_MESG_SAID" msprop:Generator_ColumnVarNameInTable="columnTP_FORM_MESG_SAID" msprop:Generator_ColumnPropNameInTable="TP_FORM_MESG_SAIDColumn" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TB_OPER_ATIV_MESG_INTE" />
+      <xs:field xpath="mstns:NU_SEQU_OPER_ATIV" />
+      <xs:field xpath="mstns:DH_MESG_INTE" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

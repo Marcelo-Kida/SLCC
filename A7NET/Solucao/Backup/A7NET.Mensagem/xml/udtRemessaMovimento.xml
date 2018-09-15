@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtRemessaMovimento>
+  <TipoRemessa tipo="A" tamanho="3" decimais="0" inicio="0"  />
+  <CodigoRemessa tipo="A" tamanho="23" decimais="0" inicio="3"/>
+  <DataRemessa tipo="A" tamanho="8" decimais="0" inicio="26"/>
+  <HoraRemessa tipo="A" tamanho="4" decimais="0" inicio="34"/>
+  <CodigoEmpresa tipo="A" tamanho="5" decimais="0" inicio="38"/>
+  <SiglaSistema tipo="A" tamanho="3" decimais="0" inicio="43"/>
+  <CodigoMoeda tipo="A" tamanho="4" decimais="0" inicio="46"/>
+  <CodigoBanqueiro tipo="A" tamanho="12" decimais="0" inicio="50"/>
+  <TipoCaixa tipo="A" tamanho="3" decimais="0" inicio="62"/>
+  <CodigoItemCaixa tipo="A" tamanho="9" decimais="0" inicio="65"/>
+  <TipoAtivoPassivo tipo="A" tamanho="1" decimais="0" inicio="74"/>
+  <CodigoProduto tipo="A" tamanho="4" decimais="0" inicio="75"/>
+  <TipoConta tipo="A" tamanho="3" decimais="0" inicio="79"/>
+  <CodigoSegmento tipo="A" tamanho="3" decimais="0" inicio="82"/>
+  <EventoFinanceiro tipo="A" tamanho="3" decimais="0" inicio="85"/>
+  <CodigoIndexador tipo="A" tamanho="3" decimais="0" inicio="88"/>
+  <CodigoLocalLiquidacao tipo="A" tamanho="4" decimais="0" inicio="91"/>
+  <CodigoFaixaValor tipo="A" tamanho="3" decimais="0" inicio="95"/>
+  <TipoMovimento tipo="A" tamanho="3" decimais="0" inicio="98"/>
+  <DataMovimento tipo="A" tamanho="8" decimais="0" inicio="101"/>
+  <HoraMovimento tipo="A" tamanho="4" decimais="0" inicio="109"/>
+  <TipoEntradaSaida tipo="A" tamanho="1" decimais="0" inicio="113"/>
+  <ValorMovimento tipo="A" tamanho="19" decimais="0" inicio="114"/>
+  <ValorContabil tipo="A" tamanho="19" decimais="0" inicio="133"/>
+  <TipoProcessamento tipo="A" tamanho="1" decimais="0" inicio="152"/>
+  <TipoEnvio tipo="A" tamanho="1" decimais="0" inicio="153"/>
+  <Filler tipo="A" tamanho="46" decimais="0" inicio="154"/>
+</udtRemessaMovimento>

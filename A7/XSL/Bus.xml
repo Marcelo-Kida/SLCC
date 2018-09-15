@@ -1,0 +1,98 @@
+<Documento>
+
+<Mensagem Tipo="CSV" Separador=";">aaa;bbb;ccc;ddd;10,5</Mensagem>
+
+<Formato>
+	<StrOutPut>
+		<Layout Indice="1" Tipo="String" Tamanho="5"/>	
+		<Layout Indice="5" Tipo="Number" Tamanho="3" Decimais="2"/>
+	</StrOutPut>
+	<XMLOutPut OutPutName="SaidaCSV">
+		<Tag1 Indice="1"></Tag1>	
+		<Tag2 Indice="2"></Tag2>
+		<Tag3 Indice="3"></Tag3>
+		<Tag4 Indice="4"></Tag4>
+		<Tag5 Indice="5"></Tag5>
+	</XMLOutPut>
+</Formato>
+
+
+   <MensagemX Tipo="XML">
+      <Resultado>
+         <TD>D</TD>
+
+         <TE>10,5</TE>
+
+         <TA>AXY</TA>
+
+         <TB>B</TB>
+
+         <TC>C</TC>
+      </Resultado>
+   </MensagemX>
+
+   <FormatoX>
+      <StrOutPut>
+         <Layout TargetTag="TA" Tipo="String" Tamanho="10">
+         </Layout>
+
+         <Layout TargetTag="TA" Tipo="String" Tamanho="10">
+         </Layout>
+
+         <Layout TargetTag="TE" Tipo="Number" Tamanho="5" Decimais="2">
+         </Layout>
+      </StrOutPut>
+
+      <XMLOutPut OutPutName="NomeSaida">
+         <Tag1 TargetTag="TA">
+         </Tag1>
+
+         <Tag2 TargetTag="TB">
+         </Tag2>
+
+         <Tag3 TargetTag="TC">
+         </Tag3>
+
+         <Tag4 TargetTag="TD">
+         </Tag4>
+
+         <Tag5 TargetTag="TE">
+         </Tag5>
+      </XMLOutPut>
+   </FormatoX>
+
+
+   <MensagemX Tipo="String">A BCDE</MensagemX>
+
+
+   <FormatoX>
+      <StrOutPut>
+         <Layout Inicio="1" Tamanho="3">
+         </Layout>
+
+         <Layout Inicio="1" Tamanho="3">
+         </Layout>
+
+         <Layout Inicio="1" Tamanho="3">
+         </Layout>
+      </StrOutPut>
+
+      <XMLOutPut OutPutName="NomeSaida">
+         <Tag1 Inicio="1" Tamanho="1">
+         </Tag1>
+
+         <Tag2 Inicio="4" Tamanho="1">
+         </Tag2>
+
+         <Tag3 Inicio="5" Tamanho="1">
+         </Tag3>
+
+         <Tag4 Inicio="6" Tamanho="1">
+         </Tag4>
+
+         <Tag5 Inicio="7" Tamanho="2">
+         </Tag5>
+      </XMLOutPut>
+   </FormatoX>
+</Documento>
+

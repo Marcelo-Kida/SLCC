@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtMaioresValores>
+  <TipoRemessa tipo="A" tamanho="3" decimais="0" inicio="0"/>
+  <CodigoRemessa tipo="A" tamanho="23" decimais="0" inicio="3"/>
+  <DataRemessa tipo="A" tamanho="8" decimais="0" inicio="26"/>
+  <HoraRemessa tipo="A" tamanho="4" decimais="0" inicio="34"/>
+  <CodigoEmpresa tipo="A" tamanho="5" decimais="0" inicio="38"/>
+  <SiglaSistema tipo="A" tamanho="3" decimais="0" inicio="43"/>
+  <CodigoMoeda tipo="A" tamanho="4" decimais="0" inicio="46"/>
+  <CodigoBanqueiro tipo="A" tamanho="12" decimais="0" inicio="50"/>
+  <TipoCaixa tipo="A" tamanho="3" decimais="0" inicio="62"/>
+  <CodigoItemCaixa tipo="A" tamanho="9" decimais="0" inicio="65"/>
+  <CodigoProduto tipo="A" tamanho="4" decimais="0" inicio="74"/>
+  <TipoConta tipo="A" tamanho="3" decimais="0" inicio="78"/>
+  <CodigoSegmento tipo="A" tamanho="3" decimais="0" inicio="81"/>
+  <CodigoEventoFinanceiro tipo="A" tamanho="3" decimais="0" inicio="84"/>
+  <CodigoIndexador tipo="A" tamanho="3" decimais="0" inicio="87"/>
+  <CodigoLocalLiquidacao tipo="A" tamanho="4" decimais="0" inicio="90"/>
+  <TipoMovimento tipo="A" tamanho="3" decimais="0" inicio="94"/>
+  <DataMovimento tipo="A" tamanho="8" decimais="0" inicio="97"/>
+  <HoraMovimento tipo="A" tamanho="4" decimais="0" inicio="105"/>
+  <TipoEntradaSaida tipo="A" tamanho="1" decimais="0" inicio="109"/>
+  <ValorMovimento tipo="A" tamanho="17" decimais="0" inicio="110"/>
+  <CodigoBanco tipo="A" tamanho="3" decimais="0" inicio="127"/>
+  <CodigoAgencia tipo="A" tamanho="5" decimais="0" inicio="130"/>
+  <NumeroContaCorrente tipo="A" tamanho="13" decimais="0" inicio="135"/>
+  <TipoPessoa tipo="A" tamanho="1" decimais="0" inicio="148"/>
+  <CodigoCNPJ_CPF tipo="A" tamanho="15" decimais="0" inicio="149"/>
+  <NomeCliente tipo="A" tamanho="64" decimais="0" inicio="164"/>
+  <TipoProcessamento tipo="A" tamanho="1" decimais="0" inicio="228"/>
+  <TipoEnvio tipo="A" tamanho="1" decimais="0" inicio="229"/>
+  <Filler tipo="A" tamanho="20" decimais="0" inicio="230"/>
+</udtMaioresValores>

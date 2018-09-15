@@ -1,0 +1,1 @@
+net start A8NETServico

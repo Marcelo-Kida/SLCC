@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtSTR0008R2>
+  <NU_RECB_PGTO tipo="A" tamanho="15" decimais="0" inicio="0"/>
+  <CO_EMPR tipo="A" tamanho="4" decimais="0" inicio="15"/>
+  <DT_RECB_PGTO tipo="A" tamanho="8" decimais="0" inicio="19"/>
+  <HO_RECB_MESG tipo="A" tamanho="6" decimais="0" inicio="27"/>
+  <VA_RECB_PGTO tipo="A" tamanho="18" decimais="0" inicio="33"/>
+  <CO_MESG tipo="A" tamanho="9" decimais="0" inicio="51"/>
+  <CO_ISPB_REMT tipo="A" tamanho="8" decimais="0" inicio="60"/>
+  <CO_BANC_REMT tipo="A" tamanho="4" decimais="0" inicio="68"/>
+  <NO_REMT tipo="A" tamanho="80" decimais="0" inicio="72"/>
+  <NU_CNPJ_CPF_REMT tipo="A" tamanho="15" decimais="0" inicio="152"/>
+  <TP_CNTA_REMT tipo="A" tamanho="2" decimais="0" inicio="167"/>
+  <CO_AGEN_REMT tipo="A" tamanho="9" decimais="0" inicio="169"/>
+  <DG_AGEN_REMT tipo="A" tamanho="1" decimais="0" inicio="178"/>
+  <NU_CNTA_REMT tipo="A" tamanho="12" decimais="0" inicio="179"/>
+  <DG_CNTA_REMT tipo="A" tamanho="1" decimais="0" inicio="191"/>
+  <NO_DEST tipo="A" tamanho="80" decimais="0" inicio="192"/>
+  <NU_CNPJ_CPF_DEST tipo="A" tamanho="15" decimais="0" inicio="272"/>
+  <IN_TIPO_PESS_DEST tipo="A" tamanho="1" decimais="0" inicio="287"/>
+  <TP_CNTA_DEST tipo="A" tamanho="2" decimais="0" inicio="288"/>
+  <CO_AGEN_DEST tipo="A" tamanho="9" decimais="0" inicio="290"/>
+  <NU_CNTA_DEST tipo="A" tamanho="13" decimais="0" inicio="299"/>
+  <SQ_TIPO_TAG_FIND tipo="A" tamanho="4" decimais="0" inicio="312"/>
+  <CO_DOMI_FIND tipo="A" tamanho="20" decimais="0" inicio="316"/>
+  <TX_HIST_COMP_RECB tipo="A" tamanho="200" decimais="0" inicio="336"/>
+  <CO_SITU_RECB_PGTO tipo="A" tamanho="4" decimais="0" inicio="536"/>
+  <NU_CTRL_REME tipo="A" tamanho="20" decimais="0" inicio="540"/>
+  <NU_CTRL_EXTE_RECB tipo="A" tamanho="20" decimais="0" inicio="560"/>
+  <NU_DOCT_CRED tipo="A" tamanho="9" decimais="0" inicio="580"/>
+</udtSTR0008R2>

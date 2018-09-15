@@ -1,0 +1,50 @@
+Type=OleDll
+Reference=*\G{2A005C00-A5DE-11CF-9E66-00AA00A3F464}#1.0#0#..\..\..\..\..\WINDOWS\system32\COMSVCS.DLL#COM+ Services Type Library
+Reference=*\G{F5078F18-C551-11D3-89B9-0000F81FE221}#4.0#0#..\..\..\..\..\windows\system32\msxml4.dll#Microsoft XML, v4.0
+Class=clsProcesso_Batch; cls\clsProcesso_Batch.cls
+Module=basA6A7A8VerificaServer; Bas\basA6A7A8ServicoCOM.bas
+Module=basRBLibrary; ..\A6A7A8\bas\basRBLibray.bas
+Module=basRegistryAPI; ..\A6A7A8\bas\basRegistryAPI.bas
+Class=clsProcesso_A6; cls\clsProcesso_A6.cls
+Class=clsProcesso_A7; cls\clsProcesso_A7.cls
+Class=clsProcesso_A8; cls\clsProcesso_A8.cls
+Startup="(None)"
+HelpFile=""
+Title="A6A7A8ServicoCOM"
+ExeName32="A6A7A8ServicoCOM.dll"
+Path32="..\..\..\..\..\Program files\SlccFiles"
+Command32=""
+Name="A6A7A8ServicoCOM"
+HelpContextID="0"
+Description="A6A7A8ServicoCOM - v4.1.42"
+CompatibleMode="2"
+CompatibleEXE32="..\..\..\..\..\Program files\SlccFiles\A6A7A8ServicoCOM.dll"
+VersionCompatible32="1"
+MajorVer=4
+MinorVer=1
+RevisionVer=42
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="Regerbanc"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=-1
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=1
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+
+[MS Transaction Server]
+AutoRefresh=1
+
+[RVB]
+DeleteClass1=Class1

@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{670E72F1-5AED-4AE3-AFDF-6B00FC1EA1DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>A8NET.Data</RootNamespace>
+    <AssemblyName>A8NET.Data</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>http://localhost/A8NET.Data/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MBS_Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_32\System.Data.OracleClient\2.0.0.0__b77a5c561934e089\System.Data.OracleClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="A8NETOracleParameter.cs" />
+    <Compile Include="AcessaBD.cs" />
+    <Compile Include="DAO\BaseDAO.cs" />
+    <Compile Include="DAO\ConciliacaoDAO.cs" />
+    <Compile Include="DAO\GestaoCaixaDAO.cs" />
+    <Compile Include="DAO\HistoricoSituacaoMensagemDAO.cs" />
+    <Compile Include="DAO\HistoricoSituacaoOperacaoDAO.cs" />
+    <Compile Include="DAO\OperacaoMensagemInternaDAO.cs" />
+    <Compile Include="DAO\RemessaRejeitadaDAO.cs" />
+    <Compile Include="DAO\TextXmlDAO.cs" />
+    <Compile Include="Dominio.cs" />
+    <Compile Include="DsParametrizacoes.cs">
+      <DependentUpon>DsParametrizacoes.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DsParametrizacoes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsParametrizacoes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\MensagemSpbDAO.cs" />
+    <Compile Include="DAO\OperacaoDAO.cs" />
+    <Compile Include="DsTB_CNCL_OPER_ATIV.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsTB_CNCL_OPER_ATIV.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DsTB_MESG_RECB_ENVI_SPB.cs">
+      <DependentUpon>DsTB_MESG_RECB_ENVI_SPB.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DsTB_MESG_RECB_ENVI_SPB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsTB_MESG_RECB_ENVI_SPB.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DsTB_OPER_ATIV.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsTB_OPER_ATIV.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DsTB_OPER_ATIV_MESG_INTE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsTB_OPER_ATIV_MESG_INTE.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DsParametrizacoes.xsc">
+      <DependentUpon>DsParametrizacoes.xsd</DependentUpon>
+    </None>
+    <None Include="DsParametrizacoes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsParametrizacoes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DsParametrizacoes.xss">
+      <DependentUpon>DsParametrizacoes.xsd</DependentUpon>
+    </None>
+    <None Include="DsTB_CNCL_OPER_ATIV.xsc">
+      <DependentUpon>DsTB_CNCL_OPER_ATIV.xsd</DependentUpon>
+    </None>
+    <None Include="DsTB_CNCL_OPER_ATIV.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsTB_CNCL_OPER_ATIV.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DsTB_CNCL_OPER_ATIV.xss">
+      <DependentUpon>DsTB_CNCL_OPER_ATIV.xsd</DependentUpon>
+    </None>
+    <None Include="DsTB_MESG_RECB_ENVI_SPB.xsc">
+      <DependentUpon>DsTB_MESG_RECB_ENVI_SPB.xsd</DependentUpon>
+    </None>
+    <None Include="DsTB_MESG_RECB_ENVI_SPB.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsTB_MESG_RECB_ENVI_SPB.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DsTB_MESG_RECB_ENVI_SPB.xss">
+      <DependentUpon>DsTB_MESG_RECB_ENVI_SPB.xsd</DependentUpon>
+    </None>
+    <None Include="DsTB_OPER_ATIV.xsc">
+      <DependentUpon>DsTB_OPER_ATIV.xsd</DependentUpon>
+    </None>
+    <None Include="DsTB_OPER_ATIV.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsTB_OPER_ATIV.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DsTB_OPER_ATIV.xss">
+      <DependentUpon>DsTB_OPER_ATIV.xsd</DependentUpon>
+    </None>
+    <None Include="DsTB_OPER_ATIV_MESG_INTE.xsc">
+      <DependentUpon>DsTB_OPER_ATIV_MESG_INTE.xsd</DependentUpon>
+    </None>
+    <None Include="DsTB_OPER_ATIV_MESG_INTE.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsTB_OPER_ATIV_MESG_INTE.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DsTB_OPER_ATIV_MESG_INTE.xss">
+      <DependentUpon>DsTB_OPER_ATIV_MESG_INTE.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A8NET.Comum\A8NET.Comum.csproj">
+      <Project>{B7009338-AD00-481E-A83E-1F80AE5FC3B5}</Project>
+      <Name>A8NET.Comum</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MBS_Client.dll" />
+    <Content Include="MBS_Config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

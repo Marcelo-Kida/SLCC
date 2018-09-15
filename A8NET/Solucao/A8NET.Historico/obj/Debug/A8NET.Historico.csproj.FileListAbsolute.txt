@@ -1,0 +1,10 @@
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\bin\Debug\A8NET.Historico.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\bin\Debug\A8NET.Historico.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\bin\Debug\A8NET.Comum.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\bin\Debug\A8NET.Data.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\bin\Debug\MBS_Client.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\bin\Debug\A8NET.Comum.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\bin\Debug\A8NET.Data.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\obj\Debug\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\obj\Debug\A8NET.Historico.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.Historico\obj\Debug\A8NET.Historico.pdb

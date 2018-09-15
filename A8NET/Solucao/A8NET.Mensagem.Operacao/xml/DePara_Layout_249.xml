@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CAMPOS>
+  <DePara campo_layout="TP_NEGO_INTB" campo_tabela="TP_NEGO_INTB"/>
+  <DePara campo_layout="CO_REG_OPER_CAMB" campo_tabela="NU_COMD_OPER"/>  
+  <DePara campo_layout="VA_MOED_NACIO" campo_tabela="VA_OPER_ATIV"/>
+  <DePara campo_layout="VA_MOED_ESTRG" campo_tabela="VA_MOED_ESTR"/>
+  <DePara campo_layout="VA_TAXA_CAMB" campo_tabela="PE_TAXA_NEGO"/>
+  <DePara campo_layout="ChACAM" campo_tabela="CD_ASSO_CAMB"/>
+  <DePara campo_layout="DT_LIQU_OPER" campo_tabela="DT_LIQU_OPER_ATIV"/>
+  <DePara campo_layout="TP_OPER_CAMB" campo_tabela="IN_OPER_DEBT_CRED">
+     <DOMINIOS>
+       <DePara dominio_layout="V" dominio_tabela="1"/>
+       <DePara dominio_layout="C" dominio_tabela="2"/>
+     </DOMINIOS> 
+  </DePara>
+  <DePara campo_layout="TP_OPER_CAMB" campo_tabela="IN_ENTR_SAID_RECU_FINC">
+     <DOMINIOS>
+       <DePara dominio_layout="V" dominio_tabela="1"/>
+       <DePara dominio_layout="C" dominio_tabela="2"/>
+     </DOMINIOS> 
+  </DePara>
+  <DePara campo_layout="NM_CLIE_MOED_ESTR" campo_tabela="NO_CNPT"/>
+  </CAMPOS>
+
+
+

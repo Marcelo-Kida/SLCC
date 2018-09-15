@@ -1,0 +1,11 @@
+bin\Debug\SLCCServicoNET.dll
+bin\Debug\SLCCServicoNET.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\SLCCServicoNET.dll
+obj\Debug\SLCCServicoNET.pdb
+bin\Release\SLCCServicoNET.dll
+bin\Release\SLCCServicoNET.pdb
+bin\Release\amqmdnet.dll
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\SLCCServicoNET.dll
+obj\Release\SLCCServicoNET.pdb

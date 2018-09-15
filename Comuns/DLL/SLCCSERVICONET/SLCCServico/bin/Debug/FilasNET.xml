@@ -1,0 +1,51 @@
+<!--
+________________________________________________
+configuracoes de Filas de Entrada do SLCC no MQ
+________________________________________________
+-->
+
+<ConfiguracaoEntrada>
+   <NomeQueueManager>QM.SLCC.01</NomeQueueManager>
+   <QuantidadeTotalThreads>80</QuantidadeTotalThreads>
+   <TempoEspera>10</TempoEspera>
+   <Janela_ParadaVerificacao HoraInicio='03:00:00' HoraFim='03:30:00' />
+   <Janela_Backup HoraInicio='2200' HoraFim='2330'/>
+   <NomeFilaMonitor Empresa="523">NZQ.E.MONITOR</NomeFilaMonitor>
+   <NomeFilaMonitor Empresa="701">NZQ.E.MONITOR</NomeFilaMonitor>
+   <NomeFilaConsultaPZ Empresa="523">A8Q.E.CONSULTA_PZ</NomeFilaConsultaPZ>
+   <NomeFilaConsultaPZ Empresa="558">A8Q.E.CONSULTA_PZ</NomeFilaConsultaPZ>
+   <NomeFilaConsultaPZ Empresa="701">A8Q.E.CONSULTA_PZ</NomeFilaConsultaPZ>
+   <NomeFilaConsDT Empresa="523">A8Q.E.CONS_DT</NomeFilaConsDT>
+   <NomeFilaConsDT Empresa="701">A8Q.E.CONS_DT</NomeFilaConsDT>
+   <Repet_Parametros_Entrada>
+..... <Grupo_Parametros_Entrada><Fila>A7Q.E.ENTRADA          </Fila><NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A7</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>4</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A7Q.E.REPORT           </Fila><NomeObjeto>A7Server.clsGerenciadorEntrega    </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A7</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>4</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.MSG_R1           </Fila><NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A7</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>4</QtdeMaxThread><Priority>Normal</Priority><Protocolo>000001000NZ A8 00000</Protocolo></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.MSG_R2           </Fila><NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A7</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>2</QtdeMaxThread><Priority>Normal</Priority><Protocolo>000001000NZ A8 00000</Protocolo></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.AVISO            </Fila><NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A7</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>2</QtdeMaxThread><Priority>Normal</Priority><Protocolo>000001000NZ A8 00000</Protocolo></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.CONS_HD          </Fila><NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A7</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>2</QtdeMaxThread><Priority>Normal</Priority><Protocolo>000001000NZ A8 00000</Protocolo></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.ERRO             </Fila><NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A7</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>2</QtdeMaxThread><Priority>Normal</Priority><Protocolo>000001003NZ A8 00000</Protocolo></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>AEA.QL.ANSWER.SLCC     </Fila><NomeObjeto>A7Server.clsGerenciadorRecebimento</NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A7</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>4</QtdeMaxThread><Priority>Normal</Priority><Protocolo>000001008BG A8 00000</Protocolo></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.ENTRADA          </Fila><NomeObjeto>A8LQS.clsRemessa                  </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A8</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>4</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.ENTRADA_BOLETO   </Fila><NomeObjeto>A8LQS.clsRemessa                  </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A8</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>4</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.ENTRADA_OPERACAO </Fila><NomeObjeto>A8LQS.clsRemessa                  </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A8</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>4</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.ENTRADA_BACEN    </Fila><NomeObjeto>A8LQS.clsRemessa                  </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A8</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>4</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.ENTRADA_CC       </Fila><NomeObjeto>A8LQS.clsRemessa                  </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A8</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>2</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.ESPERA_REPROC    </Fila><NomeObjeto>A8LQS.clsRemessa                  </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A8</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8Q.E.REPROCESSAMENTO  </Fila><NomeObjeto>A8LQS.clsRemessa                  </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A8</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>2</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A6Q.E.REMESSASUBRESERVA</Fila><NomeObjeto>A6SubReserva.clsRemessa           </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A6</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A6Q.E.ERRO</FilaErro><QtdeMaxThread>2</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A6Q.E.REMESSAFUTURO    </Fila><NomeObjeto>A6SubReserva.clsRemessa           </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_A6</ObjetoApoio><Metodo>ReceberMensagemMQ</Metodo><FilaErro>A6Q.E.ERRO</FilaErro><QtdeMaxThread>2</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+
+      <Grupo_Parametros_Entrada><Fila>A8B.RENOVA_CAHE        </Fila><NomeObjeto>clsProcesso_Batch                 </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_Batch</ObjetoApoio><Metodo>Processar</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8B.AGENDAMENTO        </Fila><NomeObjeto>A8LQS.clsTRemessa                 </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_Batch</ObjetoApoio><Metodo>Processar</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8B.LIQUIDACAO_TQ      </Fila><NomeObjeto>A8LQS.clsLiquidacaoTQ             </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_Batch</ObjetoApoio><Metodo>Processar</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8B.CTRL_USUA_SIST     </Fila><NomeObjeto>A7Server.clsControleUsuarioSistema</NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_Batch</ObjetoApoio><Metodo>Processar</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8B.PROC_MESG_STR      </Fila><NomeObjeto>A8LQS.clsProcessoMensagemSTR      </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_Batch</ObjetoApoio><Metodo>Processar</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8B.LIQUIDACAO_FUTURA  </Fila><NomeObjeto>A8LQS.clsLiquidacaoFutura         </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_Batch</ObjetoApoio><Metodo>Processar</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8B.CTRL_ACESSO        </Fila><NomeObjeto>A6A7A8.CLSCONTROLEACESSO          </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_Batch</ObjetoApoio><Metodo>Processar</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+      <Grupo_Parametros_Entrada><Fila>A8B.REPROC_CC          </Fila><NomeObjeto>A8LQS.clsGerenciadorReprocCC      </NomeObjeto><ObjetoApoio>A6A7A8ServicoCOM.clsProcesso_Batch</ObjetoApoio><Metodo>Processar</Metodo><FilaErro>A7Q.E.ERRO</FilaErro><QtdeMaxThread>1</QtdeMaxThread><Priority>Normal</Priority></Grupo_Parametros_Entrada>
+
+
+   </Repet_Parametros_Entrada>
+</ConfiguracaoEntrada>
+

@@ -1,0 +1,5 @@
+C:\WebSites\TesteChamadaCOM\TesteChamadaCOM\obj\Debug\ResolveAssemblyReference.cache
+C:\WebSites\TesteChamadaCOM\TesteChamadaCOM\bin\Debug\TesteChamadaCOM.exe
+C:\WebSites\TesteChamadaCOM\TesteChamadaCOM\bin\Debug\TesteChamadaCOM.pdb
+C:\WebSites\TesteChamadaCOM\TesteChamadaCOM\obj\Debug\TesteChamadaCOM.exe
+C:\WebSites\TesteChamadaCOM\TesteChamadaCOM\obj\Debug\TesteChamadaCOM.pdb

@@ -1,0 +1,10 @@
+basRegistryAPI = 0, 0, 0, 0, C
+basCA = 36, 131, 483, 676, C
+clsVersao = 154, 154, 1070, 565, C
+clsControleAcesso = 198, 198, 713, 639, C
+clsEmail = 22, 22, 537, 463, C
+clsLogErro = 110, 110, 679, 435, C
+clsMQAX200 = 22, 22, 844, 466, C
+clsTransacao = 0, 0, 841, 313, C
+clsConsulta = 36, 131, 483, 676, Z
+basRBLibrary = 132, 132, 1047, 445, 

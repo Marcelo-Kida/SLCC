@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtArquivoExtratoTrailer>
+  <SiglaSistemaEnviouNZ tipo="A" inicio="0" tamanho="3" decimais="0" />
+  <CodigoMensagem tipo="A" inicio="3" tamanho="9" decimais="0" />
+  <ControleRemessaNZ tipo="A" inicio="12" tamanho="20" decimais="0" />
+  <DataRemessa tipo="D" inicio="32" tamanho="8" decimais="0" />
+  <CodigoEmpresa tipo="A" inicio="40" tamanho="5" decimais="0" />
+  <CodigoMoeda tipo="A" inicio="45" tamanho="5" decimais="0" />
+  <FormatoMensagem tipo="N" inicio="50" tamanho="1" decimais="0" />
+  <AssinaturaInterna tipo="A" inicio="51" tamanho="50" decimais="0" />
+  <SiglaSistemaLegadoOrigem tipo="A" inicio="101" tamanho="3" decimais="0" />
+  <ReferenciaContabil tipo="A" inicio="104" tamanho="8" decimais="0" />
+  <BancoAgencia tipo="A" inicio="112" tamanho="15" decimais="0" />
+  <QuantidadeMensagem tipo="N" inicio="127" tamanho="6" decimais="0" />
+  <NuOP tipo="A" inicio="133" tamanho="23" decimais="0" />
+  <FILLER tipo="A" inicio="156" tamanho="42" decimais="0" />
+  <Dominio tipo="A" inicio="198" tamanho="1" decimais="0" />
+  <FILLER_1 tipo="A" inicio="199" tamanho="1" decimais="0" />
+</udtArquivoExtratoTrailer>

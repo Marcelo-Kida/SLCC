@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<udtPZW0916>
+  <SiglaSistemaEnviouNZ tipo="A" tamanho="3" decimais="0" inicio="0"/>
+  <CodigoMensagem tipo="A" tamanho="9" decimais="0" inicio="0"/>
+  <ControleRemessaNZ tipo="A" tamanho="20" decimais="0" inicio="0"/>
+  <DataRemessa tipo="A" tamanho="8" decimais="0" inicio="0"/>
+  <CodigoEmpresa tipo="A" tamanho="5" decimais="0" inicio="0"/>
+  <CodigoMoeda tipo="A" tamanho="5" decimais="0" inicio="0"/>
+  <FormatoMensagem tipo="A" tamanho="1" decimais="0" inicio="0"/>
+  <AssinaturaInterna tipo="A" tamanho="50" decimais="0" inicio="0"/>
+  <SiglaSistemaLegadoOrigem tipo="A" tamanho="3" decimais="0" inicio="0"/>
+  <ReferenciaContabil tipo="A" tamanho="8" decimais="0" inicio="0"/>
+  <BancoAgencia tipo="A" tamanho="15" decimais="0" inicio="0"/>
+  <QuantidadeMensagem tipo="A" tamanho="6" decimais="0" inicio="0"/>
+  <NuOP tipo="A" tamanho="24" decimais="0" inicio="0"/>
+  <IndicadorDupli tipo="A" tamanho="1" decimais="0" inicio="0"/>
+  <IndicadorValorCorte tipo="A" tamanho="1" decimais="0" inicio="0"/>
+  <IndicadorValorMinimo tipo="A" tamanho="1" decimais="0" inicio="0"/>
+  <NumeroControleLegado tipo="A" tamanho="23" decimais="0" inicio="0"/>
+  <CodSituTransfPagto tipo="A" tamanho="2" decimais="0" inicio="0"/>
+  <Filler tipo="A" tamanho="15" decimais="0" inicio="0"/>
+</udtPZW0916>

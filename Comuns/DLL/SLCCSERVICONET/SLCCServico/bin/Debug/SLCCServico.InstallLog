@@ -1,0 +1,47 @@
+﻿Installing assembly 'C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe
+   logfile = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.InstallLog
+Installing service SLCC...
+Service SLCC has been successfully installed.
+Creating EventLog source SLCC in log Application...
+Committing assembly 'C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe
+   logfile = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.InstallLog
+Installing assembly 'C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe
+   logfile = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.InstallLog
+Installing service SLCC...
+Creating EventLog source SLCC in log Application...
+Rolling back assembly 'C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe
+   logfile = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.InstallLog
+Restoring event log to previous state for source SLCC.
+Uninstalling assembly 'C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe
+   logfile = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.InstallLog
+Removing EventLog source SLCC.
+Service SLCC is being removed from the system...
+Service SLCC was successfully removed from the system.
+Installing assembly 'C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe
+   logfile = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.InstallLog
+Installing service SLCC...
+Service SLCC has been successfully installed.
+Creating EventLog source SLCC in log Application...
+Committing assembly 'C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.exe
+   logfile = C:\Projetos\SLCC\FONTESDS\SLCCSERVICONET\SLCCServico\bin\Debug\SLCCServico.InstallLog

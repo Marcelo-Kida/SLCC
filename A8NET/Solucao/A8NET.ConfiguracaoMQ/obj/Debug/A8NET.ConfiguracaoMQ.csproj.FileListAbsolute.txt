@@ -1,0 +1,5 @@
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.ConfiguracaoMQ\bin\Debug\A8NET.ConfiguracaoMQ.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.ConfiguracaoMQ\bin\Debug\A8NET.ConfiguracaoMQ.pdb
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.ConfiguracaoMQ\obj\Debug\ResolveAssemblyReference.cache
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.ConfiguracaoMQ\obj\Debug\A8NET.ConfiguracaoMQ.dll
+C:\SLCC\FontesDS\A8NET\Solucao\A8NET.ConfiguracaoMQ\obj\Debug\A8NET.ConfiguracaoMQ.pdb

@@ -1,0 +1,15 @@
+VBGROUP 5.0
+Project=..\LQS_Liquidação Financeira\Componentes de Software\DLL\A8MIU\A8MIU.vbp
+Project=..\LQS_Liquidação Financeira\Componentes de Software\DLL\A8LQS\A8LQS.vbp
+Project=..\LQS_Liquidação Financeira\Componentes de Software\EXE\A8\A8.vbp
+Project=..\BUS_Bus de Interface\Componentes de Software\DLL\A7Miu\A7Miu.vbp
+Project=..\BUS_Bus de Interface\Componentes de Software\DLL\A7Server\A7Server.vbp
+Project=..\BUS_Bus de Interface\Componentes de Software\DLL\A7Publisher\A7Publisher.vbp
+Project=..\BUS_Bus de Interface\Componentes de Software\EXE\A7\A7.vbp
+Project=..\SBR_Sub Reservas\Componentes de Software\DLL\A6Miu\A6MIU.vbp
+Project=..\SBR_Sub Reservas\Componentes de Software\DLL\A6SubReserva\A6SubReserva.vbp
+Project=..\SBR_Sub Reservas\Componentes de Software\EXE\A6.vbp
+Project=..\Componentes de Software(Comuns)\DLL\A6A7A8\A6A7A8.vbp
+Project=..\Componentes de Software(Comuns)\DLL\A6A7A8CA\A6A7A78CA.vbp
+Project=..\Componentes de Software(Comuns)\DLL\A6A7A8Miu\A6A7A8MIU.vbp
+StartupProject=..\Componentes de Software(Comuns)\EXE\STARTSCREEN\A6A7A8StartScreen.vbp
